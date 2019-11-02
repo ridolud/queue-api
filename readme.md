@@ -60,7 +60,10 @@ post /api/v1/getUser
 	}
 		
 
+## Setup APNs (Apple Push Notification)
 
+Kita menggunakan package https://github.com/edujugon/PushNotification
+Cara setup certificate https://stackoverflow.com/questions/21250510/generate-pem-file-used-to-set-up-apple-push-notifications
 
 ## About Laravel
 

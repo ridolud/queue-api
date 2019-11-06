@@ -24,7 +24,12 @@ Route::prefix('v1')->group(function(){
 
 	 	Route::get('getUser', 'Api\AuthController@getUser');
 
-	 	// another route
+	 	//Pasient
+	 	Route::prefix('patient')->group(function(){
+	 		Route::get('my_data', 'Api\PatientController@getMyData');
+	 		Route::post('my_data', 'Api\PatientController@saveMyData');
+	 	});
+	 	
 	});
 
 });

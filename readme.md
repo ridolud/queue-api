@@ -11,54 +11,7 @@ Client secret: 2xuZ75hjPATI3Mj8AdKSszXFDxQXlnwjhiNmxIsy
 
 ## Documentation API v1
 
-Login
-post /api/v1/login
-
-	body: {
-		"email": admin@email.com,
-		"password": password
-	}
-
-	response: {
-		"success": { 
-		 	 "token": token  
-		}
-	}
-
-Login
-post /api/v1/register
-
-	body: {
-		"name": John,
-		"email": john@example.com,
-		"password": password,
-		"c_password": password
-	}
-
-	response: {
-		"success": { 
-		 	 "token": token  
-		}
-	}
-
-Login
-post /api/v1/getUser
-
-	header: {
-		"Authorization": Bearer . token
-	}
-
-	response: {
-		"success": {
-			"id":1,
-			"name":"admin",
-			"email":"admin@email.com",
-			"email_verified_at":null,
-			"created_at":"2019-10-25 20:06:17",
-			"updated_at":"2019-10-25 20:06:17"
-		}
-	}
-		
+http://167.71.203.148/api/v1/documentation
 
 ## Setup APNs (Apple Push Notification)
 

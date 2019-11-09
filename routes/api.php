@@ -15,14 +15,14 @@ use Illuminate\Http\Request;
 
 Route::prefix('v1')->group(function(){
 
-	Route::post('login', 'Api\AuthController@login');
+	Route::post('login', 'Api\AuthController@login')->name("login");
 	Route::post('register', 'Api\AuthController@register');
 
 	Route::get('test_push_notif/{deviceToken}', 'Api\TestPushNotifController@testPush');
 
 	Route::group(['middleware' => 'auth:api'], function(){
 
-	 	Route::get('getUser', 'Api\AuthController@getUser');
+	 	Route::get('user', 'Api\AuthController@getUser');
 
 	 	//Pasient
 	 	Route::prefix('patient')->group(function(){

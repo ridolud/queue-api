@@ -38,6 +38,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            'swbar' => \App\Http\Middleware\SwaggerBarrer::class,
             'throttle:60,1',
             'bindings',
         ],

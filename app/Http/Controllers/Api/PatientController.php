@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Patient;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use App\User;
 
 class PatientController extends Controller
 {
@@ -27,9 +28,7 @@ class PatientController extends Controller
 
     function getMyData()
     {
-
-
-    	$data = Patient::where('auth_id', Auth::id())->first();	
+    	$data = Patient::where('auth_id', Auth::id())->first();
 
     	return response()->json([
     		'data' => $data,
@@ -81,12 +80,17 @@ class PatientController extends Controller
        		return response()->json(['error'=>$validator->errors()], 401);                       
     	}
 
+        $input = $request->all();
         $data = Patient::where('auth_id', Auth::id())->first();
 
-    	$input = $request->all();  
-	 	$input['auth_id'] = Auth::id();
-	 	$data = Patient::create($input); 
+        if(is_null($data)) {
+             
+            $input['auth_id'] = Auth::id();
+            $data = Patient::create($input);
+        }else{
+            $data->update($input);
+        }
 
-	 	return response()->json(['data'=>$data], $this->successStatus); 
+	 	return response()->json($data, $this->successStatus); 
     }
 }

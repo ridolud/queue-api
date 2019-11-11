@@ -26,10 +26,11 @@ class AuthController extends Controller
               @OA\MediaType(
     	        mediaType="multipart/form-data",
     	        @OA\Schema (
+                @OA\Property(property="phone_number", type="string"),
     	        	@OA\Property(property="name", type="string"),
-					@OA\Property(property="email", type="string"),
-					@OA\Property(property="password", type="string"),
-					@OA\Property(property="c_password", type="string"),
+      					@OA\Property(property="email", type="string"),
+      					@OA\Property(property="password", type="string"),
+      					@OA\Property(property="c_password", type="string"),
     	        )
      		  )
           ),    
@@ -39,8 +40,9 @@ class AuthController extends Controller
  	public function register(Request $request) {    
  		$validator = Validator::make($request->all(), 
             [ 
+              'phone_number' => 'required',
               'name' => 'required',
-              'email' => 'required|email',
+              'email' => 'required|email|unique:users',
               'password' => 'required',  
               'c_password' => 'required|same:password', 
             ]);   
@@ -82,10 +84,11 @@ class AuthController extends Controller
 		
 		if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){ 
 	   	
-	   		$user = Auth::user(); 
+	   		$user = Auth::user();
+        $data["phone_number"] = $user->phone_number; 
 	   		$data["name"] = $user->name;
 	   		$data["email"] = $user->email;
-	   		$data["token"] =  $user->createToken('AppName')-> accessToken; 
+	   		$data["token"] =  $user->createToken('AppName')->accessToken; 
 	    	
 	    	return response()->json($data, $this-> successStatus); 
 	  	

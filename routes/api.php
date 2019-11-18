@@ -24,6 +24,9 @@ Route::prefix('v1')->group(function(){
 
 	 	Route::get('user', 'Api\AuthController@getUser');
 
+	 	//Add device token
+	 	Route::post('add-device-token', 'Api\AuthController@addDeviceToken');
+
 	 	//Pasient
 	 	Route::prefix('patient')->group(function(){
 	 		Route::get('my_data', 'Api\PatientController@getMyData');

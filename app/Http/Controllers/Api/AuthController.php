@@ -119,4 +119,36 @@ class AuthController extends Controller
 	
 	 	return response()->json(['data' => $user], $this->successStatus); 
 	}
+
+
+  /**
+      @OA\Get(
+          path="/api/v1/add-device-token",
+          tags={"Profile"},
+          summary="Add Device Token",
+          operationId="adddevicetoken",
+          security={ {"bearerAuth": {}}, },
+      
+         @OA\Response(response="default", description="successful operation")
+      )
+    */ 
+  public function addDeviceToken(Request $request) {
+    
+    $validator = Validator::make($request->all(), 
+            [ 
+              'device_token' => 'required',
+            ]);   
+    
+    if ($validator->fails()) {          
+      return response()->json(['error'=>$validator->errors()], 401);                       
+    }
+
+    $input = $request->all();
+    $data = Auth::user();
+
+    $data->device_token = $input['device_token'];
+    $data->update();
+
+    return response()->json($input, 200);
+  }
 } 

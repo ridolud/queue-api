@@ -10,9 +10,6 @@ use Validator;
 
 class AuthController extends Controller
 {
-
-	public $successStatus = 200;
-
 	/**
       @OA\Post(
           path="/api/v1/register",
@@ -48,7 +45,7 @@ class AuthController extends Controller
             ]);
 
  		if ($validator->fails()) {
-       		return response()->json(['error'=>$validator->errors()], 401);
+       		return response()->json(['error'=>$validator->errors()], \ResponseCodeEnum::Error);
     	}
 
 	 	$input = $request->all();
@@ -59,7 +56,7 @@ class AuthController extends Controller
         $data['phone_number'] = $user->phone_number;
 	 	$data['token'] =  $user->createToken('AppName')->accessToken;
 
-	 	return response()->json($data, $this->successStatus);
+	 	return response()->json($data, \ResponseCodeEnum::Success);
 	}
 
    	/**
@@ -92,7 +89,7 @@ class AuthController extends Controller
             ]);
 
         if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()], 401);
+            return response()->json(['error'=>$validator->errors()], \ResponseCodeEnum::Error);
         }
 
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
@@ -103,11 +100,11 @@ class AuthController extends Controller
 	   		$data["email"] = $user->email;
 	   		$data["token"] =  $user->createToken('AppName')->accessToken;
 
-	    	return response()->json($data, $this-> successStatus);
+	    	return response()->json($data, $this->successStatus);
 
 	  	} else {
 
-	   	    return response()->json(['error'=>'Unauthorised'], 401);
+	   	    return response()->json(['error'=>'Unauthorised'], \ResponseCodeEnum::UnAuthorized);
 
 	   	}
 	}
@@ -127,7 +124,7 @@ class AuthController extends Controller
 	public function getUser() {
 		$user = Auth::user();
 
-	 	return response()->json(['data' => $user], $this->successStatus);
+	 	return response()->json(['data' => $user], \ResponseCodeEnum::Success);
 	}
 
         /**
@@ -149,7 +146,7 @@ class AuthController extends Controller
             ]);
 
         if ($validator->fails()) {
-          return response()->json(['error'=>$validator->errors()], 401);
+          return response()->json(['error'=>$validator->errors()], \ResponseCodeEnum::UnAuthorized);
         }
 
         $input = $request->all();
@@ -158,6 +155,6 @@ class AuthController extends Controller
         $data->device_token = $input['device_token'];
         $data->update();
 
-        return response()->json($input, 200);
+        return response()->json($input, \ResponseCodeEnum::Success);
       }
 }

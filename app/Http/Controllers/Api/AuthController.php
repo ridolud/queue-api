@@ -141,8 +141,6 @@ class AuthController extends Controller
         */
       public function addDeviceToken(Request $request) {
 
-        dd($request->all());
-
         $validator = Validator::make($request->all(),
             [
               'device_token' => 'required',

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller; 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Edujugon\PushNotification\PushNotification;
 
 class TestPushNotifController extends Controller
 {
+    // TODO: REMOVE DEV STUFF
     public function testPush($deviceToken)
     {
     	$push = new PushNotification('apn');
@@ -22,10 +23,10 @@ class TestPushNotifController extends Controller
 	    ];
 	    $push->setMessage($message)
 	        ->setDevicesToken([
-	            $deviceToken,  
+	            $deviceToken,
 	        ]);
 	    $push = $push->send();
-		$response = $push->getFeedback(); 
+		$response = $push->getFeedback();
     	return response()->json($response, 200);
     }
 }

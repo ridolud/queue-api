@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request; 
-use App\Http\Controllers\Controller; 
-use App\User; 
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 
-class AuthController extends Controller 
+class AuthController extends Controller
 {
 
 	public $successStatus = 200;
@@ -19,7 +19,7 @@ class AuthController extends Controller
           tags={"Authenticate"},
           summary="Register",
           operationId="register",
-      
+
           @OA\RequestBody(
               description="Authenticate",
               required=true,
@@ -33,42 +33,42 @@ class AuthController extends Controller
       					@OA\Property(property="c_password", type="string"),
     	        )
      		  )
-          ),    
+          ),
          @OA\Response(response="default", description="successful operation")
       )
-     */  
- 	public function register(Request $request) {    
- 		$validator = Validator::make($request->all(), 
-            [ 
+     */
+ 	public function register(Request $request) {
+ 		$validator = Validator::make($request->all(),
+            [
               'phone_number' => 'required',
               'name' => 'required',
               'email' => 'required|email|unique:users',
-              'password' => 'required',  
-              'c_password' => 'required|same:password', 
-            ]);   
- 		
- 		if ($validator->fails()) {          
-       		return response()->json(['error'=>$validator->errors()], 401);                       
+              'password' => 'required',
+              'c_password' => 'required|same:password',
+            ]);
+
+ 		if ($validator->fails()) {
+       		return response()->json(['error'=>$validator->errors()], 401);
     	}
 
-	 	$input = $request->all();  
+	 	$input = $request->all();
 	 	$input['password'] = bcrypt($input['password']);
-	 	$user = User::create($input); 
-    $data['name'] = $user->name;
-    $data['email'] = $user->name;
-    $data['phone_number'] = $user->phone_number;
+	 	$user = User::create($input);
+        $data['name'] = $user->name;
+        $data['email'] = $user->name;
+        $data['phone_number'] = $user->phone_number;
 	 	$data['token'] =  $user->createToken('AppName')->accessToken;
-	 	
-	 	return response()->json($data, $this->successStatus); 
+
+	 	return response()->json($data, $this->successStatus);
 	}
-  
+
    	/**
       @OA\Post(
           path="/api/v1/login",
           tags={"Authenticate"},
           summary="Login",
           operationId="login",
-      
+
           @OA\RequestBody(
               description="Authenticate",
               required=true,
@@ -79,27 +79,37 @@ class AuthController extends Controller
 					@OA\Property(property="password", type="string"),
     	        )
      		  )
-          ),    
+          ),
          @OA\Response(response="default", description="successful operation")
       )
-    */  
-	public function login(){ 
-		
-		if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){ 
-	   	
+    */
+	public function login(Request $request) {
+
+        $validator = Validator::make($request->all(),
+            [
+                'email' => ['required', 'email', 'unique:users'],
+                'password' => ['required', 'alpha_num', 'string', 'min:6'],
+            ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 401);
+        }
+
+        if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
+
 	   		$user = Auth::user();
-        $data["phone_number"] = $user->phone_number; 
+            $data["phone_number"] = $user->phone_number;
 	   		$data["name"] = $user->name;
 	   		$data["email"] = $user->email;
-	   		$data["token"] =  $user->createToken('AppName')->accessToken; 
-	    	
-	    	return response()->json($data, $this-> successStatus); 
-	  	
-	  	}else{ 
-	   	
-	   	return response()->json(['error'=>'Unauthorised'], 401); 
-	   	
-	   	} 
+	   		$data["token"] =  $user->createToken('AppName')->accessToken;
+
+	    	return response()->json($data, $this-> successStatus);
+
+	  	} else {
+
+	   	    return response()->json(['error'=>'Unauthorised'], 401);
+
+	   	}
 	}
 
 
@@ -110,45 +120,44 @@ class AuthController extends Controller
           summary="Get profile data",
           operationId="profile",
           security={ {"bearerAuth": {}}, },
-      
+
          @OA\Response(response="default", description="successful operation")
       )
-    */ 
+    */
 	public function getUser() {
 		$user = Auth::user();
-	
-	 	return response()->json(['data' => $user], $this->successStatus); 
+
+	 	return response()->json(['data' => $user], $this->successStatus);
 	}
 
+        /**
+          @OA\Get(
+              path="/api/v1/add-device-token",
+              tags={"Profile"},
+              summary="Add Device Token",
+              operationId="adddevicetoken",
+              security={ {"bearerAuth": {}}, },
 
-  /**
-      @OA\Get(
-          path="/api/v1/add-device-token",
-          tags={"Profile"},
-          summary="Add Device Token",
-          operationId="adddevicetoken",
-          security={ {"bearerAuth": {}}, },
-      
-         @OA\Response(response="default", description="successful operation")
-      )
-    */ 
-  public function addDeviceToken(Request $request) {
-    
-    $validator = Validator::make($request->all(), 
-            [ 
+             @OA\Response(response="default", description="successful operation")
+          )
+        */
+      public function addDeviceToken(Request $request) {
+
+        $validator = Validator::make($request->all(),
+            [
               'device_token' => 'required',
-            ]);   
-    
-    if ($validator->fails()) {          
-      return response()->json(['error'=>$validator->errors()], 401);                       
-    }
+            ]);
 
-    $input = $request->all();
-    $data = Auth::user();
+        if ($validator->fails()) {
+          return response()->json(['error'=>$validator->errors()], 401);
+        }
 
-    $data->device_token = $input['device_token'];
-    $data->update();
+        $input = $request->all();
+        $data = Auth::user();
 
-    return response()->json($input, 200);
-  }
-} 
+        $data->device_token = $input['device_token'];
+        $data->update();
+
+        return response()->json($input, 200);
+      }
+}

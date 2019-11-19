@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use App\Enums\ResponseCodeEnum;
 
 class AuthController extends Controller
 {
@@ -45,7 +46,7 @@ class AuthController extends Controller
             ]);
 
  		if ($validator->fails()) {
-       		return response()->json(['error'=>$validator->errors()], \ResponseCodeEnum::Error);
+       		return response()->json(['error'=>$validator->errors()], ResponseCodeEnum::Error);
     	}
 
 	 	$input = $request->all();
@@ -56,7 +57,7 @@ class AuthController extends Controller
         $data['phone_number'] = $user->phone_number;
 	 	$data['token'] =  $user->createToken('AppName')->accessToken;
 
-	 	return response()->json($data, \ResponseCodeEnum::Success);
+	 	return response()->json($data, ResponseCodeEnum::Success);
 	}
 
    	/**
@@ -84,12 +85,12 @@ class AuthController extends Controller
 
         $validator = Validator::make($request->all(),
             [
-                'email' => ['required', 'email', 'unique:users'],
+                'email' => ['required', 'email'],
                 'password' => ['required', 'alpha_num', 'string', 'min:6'],
             ]);
 
         if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()], \ResponseCodeEnum::Error);
+            return response()->json(['error'=>$validator->errors()], ResponseCodeEnum::Error);
         }
 
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
@@ -100,11 +101,11 @@ class AuthController extends Controller
 	   		$data["email"] = $user->email;
 	   		$data["token"] =  $user->createToken('AppName')->accessToken;
 
-	    	return response()->json($data, $this->successStatus);
+	    	return response()->json($data, ResponseCodeEnum::Success);
 
 	  	} else {
 
-	   	    return response()->json(['error'=>'Unauthorised'], \ResponseCodeEnum::UnAuthorized);
+	   	    return response()->json(['error'=>'Unauthorised'], ResponseCodeEnum::UnAuthorized);
 
 	   	}
 	}
@@ -124,7 +125,7 @@ class AuthController extends Controller
 	public function getUser() {
 		$user = Auth::user();
 
-	 	return response()->json(['data' => $user], \ResponseCodeEnum::Success);
+	 	return response()->json(['data' => $user], ResponseCodeEnum::Success);
 	}
 
         /**
@@ -140,13 +141,15 @@ class AuthController extends Controller
         */
       public function addDeviceToken(Request $request) {
 
+        dd($request->all());
+
         $validator = Validator::make($request->all(),
             [
               'device_token' => 'required',
             ]);
 
         if ($validator->fails()) {
-          return response()->json(['error'=>$validator->errors()], \ResponseCodeEnum::UnAuthorized);
+          return response()->json(['error'=>$validator->errors()], ResponseCodeEnum::UnAuthorized);
         }
 
         $input = $request->all();
@@ -155,6 +158,6 @@ class AuthController extends Controller
         $data->device_token = $input['device_token'];
         $data->update();
 
-        return response()->json($input, \ResponseCodeEnum::Success);
+        return response()->json($input, ResponseCodeEnum::Success);
       }
 }

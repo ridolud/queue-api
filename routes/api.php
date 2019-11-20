@@ -21,6 +21,7 @@ Route::prefix('v1')->group(function(){
 	Route::get('test_push_notif/{deviceToken}', 'Api\TestPushNotifController@testPush');
 
 	Route::name('hospital.index')->get('hospital', 'Api\HospitalController@index');
+	Route::name('hospital.search')->get('hospital/{full_name}', 'Api\HospitalController@search');
 
 	Route::group(['middleware' => 'auth:api'], function(){
 

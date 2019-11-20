@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\ListDataEnum;
 use App\Enums\ResponseCodeEnum;
 use App\Hospital;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Psy\Util\Str;
 
 class HospitalController extends Controller
 {
@@ -25,74 +27,40 @@ class HospitalController extends Controller
      */
     public function index()
     {
-        $data = Hospital::paginate(15);
-        return response()->json($data, ResponseCodeEnum::Success);
-
+        try {
+            $data = Hospital::paginate(ListDataEnum::TotalItemPerRequest);
+            return response()->json($data, ResponseCodeEnum::Success);
+        } catch (\Error $e) {
+            return response()->json($e, $e->getCode());
+        }
     }
 
     /**
-     * Show the form for creating a new resource.
+    @OA\Get(
+    path="/api/v1/hospital/{full_name}",
+    tags={"Hospital"},
+    summary="Get hospital list by query",
+    operationId="profile",
+
+    @OA\Response(response="default", description="successful operation")
+    )
+
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function search(Request $request)
     {
-        //
+        try {
+            $data = Hospital::where('full_name', 'like', '%' . strtolower($request->full_name) . '%')
+                ->orWhere('full_name', 'like', '%' . strtoupper($request->full_name) . '%')
+                ->orWhere('full_name', 'like', '%' . ucfirst($request->full_name) . '%')
+                ->orWhere('full_name', 'like', '%' . ucwords($request->full_name) . '%')
+                ->paginate(ListDataEnum::TotalItemPerRequest);
+            return response()->json($data, ResponseCodeEnum::Success);
+        } catch (\Error $e) {
+            return response()->json($e, $e->getCode());
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Hospital  $hospital
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Hospital $hospital)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Hospital  $hospital
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Hospital $hospital)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Hospital  $hospital
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Hospital $hospital)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Hospital  $hospital
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Hospital $hospital)
-    {
-        //
-    }
 }

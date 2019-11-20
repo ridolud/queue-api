@@ -20,6 +20,9 @@
                         "multipart/form-data": {
                             "schema": {
                                 "properties": {
+                                    "phone_number": {
+                                        "type": "string"
+                                    },
                                     "name": {
                                         "type": "string"
                                     },
@@ -95,6 +98,39 @@
                         "bearerAuth": []
                     }
                 ]
+            }
+        },
+        "/api/v1/add-device-token": {
+            "get": {
+                "tags": [
+                    "Profile"
+                ],
+                "summary": "Add Device Token",
+                "operationId": "adddevicetoken",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/hospital": {
+            "get": {
+                "tags": [
+                    "Hospital"
+                ],
+                "summary": "Get hospital list",
+                "operationId": "profile",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
             }
         },
         "/api/v1/patient/my_data": {

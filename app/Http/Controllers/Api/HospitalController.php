@@ -10,13 +10,22 @@ use App\Http\Controllers\Controller;
 class HospitalController extends Controller
 {
     /**
+      @OA\Get(
+          path="/api/v1/hospital",
+          tags={"Hospital"},
+          summary="Get hospital list",
+          operationId="profile",
+
+         @OA\Response(response="default", description="successful operation")
+      )
+
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $data = Hospital::all();
+        $data = Hospital::paginate(15);
         return response()->json($data, ResponseCodeEnum::Success);
 
     }

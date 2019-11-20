@@ -20,6 +20,8 @@ Route::prefix('v1')->group(function(){
 
 	Route::get('test_push_notif/{deviceToken}', 'Api\TestPushNotifController@testPush');
 
+	Route::name('hospital.index')->get('hospital', 'Api\HospitalController@index');
+
 	Route::group(['middleware' => 'auth:api'], function(){
 
 	 	Route::get('user', 'Api\AuthController@getUser');
@@ -32,7 +34,7 @@ Route::prefix('v1')->group(function(){
 	 		Route::get('my_data', 'Api\PatientController@getMyData');
 	 		Route::post('my_data', 'Api\PatientController@saveMyData');
 	 	});
-	 	
+
 	});
 
 });

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "accd1d071bf859d5655573a7681792b4",
+    "content-hash": "01fbcc4ae160ff35214a6b1c3ab449e1",
     "packages": [
         {
             "name": "darkaonline/l5-swagger",
@@ -870,6 +870,65 @@
                 "url"
             ],
             "time": "2019-07-01T23:21:34+00:00"
+        },
+        {
+            "name": "hafael/laraflake",
+            "version": "v1.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hafael/laraflake.git",
+                "reference": "371059ebb4b23bd9e7bf5a17720be5aedba39118"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hafael/laraflake/zipball/371059ebb4b23bd9e7bf5a17720be5aedba39118",
+                "reference": "371059ebb4b23bd9e7bf5a17720be5aedba39118",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=5.3.0",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "laravel/framework": ">=5.3.0",
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": ">=4.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Hafael\\LaraFlake\\LaraFlakeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hafael\\LaraFlake\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Rafael Villa-Verde",
+                    "email": "villa655321verde@gmail.com"
+                }
+            ],
+            "description": "Laravel Package based on Twitter Snowflake ID Generator (64 bit ID).",
+            "keywords": [
+                "64bit",
+                "id",
+                "laravel",
+                "shard",
+                "snowflake"
+            ],
+            "time": "2019-08-22T02:41:43+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",

@@ -12,4 +12,7 @@ class City extends Model
     protected $casts = [
         'id' => 'integer'
     ];
+    protected $hidden = [
+        'id'
+    ];
 }

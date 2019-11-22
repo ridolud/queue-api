@@ -2,12 +2,13 @@
 
 namespace App;
 
+use App\Libs\UUIDGenerator;
 use Hafael\LaraFlake\Traits\LaraFlakeTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Hospital extends Model
 {
-    use LaraFlakeTrait;
+    use UUIDGenerator;
 
     protected $table = "hospital";
     protected $fillable = [
@@ -20,4 +21,5 @@ class Hospital extends Model
         "city_id",
         "photo"
     ];
+    public $timestamps = false;
 }

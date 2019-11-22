@@ -20,8 +20,14 @@ Route::prefix('v1')->group(function(){
 
 	Route::get('test_push_notif/{deviceToken}', 'Api\TestPushNotifController@testPush');
 
+	/* Hospital Routing */
 	Route::name('hospital.index')->get('hospital', 'Api\HospitalController@index');
 	Route::name('hospital.search')->get('hospital/{full_name}', 'Api\HospitalController@search');
+	/* End Hospital Routing*/
+
+    /* Poli Clinic Routing */
+    Route::name('poli.index')->get('poli/{hospital_id}', 'Api\PoliClinicController@index');
+    /* End Poli Clinic Routing */
 
 	Route::group(['middleware' => 'auth:api'], function(){
 

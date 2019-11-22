@@ -22,4 +22,19 @@ class Hospital extends Model
         "photo"
     ];
     public $timestamps = false;
+
+    protected $casts = [
+        'province_id' => 'integer',
+        'city_id' => 'integer'
+    ];
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'province_id', 'id');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id', 'id');
+    }
 }

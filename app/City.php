@@ -1,0 +1,15 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class City extends Model
+{
+    //
+    protected $table = "indonesia_cities";
+
+    protected $casts = [
+        'id' => 'integer'
+    ];
+}

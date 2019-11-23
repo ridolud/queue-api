@@ -30,8 +30,8 @@ class HospitalController extends Controller
         try {
             $data = Hospital::with(['province', 'city'])
                 ->paginate(ListDataEnum::TotalItemPerRequest);
+
             return response()->json($data, ResponseCodeEnum::Success);
-        return Hospital::with('province')->get();
         } catch (\Error $e) {
             return response()->json($e, $e->getCode());
         }

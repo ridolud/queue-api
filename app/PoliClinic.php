@@ -16,6 +16,7 @@ class PoliClinic extends Model
         "hospital_name"
     ];
     public $incrementing = false;
+    protected $primaryKey = "id";
     public $timestamps = false;
 
     public function hospital()

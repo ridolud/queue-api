@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\PoliClinic;
+use App\Hospital;
 
 class PoliClinicSeeder extends Seeder
 {
@@ -15,10 +16,12 @@ class PoliClinicSeeder extends Seeder
         //
         $polies = ['Poli Gigi', 'Poli THT', 'Poli Ginjal', 'Poli Penyakit Jiwa', 'Poli Gami', 'Poli Andri', 'Poli Ponik', 'Poli Gon', 'Poli Tron'];
 
+        $hospital = Hospital::first();
+
         foreach ($polies as $poly) {
             PoliClinic::create([
                 'full_name' => $poly,
-                'hospital_id' => '71536672-f5bd-40ac-a659-d34d4f428aec'
+                'hospital_id' => $hospital->id,
             ]);
         }
     }

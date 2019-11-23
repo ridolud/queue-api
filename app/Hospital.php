@@ -21,6 +21,8 @@ class Hospital extends Model
         "city_id",
         "photo"
     ];
+    public $incrementing = false;
+    protected $primaryKey = "id";
     public $timestamps = false;
 
     public function province()
@@ -31,13 +33,5 @@ class Hospital extends Model
     public function city()
     {
         return $this->belongsTo(City::class, 'city_id', 'id');
-    }
-
-    public function getPlaceAttribute()
-    {
-        return $this->leftJoin('indonesia_provinces as prov', 'prov.id', 'hospital.province_id')
-            ->leftJoin('indonesia_cities as city', 'city.id', 'hospital.city_id')
-            ->whereIn('prov.id', $this->province_id)
-            ->whereIn('city.id', $this->city_id);
     }
 }

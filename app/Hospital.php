@@ -23,11 +23,6 @@ class Hospital extends Model
     ];
     public $timestamps = false;
 
-    protected $casts = [
-        'province_id' => 'integer',
-        'city_id' => 'integer'
-    ];
-
     public function province()
     {
         return $this->belongsTo(Province::class, 'province_id', 'id');
@@ -36,5 +31,13 @@ class Hospital extends Model
     public function city()
     {
         return $this->belongsTo(City::class, 'city_id', 'id');
+    }
+
+    public function getPlaceAttribute()
+    {
+        return $this->leftJoin('indonesia_provinces as prov', 'prov.id', 'hospital.province_id')
+            ->leftJoin('indonesia_cities as city', 'city.id', 'hospital.city_id')
+            ->whereIn('prov.id', $this->province_id)
+            ->whereIn('city.id', $this->city_id);
     }
 }

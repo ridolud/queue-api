@@ -9,9 +9,6 @@ class City extends Model
     //
     protected $table = "indonesia_cities";
 
-    protected $casts = [
-        'id' => 'integer'
-    ];
     protected $hidden = [
         'id'
     ];

@@ -28,11 +28,10 @@ class HospitalController extends Controller
     public function index()
     {
         try {
-            $data = Hospital::select('*', 'hospital.id as uuid', 'indonesia_cities.name as city_name', 'indonesia_provinces.name as province_name')
-                ->leftJoin('indonesia_cities', 'indonesia_cities.id', 'hospital.city_id')
-                ->leftJoin("indonesia_provinces", "indonesia_provinces.id", "hospital.province_id")
+            $data = Hospital::with(['province', 'city'])
                 ->paginate(ListDataEnum::TotalItemPerRequest);
             return response()->json($data, ResponseCodeEnum::Success);
+        return Hospital::with('province')->get();
         } catch (\Error $e) {
             return response()->json($e, $e->getCode());
         }
@@ -55,9 +54,7 @@ class HospitalController extends Controller
     public function search(Request $request)
     {
         try {
-            $data = Hospital::select('*', 'hospital.id as uuid',  'indonesia_cities.name as city_name', 'indonesia_provinces.name as province_name')
-                ->leftJoin('indonesia_cities', 'indonesia_cities.id', 'hospital.city_id')
-                ->leftJoin("indonesia_provinces", "indonesia_provinces.id", "hospital.province_id")
+            $data = Hospital::with(['province', 'city'])
                 ->where('full_name', 'like', '%' . strtolower($request->full_name) . '%')
                 ->orWhere('full_name', 'like', '%' . strtoupper($request->full_name) . '%')
                 ->orWhere('full_name', 'like', '%' . ucfirst($request->full_name) . '%')

@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "darkaonline/l5-swagger": "^6.0",
+        "doctrine/dbal": "^2.10",
         "edujugon/push-notification": "^4.1",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",

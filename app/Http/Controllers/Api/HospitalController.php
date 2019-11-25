@@ -33,7 +33,7 @@ class HospitalController extends Controller
 
             return response()->json($data, ResponseCodeEnum::Success);
         } catch (\Error $e) {
-            return response()->json($e, $e->getCode());
+            return response()->json($e->getMessage(), $e->getCode());
         }
     }
 
@@ -62,7 +62,7 @@ class HospitalController extends Controller
                 ->paginate(ListDataEnum::TotalItemPerRequest);
             return response()->json($data, ResponseCodeEnum::Success);
         } catch (\Error $e) {
-            return response()->json($e, $e->getCode());
+            return response()->json($e->getMessage(), $e->getCode());
         }
     }
 

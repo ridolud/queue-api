@@ -27,6 +27,7 @@ Route::prefix('v1')->group(function(){
 
     /* Poli Clinic Routing */
     Route::name('poli.index')->get('poli/{hospital_id}', 'Api\PoliClinicController@index');
+    Route::name('poli.search')->get('poli/{hospital_id}/{poli_name}', 'Api\PoliClinicController@search');
     /* End Poli Clinic Routing */
 
 	Route::group(['middleware' => 'auth:api'], function(){

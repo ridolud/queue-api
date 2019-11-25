@@ -26,6 +26,11 @@ class Doctor extends Model
      */
     public $timestamps = false;
 
+    protected $primaryKey = "id";
+    protected $casts = [
+      'id' => 'string'
+    ];
+
     /**
      * Relation to hospital model
      *
@@ -43,7 +48,20 @@ class Doctor extends Model
      */
     public function poli()
     {
-        return $this->belongsTo(PoliClinic::class);
+        return $this->belongsTo(PoliClinic::class, 'poli_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function schedule()
+    {
+        return $this->hasOne(DoctorSchedule::class, 'doctor_id', 'id');
+    }
+
+    public function scopeDoctorSchedule($query)
+    {
+        return $query->leftJoin('doctor_schedule as schedule', 'schedule.doctor_id', 'doctor.id');
     }
 
 }

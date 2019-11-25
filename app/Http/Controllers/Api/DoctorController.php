@@ -24,14 +24,16 @@ class DoctorController extends Controller
     {
         //
         try {
-            $doctors = Doctor::where([
+            $doctors = Doctor::select('doctor.full_name', 'schedule.day', 'schedule.time')
+                ->doctorSchedule()
+                ->where([
                     'poli_id'       => $request->poli_id,
                     'hospital_id'   => $request->hospital_id
                 ])
                 ->paginate(ListDataEnum::TotalItemPerRequest);
 
             return response()->json($doctors, ResponseCodeEnum::Success);
-        } catch (\Exception $e) {
+        } catch (\Error $e) {
             return response()->json($e->getMessage(), $e->getCode());
         }
 
@@ -47,7 +49,9 @@ class DoctorController extends Controller
     public function search(Request $request)
     {
         try {
-            $doctors = Doctor::where([
+            $doctors = Doctor::select('doctor.full_name', 'schedule.day', 'schedule.time')
+                ->doctorSchedule()
+                ->where([
                     'poli_id'       => $request->poli_id,
                     'hospital_id'   => $request->hospital_id
                 ])

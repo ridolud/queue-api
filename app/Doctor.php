@@ -2,37 +2,25 @@
 
 namespace App;
 
-use Hafael\LaraFlake\Traits\LaraFlakeTrait;
-use Illuminate\Database\Eloquent\Model;
 use App\Libs\UUIDGenerator;
+use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class PoliClinic
+ * Class Doctor
  * @package App
  */
-class PoliClinic extends Model
+class Doctor extends Model
 {
     use UUIDGenerator;
 
     /**
      * @var string
      */
-    protected $table = "poli";
-    /**
-     * @var array
-     */
-    protected $fillable = [
-        "full_name",
-        "hospital_name"
-    ];
+    protected $table = "doctor";
     /**
      * @var bool
      */
     public $incrementing = false;
-    /**
-     * @var string
-     */
-    protected $primaryKey = "id";
     /**
      * @var bool
      */
@@ -45,6 +33,17 @@ class PoliClinic extends Model
      */
     public function hospital()
     {
-        return $this->belongsTo(Hospital::class, 'hospital_id');
+        return $this->belongsTo(Hospital::class);
     }
+
+    /**
+     * Relation to poli clinic model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function poli()
+    {
+        return $this->belongsTo(PoliClinic::class);
+    }
+
 }

@@ -5,9 +5,16 @@ namespace App;
 use Hafael\LaraFlake\Traits\LaraFlakeTrait;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Patient
+ * @package App
+ */
 class Patient extends Model
 {
-	protected $table = 'patient';
+    /**
+     * @var string
+     */
+    protected $table = 'patient';
 
 	 /**
      * The attributes that are mass assignable.

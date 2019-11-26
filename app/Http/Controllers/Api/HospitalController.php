@@ -28,7 +28,9 @@ class HospitalController extends Controller
     public function index()
     {
         try {
-            $data = Hospital::with(['province', 'city'])
+            $data = Hospital::select('hospital.*')
+                ->availableInsurance()
+                ->with(['province', 'city'])
                 ->paginate(ListDataEnum::TotalItemPerRequest);
 
             return response()->json($data, ResponseCodeEnum::Success);

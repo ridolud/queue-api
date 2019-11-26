@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Doctor;
+use App\Models\Doctor;
 use App\Enums\ListDataEnum;
 use App\Enums\ResponseCodeEnum;
 use Illuminate\Http\Request;

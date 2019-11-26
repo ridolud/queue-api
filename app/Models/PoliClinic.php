@@ -1,8 +1,7 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use Hafael\LaraFlake\Traits\LaraFlakeTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Libs\UUIDGenerator;
 

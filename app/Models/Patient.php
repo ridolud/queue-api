@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use Hafael\LaraFlake\Traits\LaraFlakeTrait;
+use App\Libs\UUIDGenerator;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Patient extends Model
 {
+    use UUIDGenerator;
+
     /**
      * @var string
      */

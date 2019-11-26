@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Enums\ListDataEnum;
 use App\Enums\ResponseCodeEnum;
-use App\Hospital;
+use App\Models\Hospital;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Psy\Util\Str;

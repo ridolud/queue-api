@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Enums\ListDataEnum;
 use App\Enums\ResponseCodeEnum;
-use App\PoliClinic;
+use App\Models\PoliClinic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

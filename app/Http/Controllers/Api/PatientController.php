@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Enums\ResponseCodeEnum;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Patient;
+use App\Models\Patient;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 

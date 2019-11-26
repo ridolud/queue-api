@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use App\Enums\ResponseCodeEnum;
 
 class AuthController extends Controller

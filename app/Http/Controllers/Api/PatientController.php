@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller; 
+use App\Enums\ResponseCodeEnum;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Patient;
 use Illuminate\Support\Facades\Auth;
-use Validator;
-use App\User;
+use Illuminate\Support\Facades\Validator;
 
 class PatientController extends Controller
 {
-
-	public $successStatus = 200;
 
     /**
       @OA\get(
@@ -21,10 +19,10 @@ class PatientController extends Controller
           summary="Edit my data patient",
           operationId="getmydata",
           security={ {"bearerAuth": {}}, },
-      
+
          @OA\Response(response="default", description="successful operation")
       )
-    */ 
+    */
 
     function getMyData()
     {
@@ -32,7 +30,7 @@ class PatientController extends Controller
 
     	return response()->json([
     		'data' => $data,
-    	], $this->successStatus);
+    	], ResponseCodeEnum::Success);
     }
 
     /**
@@ -58,39 +56,37 @@ class PatientController extends Controller
 
                 )
               )
-          ),    
-      
+          ),
+
          @OA\Response(response="default", description="successful operation")
       )
-    */ 
-    function saveMyData(Request $request) 
+    */
+    function saveMyData(Request $request)
     {
-    	$validator = Validator::make($request->all(), 
-            [ 
-            	'full_name' => 'required', 
-		        'mother_name' => 'required', 
+    	$validator = Validator::make($request->all(),
+            [
+            	'full_name' => 'required',
+		        'mother_name' => 'required',
 		        'identity_number' => 'required',
 		        'dob' => 'required|date',
 		        'gender' => 'required',
 		        'blood_type' => 'required',
 		        'address' => 'required',
             ]);
- 		
- 		if ($validator->fails()) {          
-       		return response()->json(['error'=>$validator->errors()], 401);                       
+
+ 		if ($validator->fails()) {
+       		return response()->json(['error'=>$validator->errors()], ResponseCodeEnum::UnAuthorized);
     	}
 
-        $input = $request->all();
-        $data = Patient::where('auth_id', Auth::id())->first();
+ 		try {
+ 		    $patient = Patient::updateOrCreate([
+                ['auth_id' => Auth::id()],
+                $request->all()
+            ]);
 
-        if(is_null($data)) {
-             
-            $input['auth_id'] = Auth::id();
-            $data = Patient::create($input);
-        }else{
-            $data->update($input);
+            return response()->json($patient, ResponseCodeEnum::Success);
+        } catch (\Exception $e) {
+            return response()->json(['error'=>$validator->errors()], ResponseCodeEnum::UnAuthorized);
         }
-
-	 	return response()->json($data, $this->successStatus); 
     }
 }

@@ -15,9 +15,17 @@ use App\Http\Controllers\Controller;
 class DoctorController extends Controller
 {
     /**
+    @OA\Get(
+    path="/api/v1/doctor/{hospital_id}/{poli_id}",
+    tags={"Doctor"},
+    summary="Get Doctor list",
+    operationId="profile",
+
+    @OA\Response(response="default", description="successful operation")
+    )
+
      * Display a listing of the resource.
      *
-     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -41,10 +49,18 @@ class DoctorController extends Controller
 
 
     /**
-     * Show result of query from doctor name
+    @OA\Get(
+    path="/api/v1/doctor/{hospital_id}/{poli_id}/{doctor_name}",
+    tags={"Doctor"},
+    summary="Get Doctor list from search",
+    operationId="profile",
+
+    @OA\Response(response="default", description="successful operation")
+    )
+
+     * Display a listing of the resource.
      *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\Response
      */
     public function search(Request $request)
     {

@@ -125,7 +125,7 @@ class AuthController extends Controller
 	public function getUser() {
 		$user = Auth::user();
 
-	 	return response()->json(['data' => $user], ResponseCodeEnum::Success);
+	 	return response()->json($user, ResponseCodeEnum::Success);
 	}
 
         /**

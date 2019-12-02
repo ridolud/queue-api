@@ -64,17 +64,20 @@ class DoctorController extends Controller
      */
     public function search(Request $request)
     {
+
         try {
             $doctors = Doctor::select('doctor.full_name', 'schedule.day', 'schedule.time')
                 ->doctorSchedule()
                 ->where([
-                    'poli_id'       => $request->poli_id,
-                    'hospital_id'   => $request->hospital_id
+                    'hospital_id' => $request->hospital_id,
+                    'poli_id' => $request->poli_id
                 ])
-                ->where('full_name', 'like', '%' . strtoupper($request->doctor_name) . '%')
-                ->orWhere('full_name', 'like', '%' . strtoupper($request->doctor_name) . '%')
-                ->orWhere('full_name', 'like', '%' . ucfirst($request->doctor_name) . '%')
-                ->orWhere('full_name', 'like', '%' . ucwords($request->doctor_name) . '%')
+                ->where(function ($query) use ($request) {
+                    $query->where('full_name', 'like', '%' . strtoupper($request->doctor_name) . '%')
+                        ->orWhere('full_name', 'like', '%' . strtoupper($request->doctor_name) . '%')
+                        ->orWhere('full_name', 'like', '%' . ucfirst($request->doctor_name) . '%')
+                        ->orWhere('full_name', 'like', '%' . ucwords($request->doctor_name) . '%');
+                })
                 ->paginate(ListDataEnum::TotalItemPerRequest);
 
             return response()->json($doctors, ResponseCodeEnum::Success);

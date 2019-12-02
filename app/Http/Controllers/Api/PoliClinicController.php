@@ -54,10 +54,12 @@ class PoliClinicController extends Controller
     {
         try {
             $poli = PoliClinic::where('hospital_id', $request->hospital_id)
-                ->where('full_name', 'like', '%' . strtoupper($request->poli_name) . '%')
-                ->orWhere('full_name', 'like', '%' . strtolower($request->poli_name) . '%')
-                ->orWhere('full_name', 'like', '%' . ucfirst($request->poli_name) . '%')
-                ->orWhere('full_name', 'like', '%' . ucwords($request->poli_name) . '%')
+                ->where(function ($query) use ($request) {
+                    $query->where('full_name', 'like', '%' . strtoupper($request->poli_name) . '%')
+                        ->orWhere('full_name', 'like', '%' . strtolower($request->poli_name) . '%')
+                        ->orWhere('full_name', 'like', '%' . ucfirst($request->poli_name) . '%')
+                        ->orWhere('full_name', 'like', '%' . ucwords($request->poli_name) . '%');
+                })
                 ->paginate(ListDataEnum::TotalItemPerRequest);
 
             return response()->json($poli, ResponseCodeEnum::Success);

@@ -57,10 +57,12 @@ class HospitalController extends Controller
     {
         try {
             $data = Hospital::with(['province', 'city'])
-                ->where('full_name', 'like', '%' . strtolower($request->full_name) . '%')
-                ->orWhere('full_name', 'like', '%' . strtoupper($request->full_name) . '%')
-                ->orWhere('full_name', 'like', '%' . ucfirst($request->full_name) . '%')
-                ->orWhere('full_name', 'like', '%' . ucwords($request->full_name) . '%')
+                ->where(function ($query) use ($request) {
+                    $query->where('full_name', 'like', '%' . strtolower($request->full_name) . '%')
+                        ->orWhere('full_name', 'like', '%' . strtoupper($request->full_name) . '%')
+                        ->orWhere('full_name', 'like', '%' . ucfirst($request->full_name) . '%')
+                        ->orWhere('full_name', 'like', '%' . ucwords($request->full_name) . '%');
+                })
                 ->paginate(ListDataEnum::TotalItemPerRequest);
             return response()->json($data, ResponseCodeEnum::Success);
         } catch (\Error $e) {

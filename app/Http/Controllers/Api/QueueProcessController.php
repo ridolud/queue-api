@@ -15,6 +15,31 @@ use App\Http\Controllers\Controller;
 class QueueProcessController extends Controller
 {
 
+
+    /**
+    @OA\Post(
+    path="/api/v1/queue",
+    tags={"Data Queue Process"},
+    summary="Store Queue",
+    operationId="storequeue",
+    security={ {"bearerAuth": {}}, },
+    @OA\RequestBody(
+    description="form",
+    required=true,
+    @OA\MediaType(
+    mediaType="multipart/form-data",
+    @OA\Schema (
+    @OA\Property(property="patient_id", type="string"),
+    @OA\Property(property="insurance_id", type="string", optional=true),
+    @OA\Property(property="doctor_schedule", type="string"),
+
+    )
+    )
+    ),
+
+    @OA\Response(response="default", description="successful operation")
+    )
+     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -41,6 +66,20 @@ class QueueProcessController extends Controller
         ], ResponseCodeEnum::Success);
     }
 
+    /**
+    @OA\Get(
+    path="/api/v1/queue/index",
+    tags={"Histories Queue"},
+    summary="get list histories of queue per patient",
+    operationId="profile",
+
+    @OA\Response(response="default", description="successful operation")
+    )
+
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $queues = Auth::user()->queue;

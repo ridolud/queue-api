@@ -119,12 +119,54 @@
                 ]
             }
         },
+        "/api/v1/doctor/{hospital_id}/{poli_id}": {
+            "get": {
+                "tags": [
+                    "Doctor"
+                ],
+                "summary": "Get Doctor list",
+                "operationId": "profile",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/v1/doctor/{hospital_id}/{poli_id}/{doctor_name}": {
+            "get": {
+                "tags": [
+                    "Doctor"
+                ],
+                "summary": "Get Doctor list from search",
+                "operationId": "profile",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/api/v1/hospital": {
             "get": {
                 "tags": [
                     "Hospital"
                 ],
                 "summary": "Get hospital list",
+                "operationId": "profile",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/v1/hospital/{full_name}": {
+            "get": {
+                "tags": [
+                    "Hospital"
+                ],
+                "summary": "Get hospital list by query",
                 "operationId": "profile",
                 "responses": {
                     "default": {
@@ -203,6 +245,89 @@
                         "bearerAuth": []
                     }
                 ]
+            }
+        },
+        "/api/v1/poli/{hospital_id}": {
+            "get": {
+                "tags": [
+                    "Poli Clinic"
+                ],
+                "summary": "Get Policlinic list by query",
+                "operationId": "profile",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/v1/poli/{hospital_id}/{poli_name}": {
+            "get": {
+                "tags": [
+                    "Search Poli Clinic"
+                ],
+                "summary": "Search Policlinic list by query",
+                "operationId": "profile",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/v1/queue": {
+            "post": {
+                "tags": [
+                    "Queue Process"
+                ],
+                "summary": "Store Queue",
+                "operationId": "storequeue",
+                "requestBody": {
+                    "description": "form",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "patient_id": {
+                                        "type": "string"
+                                    },
+                                    "doctor_schedule": {
+                                        "type": "string"
+                                    },
+                                    "insurance_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/queue/index": {
+            "get": {
+                "tags": [
+                    "Queue Process"
+                ],
+                "summary": "get list histories of queue per patient",
+                "operationId": "profile",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
             }
         }
     },

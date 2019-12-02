@@ -19,7 +19,7 @@ class QueueProcessController extends Controller
     /**
     @OA\Post(
     path="/api/v1/queue",
-    tags={"Data Queue Process"},
+    tags={"Queue Process"},
     summary="Store Queue",
     operationId="storequeue",
     security={ {"bearerAuth": {}}, },
@@ -30,13 +30,11 @@ class QueueProcessController extends Controller
     mediaType="multipart/form-data",
     @OA\Schema (
     @OA\Property(property="patient_id", type="string"),
-    @OA\Property(property="insurance_id", type="string"),
     @OA\Property(property="doctor_schedule", type="string"),
-
+    @OA\Property(property="insurance_id", type="string"),
     )
     )
     ),
-
     @OA\Response(response="default", description="successful operation")
     )
      */
@@ -73,7 +71,7 @@ class QueueProcessController extends Controller
     /**
     @OA\Get(
     path="/api/v1/queue/index",
-    tags={"Histories Queue"},
+    tags={"Queue Process"},
     summary="get list histories of queue per patient",
     operationId="profile",
 

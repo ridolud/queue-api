@@ -39,7 +39,8 @@ class QueueProcess extends Model
         "doctor_schedule_id",
         "is_valid",
         "submit_time",
-        "insurance_id"
+        "insurance_id",
+        "process_status"
     ];
 
 }

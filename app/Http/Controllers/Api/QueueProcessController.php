@@ -49,7 +49,9 @@ class QueueProcessController extends Controller
         ]);
 
         if ($fails = $validator->fails()) {
-            return response()->json($fails, ResponseCodeEnum::Error);
+            return response()->json([
+                "success" => false,
+                "message" => "Data Exists"], ResponseCodeEnum::Error);
         }
 
         QueueProcess::create([
@@ -59,10 +61,12 @@ class QueueProcessController extends Controller
             'doctor_schedule_id' => $request->doctor_schedule_id,
             'is_valid' => QueueEnum::Valid,
             'submit_time' => Carbon::now(),
+            'process_status' => QueueEnum::waiting,
         ]);
 
         return response()->json([
             "success" => true,
+            "message" => "Queue Success"
         ], ResponseCodeEnum::Success);
     }
 

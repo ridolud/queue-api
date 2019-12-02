@@ -30,7 +30,7 @@ class QueueProcessController extends Controller
     mediaType="multipart/form-data",
     @OA\Schema (
     @OA\Property(property="patient_id", type="string"),
-    @OA\Property(property="insurance_id", type="string", optional=true),
+    @OA\Property(property="insurance_id", type="string"),
     @OA\Property(property="doctor_schedule", type="string"),
 
     )

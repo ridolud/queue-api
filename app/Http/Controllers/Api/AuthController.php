@@ -96,6 +96,7 @@ class AuthController extends Controller
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
 
 	   		$user = Auth::user();
+	   		$data["id"] = $user->id;
             $data["phone_number"] = $user->phone_number;
 	   		$data["name"] = $user->name;
 	   		$data["email"] = $user->email;

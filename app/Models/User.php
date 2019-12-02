@@ -39,4 +39,8 @@ class User extends Authenticatable
     ];
 
 
+    public function queue()
+    {
+        return $this->hasMany(QueueProcess::class, 'user_id');
+    }
 }

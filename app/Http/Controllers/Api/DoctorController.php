@@ -30,9 +30,13 @@ class DoctorController extends Controller
      */
     public function index(Request $request)
     {
-        //
         try {
-            $doctors = Doctor::select('doctor.full_name', 'schedule.day', 'schedule.time')
+            $doctors = Doctor::select([
+                    'doctor.full_name',
+                    'schedule.day',
+                    'schedule.time',
+                    'schedule.id as schedule_id'
+                ])
                 ->doctorSchedule()
                 ->where([
                     'poli_id'       => $request->poli_id,
@@ -64,9 +68,13 @@ class DoctorController extends Controller
      */
     public function search(Request $request)
     {
-
         try {
-            $doctors = Doctor::select('doctor.full_name', 'schedule.day', 'schedule.time')
+            $doctors = Doctor::select([
+                    'doctor.full_name',
+                    'schedule.day',
+                    'schedule.time',
+                    'schedule.id as schedule_id'
+                ])
                 ->doctorSchedule()
                 ->where([
                     'hospital_id' => $request->hospital_id,

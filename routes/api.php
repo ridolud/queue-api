@@ -39,14 +39,20 @@ Route::prefix('v1')->group(function(){
 
 	 	Route::get('user', 'Api\AuthController@getUser');
 
-	 	//Add device token
+        /* Queue Routing */
+        Route::name('queue.store')->post('queue', 'Api\QueueProcessController@store');
+        Route::name('queue.index')->get('queue/index', 'Api\QueueProcessController@index');
+        /* End Queue Routing */
+
+	 	/* Add Device Token */
 	 	Route::post('add-device-token', 'Api\AuthController@addDeviceToken');
 
-	 	//Pasient
+	 	/* Patient Routing */
 	 	Route::prefix('patient')->group(function(){
 	 		Route::get('my_data', 'Api\PatientController@getMyData');
 	 		Route::post('my_data', 'Api\PatientController@saveMyData');
 	 	});
+	 	/* End Patient Routing */
 
 	});
 

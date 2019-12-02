@@ -14,19 +14,30 @@ class Doctor extends Model
     use UUIDGenerator;
 
     /**
+     * define table
      * @var string
      */
     protected $table = "doctor";
     /**
+     * disable incrementing
      * @var bool
      */
     public $incrementing = false;
     /**
+     * disable timestamps
      * @var bool
      */
     public $timestamps = false;
 
+    /**
+     * define column primary key
+     * @var string
+     */
     protected $primaryKey = "id";
+    /**
+     * cast data type in table model
+     * @var array
+     */
     protected $casts = [
       'id' => 'string'
     ];
@@ -52,6 +63,8 @@ class Doctor extends Model
     }
 
     /**
+     * Relation to doctor schedule
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function schedule()
@@ -59,6 +72,10 @@ class Doctor extends Model
         return $this->hasOne(DoctorSchedule::class, 'doctor_id', 'id');
     }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
     public function scopeDoctorSchedule($query)
     {
         return $query->leftJoin('doctor_schedule as schedule', 'schedule.doctor_id', 'doctor.id');

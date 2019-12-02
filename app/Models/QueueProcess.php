@@ -6,10 +6,10 @@ use App\Libs\UUIDGenerator;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Insurance
+ * Class QueueProcess
  * @package App\Models
  */
-class Insurance extends Model
+class QueueProcess extends Model
 {
     //
     use UUIDGenerator;
@@ -18,7 +18,7 @@ class Insurance extends Model
      * define table
      * @var string
      */
-    protected $table = "insurance";
+    protected $table = "queue_process";
     /**
      * disable incrementing
      * @var bool
@@ -29,13 +29,17 @@ class Insurance extends Model
      * @var bool
      */
     public $timestamps = false;
-
     /**
-     * Relation hospital
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * column that could filled
+     * @var array
      */
-    public function hospital()
-    {
-        return $this->belongsTo(Hospital::class, 'hospital_id');
-    }
+    protected $fillable = [
+        "user_id",
+        "patient_id",
+        "doctor_schedule_id",
+        "is_valid",
+        "submit_time",
+        "insurance_id"
+    ];
+
 }

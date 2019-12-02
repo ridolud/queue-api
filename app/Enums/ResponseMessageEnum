@@ -2,6 +2,10 @@
 
 namespace App\Enums;
 
+/**
+ * Class ResponseMessageEnum
+ * @package App\Enums
+ */
 final class ResponseMessageEnum {
     const success = "Success";
     const error = "Error";

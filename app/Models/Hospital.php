@@ -63,11 +63,19 @@ class Hospital extends Model
         return $this->belongsTo(City::class, 'city_id', 'id');
     }
 
+    /**
+     * Relation to insurance
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function insurance()
     {
         return $this->hasMany(Insurance::class, 'hospital_id');
     }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
     public function scopeAvailableInsurance($query)
     {
         return $query->selectRaw('array(select full_name from insurance where insurance.hospital_id = hospital.id) as insurance');

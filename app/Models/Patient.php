@@ -14,6 +14,7 @@ class Patient extends Model
     use UUIDGenerator;
 
     /**
+     * define table
      * @var string
      */
     protected $table = 'patient';

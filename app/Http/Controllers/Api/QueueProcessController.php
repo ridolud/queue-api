@@ -89,4 +89,15 @@ class QueueProcessController extends Controller
         return response($queues, ResponseCodeEnum::Success);
     }
 
+    public function getCurrentQueue($patient_id)
+    {
+        $my_queue = Auth::user()->queue()
+            ->where('is_valid', QueueEnum::Valid)
+            ->where('patient_id', $patient_id)
+            ->orderBy('submit_time', 'desc')
+            ->first();
+
+        return response()->json($my_queue, ResponseCodeEnum::Success);
+    }
+
 }

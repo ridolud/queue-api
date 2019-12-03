@@ -42,6 +42,7 @@ Route::prefix('v1')->group(function(){
         /* Queue Routing */
         Route::name('queue.store')->post('queue', 'Api\QueueProcessController@store');
         Route::name('queue.index')->get('queue/index', 'Api\QueueProcessController@index');
+        Route::name('queue.current')->get('queue/current/{patient_id}', 'Api\QueueProcessController@getCurrentQueue');
         /* End Queue Routing */
 
 	 	/* Add Device Token */

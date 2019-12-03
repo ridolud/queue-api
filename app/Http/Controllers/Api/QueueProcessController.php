@@ -89,6 +89,20 @@ class QueueProcessController extends Controller
         return response($queues, ResponseCodeEnum::Success);
     }
 
+    /**
+    @OA\Get(
+    path="/api/v1/queue/current",
+    tags={"Queue Process"},
+    summary="get current queue patient",
+    operationId="profile",
+
+    @OA\Response(response="default", description="successful operation")
+    )
+
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function getCurrentQueue($patient_id)
     {
         $my_queue = Auth::user()->queue()

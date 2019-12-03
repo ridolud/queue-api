@@ -44,7 +44,7 @@ class QueueProcessController extends Controller
     /**
     @OA\Post(
     path="/api/v1/admin/queue/update-status",
-    tags={"Queue Process"},
+    tags={"Admin"},
     summary="
     Update Status Queue
     const waiting = 0;

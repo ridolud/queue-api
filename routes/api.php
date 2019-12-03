@@ -35,6 +35,11 @@ Route::prefix('v1')->group(function(){
     Route::name('doctor.search')->get('doctor/{hospital_id}/{poli_id}/{doctor_name}', 'Api\DoctorController@search');
     /* End Doctor Routing */
 
+    /* Admin RS Routing */
+    Route::name('admin.queue.index')->get('admin/queue/index/{hospital_id}/{poli_id}', 'Api\Admin\QueueProcessController@getTodayQueue');
+    Route::name('admin.queue.update-status')->post('admin/queue/update-status', 'Api\Admin\QueueProcessController@updateCurrentQueueStatus');
+    /* End Admin RS Routing*/
+
 	Route::group(['middleware' => 'auth:api'], function(){
 
 	 	Route::get('user', 'Api\AuthController@getUser');

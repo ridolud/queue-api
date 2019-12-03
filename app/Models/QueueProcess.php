@@ -43,4 +43,11 @@ class QueueProcess extends Model
         "process_status"
     ];
 
+    public function scopeHospital($query)
+    {
+        return $query->leftJoin('doctor_schedule', 'doctor_schedule.id', 'doctor_schedule_id')
+            ->leftJoin('doctor', 'doctor.id', 'doctor_schedule.doctor_id')
+            ->leftJoin('hospital', 'hospital.id', 'doctor.hospital_id');
+    }
+
 }

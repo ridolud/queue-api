@@ -30,6 +30,10 @@ Route::prefix('v1')->group(function(){
     Route::name('poli.search')->get('poli/{hospital_id}/{poli_name}', 'Api\PoliClinicController@search');
     /* End Poli Clinic Routing */
 
+    /* Insurance Routing */
+    Route::name('insurance.index')->get('insurance/{hospital_id}', 'Api\InsuranceController@index');
+    /* End Insurance Routing */
+
     /* Doctor Routing */
     Route::name('doctor.index')->get('doctor/{hospital_id}/{poli_id}', 'Api\DoctorController@index');
     Route::name('doctor.search')->get('doctor/{hospital_id}/{poli_id}/{doctor_name}', 'Api\DoctorController@search');

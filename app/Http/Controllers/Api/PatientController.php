@@ -27,9 +27,7 @@ class PatientController extends Controller
     {
       $data = Patient::where('auth_id', Auth::id())->get();
 
-      return response()->json([
-        'data' => $data,
-      ], ResponseCodeEnum::Success);
+      return response()->json($data, ResponseCodeEnum::Success);
     }
 
     /**

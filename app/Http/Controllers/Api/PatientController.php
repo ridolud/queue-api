@@ -11,6 +11,24 @@ use Illuminate\Support\Facades\Validator;
 
 class PatientController extends Controller
 {
+    /**
+      @OA\get(
+          path="/api/v1/patient",
+          tags={"Data Patient"},
+          summary="Edit my data patient",
+          operationId="getmydata",
+          security={ {"bearerAuth": {}}, },
+
+         @OA\Response(response="default", description="successful operation")
+      )
+    */
+
+    function getPatientsByUserLogin()
+    {
+      $data = Patient::where('auth_id', Auth::id())->get();
+
+      return response()->json($data, ResponseCodeEnum::Success);
+    }
 
     /**
       @OA\get(

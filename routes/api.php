@@ -61,6 +61,7 @@ Route::prefix('v1')->group(function(){
 	 	Route::prefix('patient')->group(function(){
 	 		Route::get('my_data', 'Api\PatientController@getMyData');
 	 		Route::post('my_data', 'Api\PatientController@saveMyData');
+	 		Route::get('/', 'Api\PatientController@getPatientsByUserLogin');
 	 	});
 	 	/* End Patient Routing */
 

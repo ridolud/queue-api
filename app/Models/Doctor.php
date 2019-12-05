@@ -39,7 +39,8 @@ class Doctor extends Model
      * @var array
      */
     protected $casts = [
-      'id' => 'string'
+        'id' => 'string',
+        'doctor_id' => 'string'
     ];
 
     /**
@@ -79,6 +80,15 @@ class Doctor extends Model
     public function scopeDoctorSchedule($query)
     {
         return $query->leftJoin('doctor_schedule as schedule', 'schedule.doctor_id', 'doctor.id');
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeAvailableSchedule($query)
+    {
+        return $query->selectRaw("array(select * from doctor_schedule where doctor_schedule.doctor_id = doctor_id) as schedule");
     }
 
 }

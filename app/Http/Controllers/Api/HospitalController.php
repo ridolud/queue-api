@@ -56,7 +56,9 @@ class HospitalController extends Controller
     public function search(Request $request)
     {
         try {
-            $data = Hospital::with(['province', 'city'])
+            $data = Hospital::select('hospital.*')
+                ->availableInsurance()
+                ->with(['province', 'city'])
                 ->where(function ($query) use ($request) {
                     $query->where('full_name', 'like', '%' . strtolower($request->full_name) . '%')
                         ->orWhere('full_name', 'like', '%' . strtoupper($request->full_name) . '%')

@@ -15,6 +15,7 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
         "laravel/passport": "^7.5",
+        "laravel/telescope": "^2.1",
         "laravel/tinker": "^1.0",
         "laravolt/indonesia": "^0.24.0",
         "webpatser/laravel-uuid": "^3.0"

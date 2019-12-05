@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Doctor;
 use App\Enums\ListDataEnum;
 use App\Enums\ResponseCodeEnum;
+use App\Models\DoctorSchedule;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -31,20 +32,29 @@ class DoctorController extends Controller
     public function index(Request $request)
     {
         try {
-            $doctors = Doctor::select([
-                    'doctor.full_name',
-                    'schedule.day',
-                    'schedule.time',
-                    'schedule.id as schedule_id'
-                ])
-                ->doctorSchedule()
-                ->where([
+
+            $list_doctors = [];
+
+            $doctors = Doctor::where([
                     'poli_id'       => $request->poli_id,
                     'hospital_id'   => $request->hospital_id
                 ])
-                ->paginate(ListDataEnum::TotalItemPerRequest);
+                ->get();
 
-            return response()->json($doctors, ResponseCodeEnum::Success);
+            foreach ($doctors as $doctor) {
+                $arr_doctor = [
+                    'full_name' => $doctor->full_name,
+                ];
+
+                $arr_doctor["schedule"] = DoctorSchedule::where('doctor_id', $doctor->id)
+                                        ->get()
+                                        ->toArray();
+
+                array_push($list_doctors, $arr_doctor);
+            }
+
+            return response()->json($list_doctors, ResponseCodeEnum::Success);
+
         } catch (\Error $e) {
             return response()->json($e->getMessage(), $e->getCode());
         }

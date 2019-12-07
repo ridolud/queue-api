@@ -6,6 +6,7 @@ use App\Models\Doctor;
 use App\Enums\ListDataEnum;
 use App\Enums\ResponseCodeEnum;
 use App\Models\DoctorSchedule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -94,13 +95,27 @@ class DoctorController extends Controller
                 ->get();
 
              foreach ($doctors as $doctor) {
+
                  $arr_doctor = [
                      'full_name' => $doctor->full_name,
                  ];
 
                  $arr_doctor["schedule"] = DoctorSchedule::where('doctor_id', $doctor->id)
-                     ->get()
-                     ->toArray();
+                     ->get();
+
+                 $now = Carbon::now()
+                     ->timeZone('Asia/Jakarta')
+                     ->format('H:i:s');
+
+                 foreach ($arr_doctor["schedule"] as $schedule) {
+
+                     if ($now < $schedule->time_end) {
+                        $schedule["is_available"] = true;
+                     } else {
+                        $schedule["is_available"] = false;
+                     }
+
+                 }
 
                  array_push($list_doctors, $arr_doctor);
              }

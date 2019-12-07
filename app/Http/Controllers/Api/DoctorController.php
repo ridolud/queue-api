@@ -48,8 +48,22 @@ class DoctorController extends Controller
                 ];
 
                 $arr_doctor["schedule"] = DoctorSchedule::where('doctor_id', $doctor->id)
-                                        ->get()
-                                        ->toArray();
+                                        ->get();
+
+                $now = Carbon::now()
+                    ->timeZone('Asia/Jakarta')
+                    ->format('H:i:s');
+
+                foreach ($arr_doctor["schedule"] as $schedule) {
+
+                    if ($now < $schedule->time_end) {
+                        $schedule["is_available"] = true;
+                    } else {
+                        $schedule["is_available"] = false;
+                    }
+
+                }
+
 
                 array_push($list_doctors, $arr_doctor);
             }

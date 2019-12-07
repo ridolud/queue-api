@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Libs\UUIDGenerator;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -39,5 +40,20 @@ class DoctorSchedule extends Model
      * @var string
      */
     protected $primaryKey = "id";
+
+    public function getTimeStartAttribute($value)
+    {
+        return $this->convertTime($value);
+    }
+
+    public function getTimeEndAttribute($value)
+    {
+        return $this->convertTime($value);
+    }
+
+    private function convertTime($time)
+    {
+        return Carbon::create($time)->format('H:i');
+    }
 
 }

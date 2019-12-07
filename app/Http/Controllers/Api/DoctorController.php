@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\TimeConfigEnum;
 use App\Models\Doctor;
 use App\Enums\ListDataEnum;
 use App\Enums\ResponseCodeEnum;
@@ -51,8 +52,8 @@ class DoctorController extends Controller
                                         ->get();
 
                 $now = Carbon::now()
-                    ->timeZone('Asia/Jakarta')
-                    ->format('H:i:s');
+                    ->timeZone(TimeConfigEnum::zone)
+                    ->format(TimeConfigEnum::format);
 
                 foreach ($arr_doctor["schedule"] as $schedule) {
 
@@ -118,8 +119,8 @@ class DoctorController extends Controller
                      ->get();
 
                  $now = Carbon::now()
-                     ->timeZone('Asia/Jakarta')
-                     ->format('H:i:s');
+                     ->timeZone(TimeConfigEnum::zone)
+                     ->format(TimeConfigEnum::format);
 
                  foreach ($arr_doctor["schedule"] as $schedule) {
 
@@ -140,7 +141,5 @@ class DoctorController extends Controller
         }
 
     }
-
-
 
 }

@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-use App\DoctorSchedule;
-use App\Doctor;
+use App\Models\DoctorSchedule;
+use App\Models\Doctor;
 use Faker\Factory;
 
 class DoctorScheduleSeeder extends Seeder
@@ -30,7 +30,9 @@ class DoctorScheduleSeeder extends Seeder
             DoctorSchedule::create([
                 'day' => $faker->randomElement($days),
                 'time' => $faker->date('h:m') . ' - ' . $faker->date('h:m'),
-                'doctor_id' => $doctor
+                'doctor_id' => $doctor,
+                'time_start' => $faker->time('H:i:s'),
+                'time_end' => $faker->time('H:i:s'),
             ]);
         }
     }

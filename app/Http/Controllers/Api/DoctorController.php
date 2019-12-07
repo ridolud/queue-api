@@ -79,14 +79,9 @@ class DoctorController extends Controller
     public function search(Request $request)
     {
         try {
-            $doctors = Doctor::select([
-                    'doctor.full_name',
-                    'schedule.day',
-                    'schedule.time',
-                    'schedule.id as schedule_id'
-                ])
-                ->doctorSchedule()
-                ->where([
+            $list_doctors = [];
+
+            $doctors = Doctor::where([
                     'hospital_id' => $request->hospital_id,
                     'poli_id' => $request->poli_id
                 ])
@@ -96,9 +91,21 @@ class DoctorController extends Controller
                         ->orWhere('full_name', 'like', '%' . ucfirst($request->doctor_name) . '%')
                         ->orWhere('full_name', 'like', '%' . ucwords($request->doctor_name) . '%');
                 })
-                ->paginate(ListDataEnum::TotalItemPerRequest);
+                ->get();
 
-            return response()->json($doctors, ResponseCodeEnum::Success);
+             foreach ($doctors as $doctor) {
+                 $arr_doctor = [
+                     'full_name' => $doctor->full_name,
+                 ];
+
+                 $arr_doctor["schedule"] = DoctorSchedule::where('doctor_id', $doctor->id)
+                     ->get()
+                     ->toArray();
+
+                 array_push($list_doctors, $arr_doctor);
+             }
+
+            return response()->json($list_doctors, ResponseCodeEnum::Success);
         } catch (\Exception $e) {
             return response()->json($e->getMessage(), $e->getCode());
         }

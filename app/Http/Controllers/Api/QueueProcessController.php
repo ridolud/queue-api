@@ -103,11 +103,10 @@ class QueueProcessController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getCurrentQueue($patient_id)
+    public function getCurrentQueue()
     {
         $my_queue = Auth::user()->queue()
             ->where('is_valid', QueueEnum::Valid)
-            ->where('patient_id', $patient_id)
             ->orderBy('submit_time', 'desc')
             ->first();
 

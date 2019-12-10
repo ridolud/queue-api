@@ -49,7 +49,7 @@ class QueueProcessController extends Controller
         if ($fails = $validator->fails()) {
             return response()->json([
                 "success" => false,
-                "message" => "You already in queue"], ResponseCodeEnum::Error);
+                "message" => "You already in queue"], ResponseCodeEnum::Success);
         }
 
         QueueProcess::create([

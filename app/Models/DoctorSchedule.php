@@ -33,7 +33,7 @@ class DoctorSchedule extends Model
      */
     protected $casts = [
         'id' => 'string',
-        'doctor_id' => 'string'
+        'doctor_id' => 'string',
     ];
 
     /**
@@ -41,16 +41,34 @@ class DoctorSchedule extends Model
      */
     protected $primaryKey = "id";
 
+    /**
+     * Convert format H:i:s to H:i
+     *
+     * @param $value
+     * @return string
+     */
     public function getTimeStartAttribute($value)
     {
         return $this->convertTime($value);
     }
 
+    /**
+     * Convert format H:i:s to H:i
+     *
+     * @param $value
+     * @return string
+     */
     public function getTimeEndAttribute($value)
     {
         return $this->convertTime($value);
     }
 
+    /**
+     * Method to convert format H:i:s to H:i
+     *
+     * @param $time
+     * @return string
+     */
     private function convertTime($time)
     {
         return Carbon::create($time)->format('H:i');

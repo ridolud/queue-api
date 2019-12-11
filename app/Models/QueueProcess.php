@@ -43,6 +43,10 @@ class QueueProcess extends Model
         "process_status"
     ];
 
+    /**
+     * @param $query
+     * @return mixed
+     */
     public function scopeHospital($query)
     {
         return $query->leftJoin('doctor_schedule', 'doctor_schedule.id', 'doctor_schedule_id')
@@ -50,6 +54,10 @@ class QueueProcess extends Model
             ->leftJoin('hospital', 'hospital.id', 'doctor.hospital_id');
     }
 
+    /**
+     * handle empty value in insurance_id attribute
+     * @return string
+     */
     public function getInsuranceIdAttribute()
     {
         if (empty($this->insurance_id)) {

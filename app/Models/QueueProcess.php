@@ -50,4 +50,11 @@ class QueueProcess extends Model
             ->leftJoin('hospital', 'hospital.id', 'doctor.hospital_id');
     }
 
+    public function getInsuranceIdAttribute()
+    {
+        if (empty($this->insurance_id)) {
+            return "";
+        }
+    }
+
 }

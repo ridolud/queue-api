@@ -84,9 +84,13 @@ class QueueProcessController extends Controller
      */
     public function index()
     {
-        $queues = Auth::user()->queue;
+        $queues = Auth::user()
+            ->queue()
+            ->selectedColumn()
+            ->hospital()
+            ->get();
 
-        return response($queues, ResponseCodeEnum::Success);
+        return response()->json($queues, ResponseCodeEnum::Success);
     }
 
     /**
@@ -105,7 +109,10 @@ class QueueProcessController extends Controller
      */
     public function getCurrentQueue()
     {
-        $my_queue = Auth::user()->queue()
+        $my_queue = Auth::user()
+            ->queue()
+            ->selectedColumn()
+            ->hospital()
             ->where('is_valid', QueueEnum::Valid)
             ->orderBy('submit_time', 'desc')
             ->first();

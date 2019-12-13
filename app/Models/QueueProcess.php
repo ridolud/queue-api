@@ -56,7 +56,9 @@ class QueueProcess extends Model
         'poli.*',
         'patient.*',
         'patient.full_name as patient_fullname',
-        'hospital.full_name as hospital_fullname'
+        'hospital.full_name as hospital_fullname',
+        'insurance.full_name as insurance_fullname',
+        'doctor.full_name as doctor_fullname'
     ];
 
     public function scopeSelectedColumn($query)

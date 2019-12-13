@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\QueueEnum;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Edujugon\PushNotification\PushNotification;
@@ -16,7 +17,9 @@ class TestPushNotifController extends Controller
 	        'aps' => [
 	            'alert' => [
 	                'title' => '1 Notification test',
-	                'body' => 'Just for testing purposes'
+	                'body' => 'Just for testing purposes',
+                    'queue_status' => QueueEnum::waiting,
+                    'silent' => true
 	            ],
 	            'sound' => 'default'
 	        ]

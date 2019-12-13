@@ -42,6 +42,10 @@ class QueueProcess extends Model
         "process_status"
     ];
 
+    /**
+     * variable that contain the selected column
+     * @var array
+     */
     private $columns = [
         'queue_process.id as queue_id',
         'user_id',
@@ -61,6 +65,10 @@ class QueueProcess extends Model
         'doctor.full_name as doctor_fullname'
     ];
 
+    /**
+     * @param $query
+     * @return mixed
+     */
     public function scopeSelectedColumn($query)
     {
         return $query->select($this->columns);
@@ -107,6 +115,17 @@ class QueueProcess extends Model
     public function schedule()
     {
         return $this->belongsTo(DoctorSchedule::class, 'doctor_schedule_id');
+    }
+
+    /**
+     * handle null value at insurance fullname
+     * @return string
+     */
+    public function getInsuranceFullnameAttribute()
+    {
+        if (empty($this->insurance_full_name)) {
+            return "";
+        }
     }
 
 }

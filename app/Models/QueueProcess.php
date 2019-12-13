@@ -128,4 +128,9 @@ class QueueProcess extends Model
         }
     }
 
+    public function getQueueLeftRemainingAttribute()
+    {
+
+    }
+
 }

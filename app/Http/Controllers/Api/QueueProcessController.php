@@ -43,10 +43,17 @@ class QueueProcessController extends Controller
         $validator = Validator::make($request->all(), [
             'patient_id' => ['required', 'string', new CheckIfQueueExists()],
             'insurance_id' => ['nullable', 'string'],
-            'doctor_schedule_id' => ['required', 'string'],
+            'doctor_schedule_id' => ['required', 'string']
         ]);
 
-        if ($fails = $validator->fails()) {
+        $current_queue = QueueProcess::where([
+                'user_id' => Auth::user()->id,
+                'is_valid' => true
+            ])
+            ->get()
+            ->count();
+
+        if (($fails = $validator->fails()) || ($current_queue>0)) {
             return response()->json([
                 "success" => false,
                 "message" => "You already in queue"], ResponseCodeEnum::Success);

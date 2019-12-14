@@ -56,7 +56,7 @@ class QueueProcessController extends Controller
         if (($fails = $validator->fails()) || ($current_queue>0)) {
             return response()->json([
                 "success" => false,
-                "message" => "You already in queue"], ResponseCodeEnum::Success);
+                "message" => QueueEnum::failedStoringQueue], ResponseCodeEnum::Success);
         }
 
         QueueProcess::create([
@@ -71,7 +71,7 @@ class QueueProcessController extends Controller
 
         return response()->json([
             "success" => true,
-            "message" => "Queue Success"
+            "message" => QueueEnum::successStoringQueue
         ], ResponseCodeEnum::Success);
     }
 
@@ -116,25 +116,46 @@ class QueueProcessController extends Controller
      */
     public function getCurrentQueue()
     {
-        $my_queue = Auth::user()
-            ->queue()
-            ->selectedColumn()
-            ->hospital()
-            ->where('is_valid', QueueEnum::Valid)
-            ->orderBy('submit_time', 'desc')
-            ->first();
+        try {
+            $my_queue = Auth::user()
+                ->queue()
+                ->selectedColumn()
+                ->hospital()
+                ->where('is_valid', QueueEnum::Valid)
+                ->orderBy('submit_time', 'desc')
+                ->first();
 
-        $queue_count = QueueProcess::where('doctor_schedule_id', $my_queue->doctor_schedule_id)
-            ->where('is_valid', true)
-            ->where('process_status', 0)
-            ->where('submit_time', '<', $my_queue->submit_time)
-            ->count();
+            if (!$my_queue) {
+                return response()->json([
+                    "success" => false,
+                    "message" => QueueEnum::currentQueueEmpty,
+                    "data" => null
+                ], ResponseCodeEnum::Success);
+            }
 
-        $queue = $my_queue->toArray();
+            $queue_count = QueueProcess::where('doctor_schedule_id', $my_queue->doctor_schedule_id)
+                ->where('is_valid', true)
+                ->where('process_status', 0)
+                ->where('submit_time', '<', $my_queue->submit_time)
+                ->count();
 
-        $queue["queue_remaining"] = $queue_count;
+            $queue = $my_queue->toArray();
 
-        return response()->json($queue, ResponseCodeEnum::Success);
+            $queue["queue_remaining"] = $queue_count;
+
+            $data["data"] = $queue;
+            $data["success"] = true;
+            $data["message"] = QueueEnum::currentQueueExists;
+
+            return response()->json([
+                "success" => true,
+                "message" => QueueEnum::currentQueueExists,
+                "data" => $queue
+            ], ResponseCodeEnum::Success);
+
+        } catch (\Exception $exception) {
+            return response()->json($exception, ResponseCodeEnum::Error);
+        }
     }
 
 }

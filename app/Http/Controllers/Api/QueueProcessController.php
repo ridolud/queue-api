@@ -91,6 +91,10 @@ class QueueProcessController extends Controller
      */
     public function index()
     {
+        $data = [
+            "queue_remaining" => 0
+        ];
+
         $queues = Auth::user()
             ->queue()
             ->selectedColumn()

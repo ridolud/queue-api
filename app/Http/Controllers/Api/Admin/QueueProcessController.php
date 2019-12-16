@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Models\QueueProcess;
 use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QueueProcessController extends Controller
 {
@@ -72,34 +73,27 @@ class QueueProcessController extends Controller
      */
     public function updateCurrentQueueStatus(Request $request, $deviceToken)
     {
-        QueueProcess::where('patient_id', $request->patient_id)
-            ->update([
-                'process_status' => $request->current_status
-            ]);
+        try {
+            DB::beginTransaction();
 
-        $push = new PushNotification('apn');
+            QueueProcess::where('patient_id', $request->patient_id)
+                ->update([
+                    'process_status' => $request->current_status
+                ]);
 
-        $message = [
-            'aps' => [
-                'alert' => [
-                    'title' => '1 Notification test',
-                    'body' => 'Just for testing purposes',
-                    'queue_status' => QueueEnum::waiting,
-                    'silent' => true
-                ],
-                'sound' => 'default'
-            ]
-        ];
-        $push->setMessage($message)
-            ->setDevicesToken([
-                $deviceToken,
-            ]);
-        $push = $push->send();
-        $response = $push->getFeedback();
+            DB::commit();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
+            return response()->json([
+                'message' => $exception
+            ], ResponseCodeEnum::Error);
+        }
 
         return response()->json([
             "success" => true,
             "message" => "Status Change to " . $request->current_status
             ], ResponseCodeEnum::Success);
     }
+
 }

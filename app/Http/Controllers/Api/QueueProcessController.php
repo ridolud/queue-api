@@ -91,10 +91,6 @@ class QueueProcessController extends Controller
      */
     public function index()
     {
-        $data = [
-            "queue_remaining" => 0
-        ];
-
         $queues = Auth::user()
             ->queue()
             ->selectedColumn()
@@ -139,17 +135,13 @@ class QueueProcessController extends Controller
 
             $queue_count = QueueProcess::where('doctor_schedule_id', $my_queue->doctor_schedule_id)
                 ->where('is_valid', true)
-                ->where('process_status', 0)
+                ->where('process_status', QueueEnum::waiting)
                 ->where('submit_time', '<', $my_queue->submit_time)
                 ->count();
 
             $queue = $my_queue->toArray();
 
             $queue["queue_remaining"] = $queue_count;
-
-            $data["data"] = $queue;
-            $data["success"] = true;
-            $data["message"] = QueueEnum::currentQueueExists;
 
             return response()->json([
                 "success" => true,

@@ -80,7 +80,10 @@ class QueueProcessController extends Controller
 
         if ($validator->fails()) {
             return response()
-                ->json($validator->getMessageBag(), ResponseCodeEnum::Error);
+                ->json([
+                    'success' => false,
+                    'messages' => $validator->getMessageBag()->first()
+                ], ResponseCodeEnum::Error);
         }
 
         try {
@@ -94,13 +97,7 @@ class QueueProcessController extends Controller
                     'is_valid'          => Helper::isQueueValid($status)
                 ]);
 
-            /**
-             * this process used to log any changes in queue process
-             * @model : QueueProcessLog
-            */
-            QueueProcessLogJob::dispatch($request->queue_id, $status)
-                ->delay(now()->addMinutes(1))
-                ->onQueue('logging-process-queue');
+            $this->logQueue($request->queue_id, $status);
 
             DB::commit();
         } catch (\Error $error) {
@@ -115,6 +112,18 @@ class QueueProcessController extends Controller
             "success" => true,
             "message" => "Status Change to " . $request->current_status
             ], ResponseCodeEnum::Success);
+    }
+
+    /**
+     * this process used to log any changes in queue process
+     * @model QueueProcessLog
+     * @return void
+     */
+    private function logQueue($queue_id, $status)
+    {
+        QueueProcessLogJob::dispatch($queue_id, $status)
+            ->delay(now()->addMinutes(1))
+            ->onQueue('logging-process-queue');
     }
 
 }

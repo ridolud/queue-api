@@ -3,13 +3,17 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
-
 use App\Enums\ListDataEnum;
 use App\Enums\ResponseCodeEnum;
 use App\Http\Controllers\Controller;
+use App\Jobs\QueueProcessLog as QueueProcessLogJob;
 use App\Models\QueueProcess;
+use App\Rules\IsCheckout;
+use App\Rules\IsMoreThanOneRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Libs\Helper;
+use Illuminate\Support\Facades\Validator;
 
 class QueueProcessController extends Controller
 {
@@ -68,22 +72,42 @@ class QueueProcessController extends Controller
     @OA\Response(response="default", description="successful operation")
     )
      */
-    public function updateCurrentQueueStatus(Request $request, $deviceToken)
+    public function updateCurrentQueueStatus(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'current_status' => new IsMoreThanOneRequest($request->queue_id)
+        ]);
+
+        if ($validator->fails()) {
+            return response()
+                ->json($validator->getMessageBag(), ResponseCodeEnum::Error);
+        }
+
         try {
             DB::beginTransaction();
 
-            QueueProcess::where('patient_id', $request->patient_id)
+            $status = $request->current_status;
+
+            QueueProcess::find($request->queue_id)
                 ->update([
-                    'process_status' => $request->current_status
+                    'process_status'    => $status,
+                    'is_valid'          => Helper::isQueueValid($status)
                 ]);
 
+            /**
+             * this process used to log any changes in queue process
+             * @model : QueueProcessLog
+            */
+            QueueProcessLogJob::dispatch($request->queue_id, $status)
+                ->delay(now()->addMinutes(1))
+                ->onQueue('logging-process-queue');
+
             DB::commit();
-        } catch (\Exception $exception) {
+        } catch (\Error $error) {
             DB::rollBack();
 
             return response()->json([
-                'message' => $exception
+                'message' => $error->getMessage()
             ], ResponseCodeEnum::Error);
         }
 

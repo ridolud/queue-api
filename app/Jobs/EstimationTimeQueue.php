@@ -31,7 +31,5 @@ class EstimationTimeQueue implements ShouldQueue
     public function handle()
     {
         $queue = QueueProcess::where('id', 1)->get();
-
-
     }
 }

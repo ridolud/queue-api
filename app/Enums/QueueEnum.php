@@ -17,6 +17,7 @@ final class QueueEnum
     const checkIn = 1;
     const checkOut = 2;
     const skipped = 3;
+    const terminate = 4;
 
     const currentQueueEmpty = "There is no active queue";
     const currentQueueExists = "You have an active queue";

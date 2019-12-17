@@ -133,7 +133,9 @@ class QueueProcessController extends Controller
      */
     public function calculateQueueTime($doctor_schedule_id)
     {
-        QueueEstimationTimeJob::dispatchNow($doctor_schedule_id);
+        QueueEstimationTimeJob::dispatch($doctor_schedule_id)
+        ->delay(now()->addMinutes(2))
+        ->onQueue('queue-estimation-time');
     }
 
 }

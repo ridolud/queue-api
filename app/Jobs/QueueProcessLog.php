@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Enums\QueueEnum;
 use App\Enums\ResponseCodeEnum;
 use App\Enums\TimeConfigEnum;
+use App\Jobs\QueueEstimationTime as QueueEstimationTimeJob;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -59,7 +60,7 @@ class QueueProcessLog implements ShouldQueue
                     'snapshot'              => json_encode($snapshot)
                 ]);
 
-                QueueEstimationTime::dispatch()
+                QueueEstimationTimeJob::dispatch($snapshot->doctor_schedule_id)
                     ->delay(now()->addMinutes(1))
                     ->onQueue('queue-estimation-time');
             }

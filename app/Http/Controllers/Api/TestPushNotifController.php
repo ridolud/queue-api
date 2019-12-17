@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Enums\QueueEnum;
+use App\Enums\ResponseCodeEnum;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Edujugon\PushNotification\PushNotification;
+use Illuminate\Support\Facades\Log;
 
 class TestPushNotifController extends Controller
 {
     // TODO: REMOVE DEV STUFF
     public function testPush($deviceToken)
     {
-    	$push = new PushNotification('apn');
+        $push = new PushNotification('apn');
 
-		// Silet Notif - jika admin hit ke antrian berikutnya
 		$message = [
 			'aps' => [
 			    'content-available' => 1,
@@ -23,51 +24,37 @@ class TestPushNotifController extends Controller
 			],
 		];
 
-		// ini giliran kamu
-		// $message = [
-		// 	'aps' => [
-		// 	    'alert' => [
-		// 	        'title' => 'Ini giliran kamu',
-		// 	        'body' => '',
-		// 	    ],
-		// 	'badge' => 0,		
-		// 	'sound' => 'default',
-		// 	'content-available' => 1,
-		// 	'category' => 'UPDATE_QUEUE'
-		// ];
+		 $message = [
+		 	'aps' => [
+		 	    'alert' => [
+		 	        'title' => 'Ini giliran kamu',
+		 	        'body' => '',
+                    ],
+                'badge' => 0,
+                'sound' => 'default',
+                'content-available' => 1,
+                'category' => 'UPDATE_QUEUE'
+            ]
+		 ];
 
-		// 1 orang lagi, abis itu giliran kamu
-		// $message = [
-		// 	'aps' => [
-		// 	    'alert' => [
-		// 	        'title' => '1 antrian lagi, giliran kamu',
-		// 	        'body' => '',
-		// 	    ],
-		// 	'badge' => 0,		
-		// 	'sound' => 'default',
-		// 	'content-available' => 1,
-		// 	'category' => 'UPDATE_QUEUE'
-		// ];
 
-		// 2 orang lagi, abis itu giliran kamu
-		// $message = [
-		// 	'aps' => [
-		// 	    'alert' => [
-		// 	        'title' => '2 antrian lagi, giliran kamu',
-		// 	        'body' => '',
-		// 	    ],
-		// 	'badge' => 0,		
-		// 	'sound' => 'default',
-		// 	'content-available' => 1,
-		// 	'category' => 'UPDATE_QUEUE'
-		// ];
+		 try {
+             $push->setMessage($message)
+                 ->setDevicesToken([
+                     $deviceToken,
+                 ]);
 
-	    $push->setMessage($message)
-	        ->setDevicesToken([
-	            $deviceToken,
-	        ]);
-	    $push = $push->send();
-		$response = $push->getFeedback();
-    	return response()->json($response, 200);
+             $push = $push->send();
+             $response = $push->getFeedback();
+
+             return response()->json([
+                 "success" => true,
+                 "message" => $response
+             ], 200);
+
+         } catch (\Error $error) {
+            Log::error($error);
+            return response()->json($error->getMessage(), ResponseCodeEnum::Error);
+         }
     }
 }

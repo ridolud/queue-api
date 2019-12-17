@@ -2,6 +2,7 @@
 
 namespace App\Libs;
 
+use App\Enums\NotificationTypeEnum;
 use App\Enums\QueueEnum;
 
 class Helper {
@@ -19,5 +20,33 @@ class Helper {
         }
 
         return true;
+    }
+
+    public static function setMessageNotification($type, $title = '')
+    {
+        if ($type == NotificationTypeEnum::normal) {
+            $message = [
+                'aps' => [
+                    'alert' => [
+                        'title' => $title,
+                        'body' => '',
+                    ],
+                    'badge' => 0,
+                    'sound' => 'default',
+                    'content-available' => 1,
+                    'category' => 'UPDATE_QUEUE'
+                ]
+            ];
+        } else if ($type == NotificationTypeEnum::silent) {
+            $message = [
+                'aps' => [
+                    'content-available' => 1,
+                    'sound' => '',
+                    'category' => 'UPDATE_QUEUE'
+                ],
+            ];
+        }
+
+        return $message;
     }
 }

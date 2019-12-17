@@ -177,8 +177,8 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Laravolt\Indonesia\ServiceProvider::class
-
+        Laravolt\Indonesia\ServiceProvider::class,
+        App\Providers\PushNotificationProvider::class
 
     ],
 

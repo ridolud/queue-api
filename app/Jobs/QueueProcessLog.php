@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Enums\NotificationTypeEnum;
 use App\Enums\QueueEnum;
 use App\Enums\ResponseCodeEnum;
 use App\Enums\TimeConfigEnum;

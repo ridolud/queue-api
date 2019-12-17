@@ -17,7 +17,6 @@ return [
     'apn' => [
         'certificate' => __DIR__ . '/iosCertificates/pushcert_2.pem',
         'passPhrase' => env('APN_PASS_CER', ''), //Optional
-        //'passFile' => __DIR__ . '/iosCertificates/aps_development.cer', //Optional
         'dry_run' => true,
     ],
 ];

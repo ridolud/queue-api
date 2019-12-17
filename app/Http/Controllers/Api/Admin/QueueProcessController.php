@@ -127,6 +127,7 @@ class QueueProcessController extends Controller
     }
 
     /**
+     * TODO: REMOVE THIS METHOD & ROUTER SOON
      * @param $doctor_schedule_id
      */
     public function calculateEstimation($doctor_schedule_id)

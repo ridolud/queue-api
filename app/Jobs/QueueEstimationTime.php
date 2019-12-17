@@ -2,8 +2,10 @@
 
 namespace App\Jobs;
 
+use App\Enums\NotificationTypeEnum;
 use App\Enums\QueueEnum;
 use App\Enums\TimeConfigEnum;
+use App\Libs\Helper;
 use App\Models\QueueProcess;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
@@ -20,16 +22,16 @@ class QueueEstimationTime implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $doctor_schedule_id;
+    private $current_queue;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($doctor_schedule_id)
+    public function __construct($snapshot)
     {
-        $this->doctor_schedule_id = $doctor_schedule_id;
+        $this->current_queue = $snapshot;
     }
 
     /**
@@ -50,7 +52,11 @@ class QueueEstimationTime implements ShouldQueue
         try {
             DB::beginTransaction();
 
-            $queues = QueueProcess::where('doctor_schedule_id', $this->doctor_schedule_id)->get();
+            $queues = QueueProcess::where('doctor_schedule_id', $this->current_queue->doctor_schedule_id)
+                ->where('is_valid', QueueEnum::Valid)
+                ->where('process_status', QueueEnum::waiting)
+                ->where('submit_time', '<', $this->current_queue->submit_time)
+                ->get();
 
             foreach ($queues as $queue) {
                 $times = $queue->log()
@@ -71,12 +77,22 @@ class QueueEstimationTime implements ShouldQueue
             $now = Carbon::now()->timeZone(TimeConfigEnum::zone);
 
             QueueEstimationTimeModel::updateOrCreate(
-                ['doctor_schedule_id' => $this->doctor_schedule_id],
+                ['doctor_schedule_id' => $this->current_queue->doctor_schedule_id],
                 [
                     'estimation' => $estimation,
                     'time' => $now
                 ]
             );
+
+            $type = NotificationTypeEnum::silent;
+
+            if ($total_patient <= 3) {
+                $type = NotificationTypeEnum::normal;
+                $title = "Giliran anda kurang " . $total_patient . " Lagi :)";
+            }
+
+            SendNotification::dispatchNow($this->current_queue->user->devicetoken, Helper::setMessageNotification($type, $title));
+
             DB::commit();
         } catch (\Exception $exception) {
             Log::info($exception);

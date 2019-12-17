@@ -54,7 +54,7 @@ class Helper {
     public static function getQueueRemaining($doctor_schedule_id, $submit_time)
     {
         $queue_count = QueueProcess::where('doctor_schedule_id', $doctor_schedule_id)
-            ->where('is_valid', true)
+            ->where('is_valid', QueueEnum::Valid)
             ->where('process_status', QueueEnum::waiting)
             ->where('submit_time', '<', $submit_time)
             ->get()

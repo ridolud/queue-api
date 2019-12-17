@@ -61,7 +61,7 @@ class QueueProcessLog implements ShouldQueue
                     'snapshot'              => json_encode($snapshot)
                 ]);
 
-                QueueEstimationTimeJob::dispatch($snapshot->doctor_schedule_id)
+                QueueEstimationTimeJob::dispatch($snapshot)
                     ->delay(now()->addMinutes(1))
                     ->onQueue('queue-estimation-time');
             }

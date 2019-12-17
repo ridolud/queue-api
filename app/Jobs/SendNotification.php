@@ -40,7 +40,6 @@ class SendNotification implements ShouldQueue
         $push = new PushNotification('apn');
 
         try {
-
             $push->setMessage($this->data)
                 ->setDevicesToken([
                     $this->devicetoken,

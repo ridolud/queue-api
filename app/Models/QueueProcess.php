@@ -130,9 +130,22 @@ class QueueProcess extends Model
         }
     }
 
+    /**
+     * set attribute queue_remaining
+     * @param $value
+     */
     public function setQueueRemainingAttribute($value)
     {
         $this->attributes["queue_remaining"] = $value;
+    }
+
+    /**
+     * Relation to Log Process Queue
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function log()
+    {
+        return $this->hasMany(QueueProcessLog::class, 'queue_process_id');
     }
 
 }

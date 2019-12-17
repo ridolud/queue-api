@@ -7,6 +7,7 @@ use App\Enums\ListDataEnum;
 use App\Enums\ResponseCodeEnum;
 use App\Http\Controllers\Controller;
 use App\Jobs\QueueProcessLog as QueueProcessLogJob;
+use App\Jobs\QueueEstimationTime as QueueEstimationTimeJob;
 use App\Models\QueueProcess;
 use App\Rules\IsMoreThanOneRequest;
 use Illuminate\Http\Request;
@@ -90,7 +91,7 @@ class QueueProcessController extends Controller
 
             $status = $request->current_status;
 
-            QueueProcess::find($request->queue_id)
+            $queue_process = QueueProcess::find($request->queue_id)
                 ->update([
                     'process_status'    => $status,
                     'is_valid'          => Helper::isQueueValid($status)
@@ -123,6 +124,16 @@ class QueueProcessController extends Controller
         QueueProcessLogJob::dispatch($queue_id, $status)
             ->delay(now()->addMinutes(1))
             ->onQueue('logging-process-queue');
+    }
+
+    /**
+     * method to dispatch job queueestimationtime
+     * @param $doctor_schedule_id
+     * @return void
+     */
+    public function calculateQueueTime($doctor_schedule_id)
+    {
+        QueueEstimationTimeJob::dispatchNow($doctor_schedule_id);
     }
 
 }

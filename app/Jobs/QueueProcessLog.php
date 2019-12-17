@@ -58,6 +58,10 @@ class QueueProcessLog implements ShouldQueue
                     'time'                  => Carbon::now()->timeZone(TimeConfigEnum::zone),
                     'snapshot'              => json_encode($snapshot)
                 ]);
+
+                QueueEstimationTime::dispatch()
+                    ->delay(now()->addMinutes(1))
+                    ->onQueue('queue-estimation-time');
             }
 
             DB::commit();

@@ -8,9 +8,13 @@ class Helper {
 
     public static function isQueueValid($status)
     {
-        if ($status == QueueEnum::checkOut ||
-            $status == QueueEnum::skipped ||
-            $status == QueueEnum::terminate) {
+        $exit_status = [
+            QueueEnum::checkOut,
+            QueueEnum::skipped,
+            QueueEnum::terminate
+        ];
+
+        if (in_array($status, $exit_status)) {
             return false;
         }
 

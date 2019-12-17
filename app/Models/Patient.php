@@ -11,8 +11,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Patient extends Model
 {
-    use UUIDGenerator;
-
     /**
      * define table
      * @var string

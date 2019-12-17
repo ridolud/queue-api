@@ -93,7 +93,8 @@ class AuthController extends Controller
          @OA\Response(response="default", description="successful operation")
       )
     */
-	public function login(Request $request) {
+	public function login(Request $request)
+    {
 
         $validator = Validator::make($request->all(),
             [
@@ -134,7 +135,8 @@ class AuthController extends Controller
          @OA\Response(response="default", description="successful operation")
       )
     */
-	public function getUser() {
+	public function getUser()
+    {
 		$user = Auth::user();
 
 	 	return response()->json($user, ResponseCodeEnum::Success);
@@ -151,7 +153,8 @@ class AuthController extends Controller
              @OA\Response(response="default", description="successful operation")
           )
         */
-      public function addDeviceToken(Request $request) {
+      public function addDeviceToken(Request $request)
+      {
 
         $validator = Validator::make($request->all(),
             [

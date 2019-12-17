@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Enums\QueueEnum;
 use App\Enums\ResponseCodeEnum;
 use App\Enums\TimeConfigEnum;
+use App\Libs\Helper;
 use App\Models\QueueEstimationTime as QueueEstimationTimeModel;
 use App\Models\QueueProcess;
 use App\Rules\CheckIfQueueExists;
@@ -137,7 +138,7 @@ class QueueProcessController extends Controller
 
             $queue = $my_queue->toArray();
 
-            $queue["queue_remaining"] = $this->getQueueRemaining($my_queue->doctor_schedule_id, $my_queue->submit_time);
+            $queue["queue_remaining"] = Helper::getQueueRemaining($my_queue->doctor_schedule_id, $my_queue->submit_time);
 
             return response()->json([
                 "success" => true,
@@ -177,7 +178,7 @@ class QueueProcessController extends Controller
                 'time'
             ]);
 
-        $queue_remaining = $this->getQueueRemaining($queue->doctor_schedule_id, $queue->submit_time);
+        $queue_remaining = Helper::getQueueRemaining($queue->doctor_schedule_id, $queue->submit_time);
 
         $current_estimation = $estimation->estimation * $queue_remaining;
 
@@ -190,18 +191,6 @@ class QueueProcessController extends Controller
                 'queue_remaining' => $queue_remaining
             ]
         ], ResponseCodeEnum::Success);
-    }
-
-    private function getQueueRemaining($doctor_schedule_id, $submit_time)
-    {
-        $queue_count = QueueProcess::where('doctor_schedule_id', $doctor_schedule_id)
-            ->where('is_valid', true)
-            ->where('process_status', QueueEnum::waiting)
-            ->where('submit_time', '<', $submit_time)
-            ->get()
-            ->count();
-
-        return $queue_count;
     }
 
 }

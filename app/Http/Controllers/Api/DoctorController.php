@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Enums\TimeConfigEnum;
+use App\Libs\Helper;
 use App\Models\Doctor;
 use App\Enums\ListDataEnum;
 use App\Enums\ResponseCodeEnum;
@@ -59,8 +60,11 @@ class DoctorController extends Controller
 
                     if ($now < $schedule->time_end) {
                         $schedule["is_available"] = true;
+                        $tomorrow = Carbon::tomorrow(TimeConfigEnum::zone);
+                        $schedule["queue_remaining"] = Helper::getQueueRemaining($schedule["id"], $tomorrow);
                     } else {
                         $schedule["is_available"] = false;
+                        $schedule["queue_remaining"] = 0;
                     }
 
                 }
@@ -126,8 +130,11 @@ class DoctorController extends Controller
 
                      if ($now < $schedule->time_end) {
                         $schedule["is_available"] = true;
+                        $tomorrow = Carbon::tomorrow(TimeConfigEnum::zone);
+                        $schedule["queue_remaining"] = Helper::getQueueRemaining($schedule["id"], $tomorrow);
                      } else {
                         $schedule["is_available"] = false;
+                         $schedule["queue_remaining"] = 0;
                      }
 
                  }

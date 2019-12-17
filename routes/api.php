@@ -52,6 +52,7 @@ Route::prefix('v1')->group(function(){
         Route::name('queue.store')->post('queue', 'Api\QueueProcessController@store');
         Route::name('queue.index')->get('queue/index', 'Api\QueueProcessController@index');
         Route::name('queue.current')->get('queue/current', 'Api\QueueProcessController@getCurrentQueue');
+        Route::name('queue.time.estimation')->get('queue/estimation/{doctor_schedule_id}', 'Api\QueueProcessController@getQueueEstimationTime');
         /* End Queue Routing */
 
 	 	/* Add Device Token */

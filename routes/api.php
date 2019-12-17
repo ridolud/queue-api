@@ -42,6 +42,7 @@ Route::prefix('v1')->group(function(){
     /* Admin RS Routing */
     Route::name('admin.queue.index')->get('admin/queue/index/{hospital_id}/{poli_id}', 'Api\Admin\QueueProcessController@getTodayQueue');
     Route::name('admin.queue.update-status')->post('admin/queue/update-status', 'Api\Admin\QueueProcessController@updateCurrentQueueStatus');
+    Route::name('admin.queue.estimate')->get('admin/queue/calculate/{doctor_schedule_id}', 'Api\Admin\QueueProcessController@calculateEstimation');
     /* End Admin RS Routing*/
 
 	Route::group(['middleware' => 'auth:api'], function(){
@@ -52,7 +53,7 @@ Route::prefix('v1')->group(function(){
         Route::name('queue.store')->post('queue', 'Api\QueueProcessController@store');
         Route::name('queue.index')->get('queue/index', 'Api\QueueProcessController@index');
         Route::name('queue.current')->get('queue/current', 'Api\QueueProcessController@getCurrentQueue');
-        Route::name('queue.time.estimation')->get('queue/estimation/{doctor_schedule_id}', 'Api\QueueProcessController@getQueueEstimationTime');
+        Route::name('queue.time.estimation')->get('queue/estimation', 'Api\QueueProcessController@getQueueEstimationTime');
         /* End Queue Routing */
 
 	 	/* Add Device Token */

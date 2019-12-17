@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Enums\QueueEnum;
 use App\Enums\ResponseCodeEnum;
+use App\Enums\TimeConfigEnum;
 use App\Models\QueueEstimationTime as QueueEstimationTimeModel;
 use App\Models\QueueProcess;
 use App\Rules\CheckIfQueueExists;
@@ -66,7 +67,7 @@ class QueueProcessController extends Controller
             'insurance_id' => $request->insurance_id ?? null,
             'doctor_schedule_id' => $request->doctor_schedule_id,
             'is_valid' => QueueEnum::Valid,
-            'submit_time' => Carbon::now(),
+            'submit_time' => Carbon::now()->timeZone(TimeConfigEnum::zone),
             'process_status' => QueueEnum::waiting,
         ]);
 
@@ -169,9 +170,15 @@ class QueueProcessController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getQueueEstimationTime($doctor_schedule_id)
+    public function getQueueEstimationTime()
     {
-        $estimation = QueueEstimationTimeModel::where('doctor_schedule_id', $doctor_schedule_id)->first(['estimation']);
+        $queue = Auth::user()->queue()->first();
+
+        $estimation = QueueEstimationTimeModel::where('doctor_schedule_id', $queue->doctor_schedule_id)
+            ->first([
+                'estimation',
+                'time'
+            ]);
 
         return response()->json([
             'success' => true,

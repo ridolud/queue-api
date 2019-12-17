@@ -28,7 +28,8 @@ class QueueEstimationTime extends Model
      */
     protected $fillable = [
         'doctor_schedule_id',
-        'estimation'
+        'estimation',
+        'time'
     ];
 
 }

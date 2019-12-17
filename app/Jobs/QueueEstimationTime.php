@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Enums\QueueEnum;
+use App\Enums\TimeConfigEnum;
 use App\Models\QueueProcess;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
@@ -69,7 +70,10 @@ class QueueEstimationTime implements ShouldQueue
 
             QueueEstimationTimeModel::updateOrCreate(
                 ['doctor_schedule_id' => $this->doctor_schedule_id],
-                ['estimation' => $estimation]
+                [
+                    'estimation' => $estimation,
+                    'time' => Carbon::now()->timeZone(TimeConfigEnum::zone)
+                ]
             );
             DB::commit();
         } catch (\Exception $exception) {

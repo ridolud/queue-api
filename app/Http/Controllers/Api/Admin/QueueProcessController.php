@@ -126,4 +126,12 @@ class QueueProcessController extends Controller
             ->onQueue('logging-process-queue');
     }
 
+    /**
+     * @param $doctor_schedule_id
+     */
+    public function calculateEstimation($doctor_schedule_id)
+    {
+        QueueEstimationTimeJob::dispatchNow($doctor_schedule_id);
+    }
+
 }

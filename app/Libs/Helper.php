@@ -8,6 +8,10 @@ use App\Models\QueueProcess;
 
 class Helper {
 
+    /**
+     * @param $status
+     * @return bool
+     */
     public static function isQueueValid($status)
     {
         $exit_status = [
@@ -23,6 +27,11 @@ class Helper {
         return true;
     }
 
+    /**
+     * @param $type
+     * @param string $title
+     * @return array
+     */
     public static function setMessageNotification($type, $title = '')
     {
         if ($type == NotificationTypeEnum::normal) {
@@ -51,6 +60,11 @@ class Helper {
         return $message;
     }
 
+    /**
+     * @param $doctor_schedule_id
+     * @param $submit_time
+     * @return mixed
+     */
     public static function getQueueRemaining($doctor_schedule_id, $submit_time)
     {
         $queue_count = QueueProcess::where('doctor_schedule_id', $doctor_schedule_id)

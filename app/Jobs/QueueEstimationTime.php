@@ -68,11 +68,13 @@ class QueueEstimationTime implements ShouldQueue
 
             $estimation = (int) ($total_time/$total_patient);
 
+            $now = Carbon::now()->timeZone(TimeConfigEnum::zone);
+
             QueueEstimationTimeModel::updateOrCreate(
                 ['doctor_schedule_id' => $this->doctor_schedule_id],
                 [
                     'estimation' => $estimation,
-                    'time' => Carbon::now()->timeZone(TimeConfigEnum::zone)
+                    'time' => $now
                 ]
             );
             DB::commit();

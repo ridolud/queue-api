@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Enums\ResponseCodeEnum;
 use App\Http\Controllers\Controller;
+use App\Rules\UniqueIdentityNumber;
 use Illuminate\Http\Request;
 use App\Models\Patient;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class PatientController extends Controller
@@ -83,28 +85,35 @@ class PatientController extends Controller
     {
     	$validator = Validator::make($request->all(),
             [
-            	'full_name' => 'required',
-		        'mother_name' => 'required',
-		        'identity_number' => 'required',
-		        'dob' => 'required|date',
-		        'gender' => 'required',
-		        'blood_type' => 'required',
-		        'address' => 'required',
+            	'full_name'         => ['required', 'string'],
+		        'mother_name'       => ['required', 'string'],
+		        'identity_number'   => ['required', 'numeric', new UniqueIdentityNumber()],
+		        'dob'               => ['required', 'date'],
+		        'gender'            => ['required', 'boolean'],
+		        'blood_type'        => ['required', 'string'],
+		        'address'           => ['required', 'string', 'min:15'],
             ]);
 
  		if ($validator->fails()) {
-       		return response()->json(['error'=>$validator->errors()], ResponseCodeEnum::UnAuthorized);
+       		return response()->json([
+       		    'error' => $validator->errors()
+            ], ResponseCodeEnum::UnAuthorized);
     	}
 
  		try {
+ 		    DB::beginTransaction();
+
  		    $patient = Patient::updateOrCreate([
                 ['auth_id' => Auth::id()],
                 $request->all()
             ]);
 
-            return response()->json($patient, ResponseCodeEnum::Success);
+ 		    DB::commit();
         } catch (\Exception $e) {
+ 		    DB::rollBack();
             return response()->json(['error'=>$validator->errors()], ResponseCodeEnum::UnAuthorized);
         }
+
+        return response()->json($patient, ResponseCodeEnum::Success);
     }
 }

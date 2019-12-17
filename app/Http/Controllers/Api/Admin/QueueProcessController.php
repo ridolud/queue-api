@@ -8,7 +8,6 @@ use App\Enums\ResponseCodeEnum;
 use App\Http\Controllers\Controller;
 use App\Jobs\QueueProcessLog as QueueProcessLogJob;
 use App\Models\QueueProcess;
-use App\Rules\IsCheckout;
 use App\Rules\IsMoreThanOneRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

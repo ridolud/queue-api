@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Rules\UniquePhoneNumber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use App\Enums\ResponseCodeEnum;
 
@@ -38,24 +41,33 @@ class AuthController extends Controller
  	public function register(Request $request) {
  		$validator = Validator::make($request->all(),
             [
-              'phone_number' => 'required',
-              'name' => 'required',
-              'email' => 'required|email|unique:users',
-              'password' => 'required',
-              'c_password' => 'required|same:password',
+              'phone_number'        => ['required', 'numeric', new UniquePhoneNumber()],
+              'name'                => ['required', 'string', 'max:40'],
+              'email'               => ['required', 'email', 'unique:users'],
+              'password'            => ['required', 'min:8', 'alpha_num'],
+              'c_password'          => ['required', 'same:password'],
             ]);
 
  		if ($validator->fails()) {
        		return response()->json(['error'=>$validator->errors()], ResponseCodeEnum::Error);
     	}
 
-	 	$input = $request->all();
-	 	$input['password'] = bcrypt($input['password']);
-	 	$user = User::create($input);
-        $data['name'] = $user->name;
-        $data['email'] = $user->name;
-        $data['phone_number'] = $user->phone_number;
-	 	$data['token'] =  $user->createToken('AppName')->accessToken;
+ 		try {
+            DB::beginTransaction();
+
+            $input = $request->all();
+            $input['password'] = bcrypt($input['password']);
+            $user = User::create($input);
+            $data['name'] = $user->name;
+            $data['email'] = $user->name;
+            $data['phone_number'] = $user->phone_number;
+            $data['token'] =  $user->createToken('AppName')->accessToken;
+
+            DB::commit();
+        } catch (\Exception $e) {
+ 		    Log::info($e);
+ 		    return response()->json($e->getMessage(), ResponseCodeEnum::Error);
+        }
 
 	 	return response()->json($data, ResponseCodeEnum::Success);
 	}
@@ -104,11 +116,10 @@ class AuthController extends Controller
 
 	    	return response()->json($data, ResponseCodeEnum::Success);
 
-	  	} else {
+	  	}
 
-	   	    return response()->json(['error'=>'Unauthorised'], ResponseCodeEnum::UnAuthorized);
+	   	return response()->json(['error'=>'Unauthorised'], ResponseCodeEnum::UnAuthorized);
 
-	   	}
 	}
 
 

@@ -135,15 +135,9 @@ class QueueProcessController extends Controller
                 ], ResponseCodeEnum::Success);
             }
 
-            $queue_count = QueueProcess::where('doctor_schedule_id', $my_queue->doctor_schedule_id)
-                ->where('is_valid', true)
-                ->where('process_status', QueueEnum::waiting)
-                ->where('submit_time', '<', $my_queue->submit_time)
-                ->count();
-
             $queue = $my_queue->toArray();
 
-            $queue["queue_remaining"] = $queue_count;
+            $queue["queue_remaining"] = $this->getQueueRemaining($my_queue->doctor_schedule_id, $my_queue->submit_time);
 
             return response()->json([
                 "success" => true,
@@ -180,11 +174,30 @@ class QueueProcessController extends Controller
                 'time'
             ]);
 
+        $queue_remaining = $this->getQueueRemaining($queue->doctor_schedule_id, $queue->submit_time);
+
+        $current_estimation = $estimation->estimation * $queue_remaining;
+
         return response()->json([
             'success' => true,
             'message' => 'Success get estimation time',
-            'data' => $estimation
+            'data' => [
+                'estimation' => $current_estimation,
+                'time' => $estimation->time,
+                'queue_remaining' => $queue_remaining
+            ]
         ], ResponseCodeEnum::Success);
+    }
+
+    private function getQueueRemaining($doctor_schedule_id, $submit_time)
+    {
+        $queue_count = QueueProcess::where('doctor_schedule_id', $doctor_schedule_id)
+            ->where('is_valid', true)
+            ->where('process_status', QueueEnum::waiting)
+            ->where('submit_time', '<', $submit_time)
+            ->count();
+
+        return $queue_count;
     }
 
 }

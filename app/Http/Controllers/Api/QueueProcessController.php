@@ -156,9 +156,18 @@ class QueueProcessController extends Controller
     }
 
     /**
-     * get estimation time by mean
-     * @param $doctor_schedule_id
-     * @return \Illuminate\Http\JsonResponse
+    @OA\Get(
+    path="/api/v1/queue/estimation/{doctor_schedule_id}",
+    tags={"Queue Process"},
+    summary="get current queue estimation time",
+    operationId="profile",
+
+    @OA\Response(response="default", description="successful operation")
+    )
+
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
     public function getQueueEstimationTime($doctor_schedule_id)
     {

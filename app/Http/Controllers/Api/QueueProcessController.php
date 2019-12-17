@@ -166,7 +166,10 @@ class QueueProcessController extends Controller
      */
     public function getQueueEstimationTime()
     {
-        $queue = Auth::user()->queue()->first();
+        $queue = Auth::user()
+            ->queue()
+            ->orderBy('submit_time', 'desc')
+            ->first();
 
         $estimation = QueueEstimationTimeModel::where('doctor_schedule_id', $queue->doctor_schedule_id)
             ->first([
@@ -195,6 +198,7 @@ class QueueProcessController extends Controller
             ->where('is_valid', true)
             ->where('process_status', QueueEnum::waiting)
             ->where('submit_time', '<', $submit_time)
+            ->get()
             ->count();
 
         return $queue_count;

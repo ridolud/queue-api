@@ -13,17 +13,55 @@ class TestPushNotifController extends Controller
     public function testPush($deviceToken)
     {
     	$push = new PushNotification('apn');
-	    $message = [
-	        'aps' => [
-	            'alert' => [
-	                'title' => '1 Notification test',
-	                'body' => 'Just for testing purposes',
-                    'queue_status' => QueueEnum::waiting,
-                    'silent' => true
-	            ],
-	            'sound' => 'default'
-	        ]
-	    ];
+
+		// Silet Notif - jika admin hit ke antrian berikutnya
+		$message = [
+			'aps' => [
+			    'content-available' => 1,
+			    'sound' => '',
+			    'category' => 'UPDATE_QUEUE'
+			],
+		];
+
+		// ini giliran kamu
+		// $message = [
+		// 	'aps' => [
+		// 	    'alert' => [
+		// 	        'title' => 'Ini giliran kamu',
+		// 	        'body' => '',
+		// 	    ],
+		// 	'badge' => 0,		
+		// 	'sound' => 'default',
+		// 	'content-available' => 1,
+		// 	'category' => 'UPDATE_QUEUE'
+		// ];
+
+		// 1 orang lagi, abis itu giliran kamu
+		// $message = [
+		// 	'aps' => [
+		// 	    'alert' => [
+		// 	        'title' => '1 antrian lagi, giliran kamu',
+		// 	        'body' => '',
+		// 	    ],
+		// 	'badge' => 0,		
+		// 	'sound' => 'default',
+		// 	'content-available' => 1,
+		// 	'category' => 'UPDATE_QUEUE'
+		// ];
+
+		// 2 orang lagi, abis itu giliran kamu
+		// $message = [
+		// 	'aps' => [
+		// 	    'alert' => [
+		// 	        'title' => '2 antrian lagi, giliran kamu',
+		// 	        'body' => '',
+		// 	    ],
+		// 	'badge' => 0,		
+		// 	'sound' => 'default',
+		// 	'content-available' => 1,
+		// 	'category' => 'UPDATE_QUEUE'
+		// ];
+
 	    $push->setMessage($message)
 	        ->setDevicesToken([
 	            $deviceToken,

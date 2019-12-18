@@ -46,16 +46,12 @@ class SendNotification implements ShouldQueue
                 ]);
 
             $push = $push->send();
-            $response = $push->getFeedback();
+            $push = $push->getFeedback();
 
-            return response()->json([
-                "success" => true,
-                "message" => $response
-            ], 200);
+            Log::info($push);
 
         } catch (\Error $error) {
             Log::error($error);
-            return response()->json($error->getMessage(), ResponseCodeEnum::Error);
         }
     }
 }

@@ -43,6 +43,7 @@ Route::prefix('v1')->group(function(){
     Route::name('admin.queue.index')->get('admin/queue/index/{hospital_id}/{poli_id}', 'Api\Admin\QueueProcessController@getTodayQueue');
     Route::name('admin.queue.update-status')->post('admin/queue/update-status', 'Api\Admin\QueueProcessController@updateCurrentQueueStatus');
     Route::name('admin.queue.estimate')->get('admin/queue/calculate/{doctor_schedule_id}', 'Api\Admin\QueueProcessController@calculateEstimation');
+    Route::name('admin.queue.notification')->get('admin/queue/notification', 'Api\Admin\QueueProcessController@sendNotification');
     /* End Admin RS Routing*/
 
 	Route::group(['middleware' => 'auth:api'], function(){

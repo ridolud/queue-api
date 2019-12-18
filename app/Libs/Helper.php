@@ -34,6 +34,19 @@ class Helper {
      */
     public static function setMessageNotification($type, $title = '')
     {
+        $message = [
+            'aps' => [
+                'alert' => [
+                    'title' => $title,
+                    'body' => '',
+                ],
+                'badge' => 0,
+                'sound' => 'default',
+                'content-available' => 1,
+                'category' => 'UPDATE_QUEUE'
+            ]
+        ];
+
         if ($type == NotificationTypeEnum::normal) {
             $message = [
                 'aps' => [

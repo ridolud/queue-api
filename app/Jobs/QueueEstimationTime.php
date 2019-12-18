@@ -88,14 +88,16 @@ class QueueEstimationTime implements ShouldQueue
 
             if ($total_patient <= 3) {
                 $type = NotificationTypeEnum::normal;
-                $title = "Giliran anda kurang " . $total_patient . " Lagi :)";
+                $title = "Giliran anda kurang Lagi :)";
             }
 
-            SendNotification::dispatchNow($this->current_queue->user->devicetoken, Helper::setMessageNotification($type, $title));
+            SendNotification::dispatch($this->current_queue->user->devicetoken, Helper::setMessageNotification($type, $title))
+                ->delay(now()->addSeconds(15))
+                ->onQueue('send-notification');
 
             DB::commit();
-        } catch (\Exception $exception) {
-            Log::info($exception);
+        } catch (\Error $error) {
+            Log::info($error);
             DB::rollBack();
         }
     }

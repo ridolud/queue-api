@@ -62,12 +62,13 @@ class QueueProcessLog implements ShouldQueue
                 ]);
 
                 QueueEstimationTimeJob::dispatch($snapshot)
-                    ->delay(now()->addMinutes(1))
+                    ->delay(now()->addSeconds(15))
                     ->onQueue('queue-estimation-time');
             }
 
             DB::commit();
         } catch (\Error $error) {
+            Log::error($error);
             DB::rollBack();
         }
     }

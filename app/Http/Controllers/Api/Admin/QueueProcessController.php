@@ -4,10 +4,12 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Enums\ListDataEnum;
+use App\Enums\NotificationTypeEnum;
 use App\Enums\ResponseCodeEnum;
 use App\Http\Controllers\Controller;
 use App\Jobs\QueueProcessLog as QueueProcessLogJob;
 use App\Jobs\QueueEstimationTime as QueueEstimationTimeJob;
+use App\Jobs\SendNotification;
 use App\Models\QueueProcess;
 use App\Rules\IsMoreThanOneRequest;
 use Illuminate\Http\Request;
@@ -122,7 +124,7 @@ class QueueProcessController extends Controller
     private function logQueue($queue_id, $status)
     {
         QueueProcessLogJob::dispatch($queue_id, $status)
-            ->delay(now()->addMinutes(1))
+            ->delay(now()->addSeconds(15))
             ->onQueue('logging-process-queue');
     }
 
@@ -133,6 +135,16 @@ class QueueProcessController extends Controller
     public function calculateEstimation($doctor_schedule_id)
     {
         QueueEstimationTimeJob::dispatchNow($doctor_schedule_id);
+    }
+
+    public function sendNotification()
+    {
+        $type = NotificationTypeEnum::normal;
+        $title = "Giliran anda kurang Lagi :)";
+
+        SendNotification::dispatch('154795e6bac8f1b33ca8e9d01603af02d5c77b0d147d8e1584d1dacaa5afdeb1', Helper::setMessageNotification($type, $title))
+            ->delay(now()->addSeconds(15))
+            ->onQueue('send-notification');
     }
 
 }

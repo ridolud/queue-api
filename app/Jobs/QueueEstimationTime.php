@@ -84,7 +84,7 @@ class QueueEstimationTime implements ShouldQueue
                 ]
             );
 
-            $type = NotificationTypeEnum::silent;
+      /*      $type = NotificationTypeEnum::silent;
 
             if ($total_patient <= 3) {
                 $type = NotificationTypeEnum::normal;
@@ -93,7 +93,7 @@ class QueueEstimationTime implements ShouldQueue
 
             SendNotification::dispatch($this->current_queue->user->devicetoken, Helper::setMessageNotification($type, $title))
                 ->delay(now()->addSeconds(15))
-                ->onQueue('send-notification');
+                ->onQueue('send-notification');*/
 
             DB::commit();
         } catch (\Error $error) {

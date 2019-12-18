@@ -7,6 +7,7 @@ use App\Enums\QueueEnum;
 use App\Enums\ResponseCodeEnum;
 use App\Enums\TimeConfigEnum;
 use App\Jobs\QueueEstimationTime as QueueEstimationTimeJob;
+use App\Jobs\SendNotification as NotifyUser;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -61,9 +62,13 @@ class QueueProcessLog implements ShouldQueue
                     'snapshot'              => json_encode($snapshot)
                 ]);
 
-                QueueEstimationTimeJob::dispatch($snapshot)
+                $type = NotificationTypeEnum::normal;
+                $title = "Giliran anda kurang Lagi do 456:)";
+
+                NotifyUser::dispatch($snapshot->user->device_token, Helper::setMessageNotification($type, $title))
                     ->delay(now()->addSeconds(15))
-                    ->onQueue('queue-estimation-time');
+                    ->onQueue('send-notification');
+
             }
 
             DB::commit();

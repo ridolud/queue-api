@@ -23,15 +23,18 @@ class QueueEstimationTime implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $current_queue;
+    private $doctor_schedule_id;
+    private $submit_time;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($snapshot)
+    public function __construct($doctor_schedule_id, $submit_time)
     {
-        $this->current_queue = $snapshot;
+        $this->doctor_schedule_id = $doctor_schedule_id;
+        $this->submit_time = $submit_time;
     }
 
     /**
@@ -52,10 +55,10 @@ class QueueEstimationTime implements ShouldQueue
         try {
             DB::beginTransaction();
 
-            $queues = QueueProcess::where('doctor_schedule_id', $this->current_queue->doctor_schedule_id)
+            $queues = QueueProcess::where('doctor_schedule_id', $this->doctor_schedule_id)
                 ->where('is_valid', QueueEnum::Valid)
                 ->where('process_status', QueueEnum::waiting)
-                ->where('submit_time', '<', $this->current_queue->submit_time)
+                ->where('submit_time', '<', $this->submit_time)
                 ->get();
 
             foreach ($queues as $queue) {
@@ -77,23 +80,12 @@ class QueueEstimationTime implements ShouldQueue
             $now = Carbon::now()->timeZone(TimeConfigEnum::zone);
 
             QueueEstimationTimeModel::updateOrCreate(
-                ['doctor_schedule_id' => $this->current_queue->doctor_schedule_id],
+                ['doctor_schedule_id' => $this->doctor_schedule_id],
                 [
                     'estimation' => $estimation,
                     'time' => $now
                 ]
             );
-
-      /*      $type = NotificationTypeEnum::silent;
-
-            if ($total_patient <= 3) {
-                $type = NotificationTypeEnum::normal;
-                $title = "Giliran anda kurang Lagi :)";
-            }
-
-            SendNotification::dispatch($this->current_queue->user->devicetoken, Helper::setMessageNotification($type, $title))
-                ->delay(now()->addSeconds(15))
-                ->onQueue('send-notification');*/
 
             DB::commit();
         } catch (\Error $error) {

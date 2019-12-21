@@ -25,7 +25,7 @@
                 "tags": [
                     "Admin"
                 ],
-                "summary": "\n    Update Status Queue\n    const waiting = 0;\n    const checkIn = 1;\n    const checkOut = 2;\n    const skipped = 3;",
+                "summary": "\r\n    Update Status Queue\r\n    const waiting = 0;\r\n    const checkIn = 1;\r\n    const checkOut = 2;\r\n    const skipped = 3;",
                 "operationId": "storequeue",
                 "requestBody": {
                     "description": "form",
@@ -241,6 +241,25 @@
                 }
             }
         },
+        "/api/v1/patient": {
+            "get": {
+                "tags": [
+                    "Data Patient"
+                ],
+                "summary": "Edit my data patient",
+                "operationId": "getmydata",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/patient/my_data": {
             "get": {
                 "tags": [
@@ -402,6 +421,20 @@
                     "Queue Process"
                 ],
                 "summary": "get current queue patient",
+                "operationId": "profile",
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/api/v1/queue/estimation/{doctor_schedule_id}": {
+            "get": {
+                "tags": [
+                    "Queue Process"
+                ],
+                "summary": "get current queue estimation time",
                 "operationId": "profile",
                 "responses": {
                     "default": {

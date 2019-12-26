@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Patient;
+use App\Rules\UniqueIdentityNumber;
 use App\Rules\UniquePhoneNumber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -46,6 +48,15 @@ class AuthController extends Controller
               'email'               => ['required', 'email', 'unique:users'],
               'password'            => ['required', 'min:8', 'alpha_num'],
               'c_password'          => ['required', 'same:password'],
+                'full_name'         => ['required', 'string', 'max:40'],
+                'mother_name'       => ['required', 'string', 'max:40'],
+                'identity_number'   => ['nullable', 'numeric', new UniqueIdentityNumber()],
+                'dob'               => ['required', 'date_format:Y-m-d'],
+                'gender'            => ['required', 'boolean'],
+                'blood_type'        => ['required', 'string', 'in:A,B,AB,O'],
+                'address'           => ['required', 'string', 'min:15'],
+                'identity_photo'    => ['nullable', 'image', 'mimes: jpg, jpeg, png', 'max:5024']
+
             ]);
 
  		if ($validator->fails()) {
@@ -59,9 +70,21 @@ class AuthController extends Controller
             $input['password'] = bcrypt($input['password']);
             $user = User::create($input);
             $data['name'] = $user->name;
-            $data['email'] = $user->name;
+            $data['email'] = $user->email;
             $data['phone_number'] = $user->phone_number;
             $data['token'] =  $user->createToken('AppName')->accessToken;
+
+            Patient::create([
+                'auth_id'           => $user->id,
+                'full_name'         => $input['full_name'],
+                'mother_name'       => $input['mother_name'],
+                'identity_number'   => $input['identity_number'] ?? null,
+                'dob'               => $input['dob'],
+                'gender'            => $input['gender'],
+                'blood_type'        => $input['blood_type'],
+                'address'           => $input['address'],
+                'identity_photo'    => $input['identity_number'] ?? null
+            ]);
 
             DB::commit();
         } catch (\Exception $e) {
@@ -95,7 +118,6 @@ class AuthController extends Controller
     */
 	public function login(Request $request)
     {
-
         $validator = Validator::make($request->all(),
             [
                 'email' => ['required', 'email'],

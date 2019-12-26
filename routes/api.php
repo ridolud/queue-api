@@ -56,15 +56,16 @@ Route::prefix('v1')->group(function(){
         Route::name('queue.current')->get('queue/current', 'Api\QueueProcessController@getCurrentQueue');
         Route::name('queue.time.estimation')->get('queue/estimation', 'Api\QueueProcessController@getQueueEstimationTime');
         /* End Queue Routing */
-
+        
 	 	/* Add Device Token */
 	 	Route::post('add-device-token', 'Api\AuthController@addDeviceToken');
 
 	 	/* Patient Routing */
 	 	Route::prefix('patient')->group(function(){
-	 		Route::get('my_data', 'Api\PatientController@getMyData');
-	 		Route::post('my_data', 'Api\PatientController@saveMyData');
-	 		Route::get('/', 'Api\PatientController@getPatientsByUserLogin');
+	 		Route::get('index', 'Api\PatientController@index');
+	 		Route::post('store', 'Api\PatientController@store');
+	 		Route::post('update/{patient_id}', 'Api\PatientController@update');
+	 		Route::get('show', 'Api\PatientController@show');
 	 	});
 	 	/* End Patient Routing */
 

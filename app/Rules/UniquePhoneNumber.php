@@ -45,6 +45,6 @@ class UniquePhoneNumber implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'The Phone number is already taken';
     }
 }

@@ -31,9 +31,9 @@ class PatientController extends Controller
 
     /**
       @OA\get(
-          path="/api/v1/patient",
+          path="/api/v1/patient/index",
           tags={"Data Patient"},
-          summary="Edit my data patient",
+          summary="get list patient",
           operationId="getmydata",
           security={ {"bearerAuth": {}}, },
 
@@ -50,9 +50,9 @@ class PatientController extends Controller
 
     /**
       @OA\get(
-          path="/api/v1/patient/my_data",
+          path="/api/v1/patient/show",
           tags={"Data Patient"},
-          summary="Edit my data patient",
+          summary="get current data",
           operationId="getmydata",
           security={ {"bearerAuth": {}}, },
 
@@ -71,9 +71,9 @@ class PatientController extends Controller
 
     /**
       @OA\Post(
-          path="/api/v1/patient/my_data",
+          path="/api/v1/patient/store",
           tags={"Data Patient"},
-          summary="Edit my data patient",
+          summary="Save my data patient",
           operationId="editmydata",
           security={ {"bearerAuth": {}}, },
           @OA\RequestBody(

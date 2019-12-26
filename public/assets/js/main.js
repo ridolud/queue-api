@@ -1805,7 +1805,7 @@
   ======================================================================*/
 		if ($('.typed').length > 0) {
 			var typed = new Typed('.typed', {
-				strings: ["busy", "laziness"],
+				strings: ["queue", "poli", "doctor", "services"],
 				typeSpeed: 40,
 				loop: true,
 				backSpeed: 40,

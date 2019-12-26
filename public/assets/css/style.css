@@ -79,7 +79,7 @@ Author URI: http://themeforest.net/user/XpeedStudio/portfolio
 62. video testimonial
 63. office info
 64. feature step
-65. customer satisfiction
+65. © satisfiction
 66. vertical slider
 67. icon menu
 
@@ -1944,7 +1944,7 @@ button:focus {
   color: #000000;
   font-weight: 900;
   font-family: "Roboto", sans-serif;
-  font-size: 5.625rem;
+  font-size: 4.625rem;
   line-height: 1;
 }
 .typing-effect > h2 span {
@@ -1969,7 +1969,7 @@ button:focus {
 }
 .agency-banner6 .agency-banner-img {
   margin-right: -175px;
-  margin-left: -130px;
+  margin-left: -60px;
 }
 
 .agency-banner-content .banner-video-popups .xs-video-popup {
@@ -1992,7 +1992,7 @@ button:focus {
   padding-left: 20px;
 }
 .agency-banner-content.banner-style6 .banner-title {
-  font-size: 5.625rem;
+  font-size: 1.75rem;
   font-family: "Roboto", sans-serif;
   color: #21069b;
   font-weight: 900;

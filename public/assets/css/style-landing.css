@@ -1,0 +1,55 @@
+/* Color code:
+
+Biru - #1e4383
+Oren - #ffab29
+Ijo - #21808f
+
+*/
+.offcanvas-nav-brand img {
+	max-height: 45px;
+	margin-top: 2px;
+}
+
+.agency-banner-content.banner-style6 .banner-title {
+	font-size: 2rem;
+	padding-left: 0px;
+	color: #1e4383;
+}
+
+.agency-banner6 a.btn-primary {
+  margin-top: 20px;
+}
+
+.hr-timeline-section .agency-section-title.text-center.style5 {
+  margin-bottom: 200px;
+}
+
+.hr-timeline-section .timeline-wave {
+  top: calc(50% + 110px)
+}
+
+.typing-effect > h2 .color-char, .typing-effect > h2 .typed-cursor, .agency-section-title.style5 .main-title, 
+.info-card .info-card-body .card-title {
+	color: #1e4383;
+}
+
+.btn.style5 {
+	background-color: #1e4383;
+}
+
+.number-count {
+	color: #eceefd ! important;
+}
+
+.hr-timeline-content-wraper .hr-timeline-content > i {
+	color: #1e4383 ! important;
+}
+
+.info-card {
+	background-color: transparent;
+	box-shadow: none;
+}
+
+.growth-card-section {
+	padding-bottom: 0px;
+}

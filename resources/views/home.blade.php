@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Multipurpose - Agecny Index V6</title>
+        <title>Antridoc - Hospital Queue System</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         
@@ -33,6 +33,8 @@
         <!--Theme custom css -->
         <link rel="stylesheet" href="assets/css/style.css">
 
+        <link rel="stylesheet" href="assets/css/style-landing.css">
+
         <!--Theme Responsive css-->
         <link rel="stylesheet" href="assets/css/responsive.css" />
     </head>
@@ -57,8 +59,8 @@
     <div class="container">
         <div class="offset-menu-wraper clearfix">
             <div class="float-left">
-                <a href="#" class="offcanvas-nav-brand">
-                    <img src="assets/images/logo-5.png" alt="">
+                <a href="index.html" class="offcanvas-nav-brand">
+                    <img src="assets/antridoc/logo.png" alt="">
                 </a>
             </div>
             <div class="float-right">
@@ -113,14 +115,15 @@
         <div class="row">
             <div class="col-lg-7 align-self-center">
                 <div class="agency-banner-content banner-style6">
-                    <h2 class="banner-title"><span class="title-underline">Business</span> is the <span class="title-underline">salt of</span> life</h2>
-                    <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.</p>
-                    <div class="banner-video-popups">
-                        <a href="#" class="xs-video-popup">
-                            <i class="icon icon-play"></i>
-                        </a>
-                        <span>Take a Video Tour</span>
+                    <h1 class="banner-title">
+                        Antridoc
+                        <!-- <span class="separete-border"></span>
+                        <span class="sub-content">Creative Agency to Established <br> a Brand Idencity</span> -->
+                    </h1>
+                    <div class="typing-effect">
+                        <h2>Focus on being <span class="color-char">Productive</span> instead of <span class="typed"></span></h2>
                     </div>
+                    <a href="#" class="btn btn-primary style5 icon-right">GET IN TOUCH <i class="icon icon-arrow-right"></i></a>
                 </div><!-- .agency-banner-content END -->
             </div>
             <div class="col-lg-5">
@@ -154,7 +157,6 @@
                     </div>
                     <div class="info-card-body">
                         <h3 class="card-title">Business Relation</h3>
-                        <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas</p>
                     </div>
                 </div><!-- .info-card END -->
             </div>
@@ -165,7 +167,6 @@
                     </div>
                     <div class="info-card-body">
                         <h3 class="card-title">Business Relation</h3>
-                        <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas</p>
                     </div>
                 </div><!-- .info-card END -->
             </div>
@@ -176,7 +177,6 @@
                     </div>
                     <div class="info-card-body">
                         <h3 class="card-title">Business Relation</h3>
-                        <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas</p>
                     </div>
                 </div><!-- .info-card END -->
             </div>
@@ -187,188 +187,236 @@
                     </div>
                     <div class="info-card-body">
                         <h3 class="card-title">Business Relation</h3>
-                        <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas</p>
                     </div>
                 </div><!-- .info-card END -->
             </div>
         </div><!-- .row END -->
-        <div class="btn-wraper text-center">
-            <a href="#" class="simple-btn icon-right style2">View All Services <i class="icon icon-arrow-right"></i></a>
-        </div>
     </div><!-- .container END -->
     <div class="growth-card-bg">
         <img src="assets/images/growth-bg.png" alt="">
     </div>
 </section><!-- end growth grid section -->
 
-<!-- agency portfolio area section -->
-<!-- <section class="agency_portfolio_section" id="services">
-    <div class="agency-portfolio-slider owl-carousel owl-theme">
-        <div class="single-portfolio portfolio-style3">
-            <img src="assets/images/portfolio-slider/portfolio-slider-11.jpg" alt="">
-            <div class="hover-area">
-                <div class="hover-content">
-                    <span class="vertical-border"></span>
-                    <h4 class="xs-title"><a href="#">iSometric Vector</a></h4>
-                    <a href="#" class="portfolio-tag">illustration</a>
+<!-- customer satisfiction strart -->
+<section class="xs-section-padding customer-satisfiction">
+    <div class="customer-satisfaction-wraper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2 class="satisfaction-title">We believe in Customer <span>Satisfaction</span></h2>
                 </div>
             </div>
-        </div>
-        <div class="single-portfolio portfolio-style3">
-            <img src="assets/images/portfolio-slider/portfolio-slider-12.jpg" alt="">
-            <div class="hover-area">
-                <div class="hover-content">
-                    <span class="vertical-border"></span>
-                    <h4 class="xs-title"><a href="#">iSometric Vector</a></h4>
-                    <a href="#" class="portfolio-tag">illustration</a>
+            <div class="row satisfiction-group">
+                <div class="col-lg-6">
+                    <div class="customer-satisfaction-list wow fadeInLeft">
+                        <i class="icon icon-icon_01"></i>
+                        <h3 class="xs-title">Business Growth</h3>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast</p>
+                        <span class="number-count"></span>
+                    </div><!-- .customer-satisfaction-list END -->
                 </div>
-            </div>
-        </div>
-        <div class="single-portfolio portfolio-style3">
-            <img src="assets/images/portfolio-slider/portfolio-slider-13.jpg" alt="">
-            <div class="hover-area">
-                <div class="hover-content">
-                    <span class="vertical-border"></span>
-                    <h4 class="xs-title"><a href="#">iSometric Vector</a></h4>
-                    <a href="#" class="portfolio-tag">illustration</a>
+                <div class="col-lg-6">
+                    <div class="customer-satisfaction-list wow fadeInRight">
+                        <i class="icon icon-icon_02"></i>
+                        <h3 class="xs-title">Great Solution</h3>
+                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                        <span class="number-count"></span>
+                    </div><!-- .customer-satisfaction-list END -->
                 </div>
-            </div>
-        </div>
-        <div class="single-portfolio portfolio-style3">
-            <img src="assets/images/portfolio-slider/portfolio-slider-14.jpg" alt="">
-            <div class="hover-area">
-                <div class="hover-content">
-                    <span class="vertical-border"></span>
-                    <h4 class="xs-title"><a href="#">iSometric Vector</a></h4>
-                    <a href="#" class="portfolio-tag">illustration</a>
+                <div class="col-lg-6">
+                    <div class="customer-satisfaction-list wow fadeInLeft">
+                        <i class="icon icon-icon_03"></i>
+                        <h3 class="xs-title">Time is Money</h3>
+                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave</p>
+                        <span class="number-count"></span>
+                    </div><!-- .customer-satisfaction-list END -->
                 </div>
-            </div>
-        </div>
-        <div class="single-portfolio portfolio-style3">
-            <img src="assets/images/portfolio-slider/portfolio-slider-11.jpg" alt="">
-            <div class="hover-area">
-                <div class="hover-content">
-                    <span class="vertical-border"></span>
-                    <h4 class="xs-title"><a href="#">iSometric Vector</a></h4>
-                    <a href="#" class="portfolio-tag">illustration</a>
+                <div class="col-lg-6">
+                    <div class="customer-satisfaction-list wow fadeInRight">
+                        <i class="icon icon-icon_04"></i>
+                        <h3 class="xs-title">Better Investment</h3>
+                        <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia,</p>
+                        <span class="number-count"></span>
+                    </div><!-- .customer-satisfaction-list END -->
                 </div>
-            </div>
-        </div>
-        <div class="single-portfolio portfolio-style3">
-            <img src="assets/images/portfolio-slider/portfolio-slider-12.jpg" alt="">
-            <div class="hover-area">
-                <div class="hover-content">
-                    <span class="vertical-border"></span>
-                    <h4 class="xs-title"><a href="#">iSometric Vector</a></h4>
-                    <a href="#" class="portfolio-tag">illustration</a>
+                <div class="col-lg-6">
+                    <div class="customer-satisfaction-list wow fadeInLeft">
+                        <i class="icon icon-icon_05"></i>
+                        <h3 class="xs-title">Growth Graph</h3>
+                        <p>But the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way. When she reached the first hills of the Italic Mountains</p>
+                        <span class="number-count"></span>
+                    </div><!-- .customer-satisfaction-list END -->
                 </div>
-            </div>
-        </div>
-        <div class="single-portfolio portfolio-style3">
-            <img src="assets/images/portfolio-slider/portfolio-slider-13.jpg" alt="">
-            <div class="hover-area">
-                <div class="hover-content">
-                    <span class="vertical-border"></span>
-                    <h4 class="xs-title"><a href="#">iSometric Vector</a></h4>
-                    <a href="#" class="portfolio-tag">illustration</a>
+                <div class="col-lg-6">
+                    <div class="customer-satisfaction-list wow fadeInRight">
+                        <i class="icon icon-icon_06"></i>
+                        <h3 class="xs-title">Global Business</h3>
+                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot</p>
+                        <span class="number-count"></span>
+                    </div><!-- .customer-satisfaction-list END -->
                 </div>
-            </div>
-        </div>
-        <div class="single-portfolio portfolio-style3">
-            <img src="assets/images/portfolio-slider/portfolio-slider-14.jpg" alt="">
-            <div class="hover-area">
-                <div class="hover-content">
-                    <span class="vertical-border"></span>
-                    <h4 class="xs-title"><a href="#">iSometric Vector</a></h4>
-                    <a href="#" class="portfolio-tag">illustration</a>
-                </div>
-            </div>
-        </div>
+            </div><!-- .row END -->
+        </div><!-- .container END -->
     </div>
-</section> -->
-<!-- agency portfolio area section end -->
+</section><!-- end customer satisfiction -->
 
-<!-- agency testimonial section -->
-<!-- <section class="xs-section-padding agency-testimonial-area2" id="testimonial" style="background-image: url(assets/images/testimonial-bg.png);">
+<!-- horizontal timeline section -->
+<div class="xs-section-padding hr-timeline-section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="bouble-slider-thumb owl-carousel" id="sync2">
-                    <div class="single-bouble-thumb wow bounceIn">
-                        <img src="assets/images/team/team-1.jpg" alt="">
+            <div class="col-md-8 mx-auto">
+                <div class="agency-section-title text-center style5">
+                    <h2 class="main-title medium">Milestones</h2>
+                </div><!-- .agency-section-title .style3 END -->
+            </div>
+        </div><!-- .row END -->   
+        <div class="row hr-timeline-group">
+            <div class="col-md-6 col-lg-3">
+                <div class="hr-single-timeline wow bounceIn">
+                    <span class="number-count"></span>
+                    <div class="hr-timeline-content-wraper">
+                        <div class="hr-timeline-content">
+                            <i class="icon icon-working_process_icons_1"></i>
+                            <p>Estimate</p>
+                        </div>
+                    </div><!-- .hr-timeline-content-wraper END -->
+                </div><!-- .hr-single-timeline END -->
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="hr-single-timeline color-1 wow bounceIn" data-wow-delay=".5s">
+                    <span class="number-count"></span>
+                    <div class="hr-timeline-content-wraper">
+                        <div class="hr-timeline-content">
+                            <i class="icon icon-working_process_icons_2"></i>
+                            <p>Idea Making</p>
+                        </div>
+                    </div><!-- .hr-timeline-content-wraper END -->
+                </div><!-- .hr-single-timeline END -->
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="hr-single-timeline color-2 wow bounceIn" data-wow-delay=".7s">
+                    <span class="number-count"></span>
+                    <div class="hr-timeline-content-wraper">
+                        <div class="hr-timeline-content">
+                            <i class="icon icon-working_process_icons_3"></i>
+                            <p>Working Plan</p>
+                        </div>
+                    </div><!-- .hr-timeline-content-wraper END -->
+                </div><!-- .hr-single-timeline END -->
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="hr-single-timeline color-3 wow bounceIn" data-wow-delay=".9s">
+                    <span class="number-count"></span>
+                    <div class="hr-timeline-content-wraper">
+                        <div class="hr-timeline-content">
+                            <i class="icon icon-working_process_icons_4"></i>
+                            <p>Handover</p>
+                        </div>
+                    </div><!-- .hr-timeline-content-wraper END -->
+                </div><!-- .hr-single-timeline END -->
+            </div>
+        </div><!-- .row .hr-timeline-group END -->
+    </div><!-- .container END -->
+    <div class="timeline-wave">
+        <img src="assets/images/timeline-wave-shape.png" alt="">
+    </div>
+</div><!-- horizontal timeline section end -->
+
+<!-- agency team section -->
+<section class="xs-section-padding gray-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="agency-section-title text-center section-title-style2">
+                    <div class="title-icon">
+                        <i class="icon icon-users3 gradient-icon"></i>
                     </div>
-                    <div class="single-bouble-thumb thumb-1 wow bounceIn" data-wow-delay=".3s">
-                        <img src="assets/images/team/team-2.jpg" alt="">
-                    </div>
-                    <div class="single-bouble-thumb thumb-2 wow bounceIn" data-wow-delay=".6s">
-                        <img src="assets/images/team/team-3.jpg" alt="">
-                    </div>
-                    <div class="single-bouble-thumb thumb-3 wow bounceIn" data-wow-delay=".9s">
-                        <img src="assets/images/team/team-4.jpg" alt="">
-                    </div>
-                    <div class="single-bouble-thumb thumb-4 wow bounceIn" data-wow-delay="1.2s">
-                        <img src="assets/images/team/team-1.jpg" alt="">
-                    </div>
+                    <h4 class="main-title">Meet Our Team</h4>
+                    <p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="bouble-slider-privew owl-carousel" id="sync1">
-                    <div class="review-content review-style3">
-                        <div class="review-content-header">
-                            <img src="assets/images/testimonial/testimonial-icon.png" alt="">
-                        </div>
-                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence</p>
-                        <div class="reviewer-bio">
-                            <h3>William Logan</h3>
-                            <p>Creative Director</p>
-                        </div>
+        </div><!-- .row end -->
+        <div class="row xs-mb-5">
+            <div class="col-lg-3 col-md-6">
+                <div class="single-team-style2">
+                    <div class="image">
+                        <img src="assets/images/team/team-5.jpg" alt="">
+                        <div class="hover-area text-center">
+                            <div class="team-content">
+                                <h4 class="xs-title">CHARLOTTE GRACE</h4>
+                                <span>Chief Executive</span>
+                            </div>
+                            <ul class="social-list version-5">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            </ul><!-- .social-list -->        
+                        </div><!-- .hover-area END -->
                     </div>
-                    <div class="review-content review-style3">
-                        <div class="review-content-header">
-                            <img src="assets/images/testimonial/testimonial-icon.png" alt="">
-                        </div>
-                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence</p>
-                        <div class="reviewer-bio">
-                            <h3>William Hannah</h3>
-                            <p>Creative Designer</p>
-                        </div>
+                </div><!-- .single-team-style2 END -->
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="single-team-style2">
+                    <div class="image">
+                        <img src="assets/images/team/team-6.jpg" alt="">
+                        <div class="hover-area text-center">
+                            <div class="team-content">
+                                <h4 class="xs-title">ROBERT S NUNN</h4>
+                                <span>Talent Director</span>
+                            </div>
+                            <ul class="social-list version-5">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            </ul><!-- .social-list -->        
+                        </div><!-- .hover-area END -->
                     </div>
-                    <div class="review-content review-style3">
-                        <div class="review-content-header">
-                            <img src="assets/images/testimonial/testimonial-icon.png" alt="">
-                        </div>
-                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence</p>
-                        <div class="reviewer-bio">
-                            <h3>Jhon Doe</h3>
-                            <p>CTO</p>
-                        </div>
+                </div><!-- .single-team-style2 END -->
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="single-team-style2">
+                    <div class="image">
+                        <img src="assets/images/team/team-7.jpg" alt="">
+                        <div class="hover-area text-center">
+                            <div class="team-content">
+                                <h4 class="xs-title">JOSEPH L KEESLER</h4>
+                                <span>Interior Design</span>
+                            </div>
+                            <ul class="social-list version-5">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            </ul><!-- .social-list -->        
+                        </div><!-- .hover-area END -->
                     </div>
-                    <div class="review-content review-style3">
-                        <div class="review-content-header">
-                            <img src="assets/images/testimonial/testimonial-icon.png" alt="">
-                        </div>
-                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence</p>
-                        <div class="reviewer-bio">
-                            <h3>Paul Willam</h3>
-                            <p>Graphic Designer</p>
-                        </div>
+                </div><!-- .single-team-style2 END -->
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="single-team-style2">
+                    <div class="image">
+                        <img src="assets/images/team/team-8.jpg" alt="">
+                        <div class="hover-area text-center">
+                            <div class="team-content">
+                                <h4 class="xs-title">GERALD Y KOHL</h4>
+                                <span>Product Investigator</span>
+                            </div>
+                            <ul class="social-list version-5">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            </ul><!-- .social-list -->        
+                        </div><!-- .hover-area END -->
                     </div>
-                    <div class="review-content review-style3">
-                        <div class="review-content-header">
-                            <img src="assets/images/testimonial/testimonial-icon.png" alt="">
-                        </div>
-                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence</p>
-                        <div class="reviewer-bio">
-                            <h3>Smith</h3>
-                            <p>Director</p>
-                        </div>
-                    </div>
-                </div>
+                </div><!-- .single-team-style2 END -->
             </div>
         </div>
     </div>
-</section> -->
-<!-- agency testimonial section end -->
+</section>        
+<!-- agency team section end -->
 
 <!-- call to action section -->
 <section class="calltoaction-section-3">
@@ -377,7 +425,7 @@
             <div class="col-lg-10 mx-auto text-center">
                 <div class="call-to-action-content-3">
                     <h2 class="call-to-action-title">Join With The Entrepreneur Community for Business Growth</h2>
-                    <a href="service.html" class="btn btn-primary style6 icon-right">View All Services <i class="icon icon-arrow-right"></i></a>
+                    <a href="service.html" class="btn btn-primary style6 icon-right">Contact Us <i class="icon icon-arrow-right"></i></a>
                 </div>
             </div>
         </div><!-- .row END -->
@@ -530,7 +578,7 @@
 
         <!-- footer section start -->
         <footer class="xs-footer-section footer-style7" style="background-image: url(assets/images/footer-vector-img-2.png);">
-            <!-- <div class="footer-top-area">
+            <div class="footer-top-area">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-7 col-md-6">
@@ -552,25 +600,25 @@
                                     <li><a href="service.html">Service</a></li>
                                     <li><a href="news-list.html">Blog</a></li>
                                     <li><a href="contact.html">Contact</a></li>
-                                </ul>
-                            </div>
+                                </ul><!-- .xs-list END -->
+                            </div><!-- .footer-widget END -->
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <div class="footer-widget">
                                 <p><a href="https://www.google.com/maps/place/London,+UK/@51.528308,-0.3817812,10z/data=!3m1!4b1!4m5!3m4!1s0x47d8a00baf21de75:0x52963a5addd52a99!8m2!3d51.5073509!4d-0.1277583" target="_blank">178 Alex Avenue. William Street. New York, NY-25435</a> </p>
                                 <p><a href="tel:(805)%20215-8578"> (805) 215-8578</a></p>
                                 <p><a href="mailto:admin@agencifynewyork.com">admin@agencifynewyork.com</a></p>
-                            </div>
+                            </div><!-- .footer-widget END -->
                         </div>
-                    </div>
-                </div>
-            </div> -->
+                    </div><!-- .row END -->
+                </div><!-- .container END -->
+            </div><!-- .footer-top-area END -->
             <div class="footer-bottom-area">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="copyright-section">
-                                <p>Copyright 2019, <a href="#">Antridoc</a>. All Rights Reserved.</p>
+                                <p>Copyright 2018, <a href="https://themeforest.net/user/xpeedstudio/portfolio">XpeedStudio</a>. All Rights Reserved.</p>
                             </div><!-- .copyright-section END -->
                         </div>
                         <div class="col-md-6">

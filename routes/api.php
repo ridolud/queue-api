@@ -15,8 +15,8 @@ use Illuminate\Http\Request;
 
 Route::prefix('v1')->group(function(){
 
-	Route::post('login', 'Api\AuthController@login')->name("login");
-	Route::post('register', 'Api\AuthController@register');
+	Route::name("login")->post('login', 'Api\Auth\LoginController@login');
+	Route::name("register")->post('register', 'Api\Auth\RegisterController@register');
 
 	Route::get('test_push_notif/{deviceToken}', 'Api\TestPushNotifController@testPush');
 
@@ -46,7 +46,7 @@ Route::prefix('v1')->group(function(){
     Route::name('admin.queue.notification')->get('admin/queue/notification/{queue_id}', 'Api\Admin\QueueProcessController@sendNotification');
     /* End Admin RS Routing*/
 
-	Route::group(['middleware' => 'auth:api'], function(){
+	Route::group(['middleware' => ['auth:api', 'verified']], function(){
 
 	 	Route::get('user', 'Api\AuthController@getUser');
 
@@ -56,7 +56,7 @@ Route::prefix('v1')->group(function(){
         Route::name('queue.current')->get('queue/current', 'Api\QueueProcessController@getCurrentQueue');
         Route::name('queue.time.estimation')->get('queue/estimation', 'Api\QueueProcessController@getQueueEstimationTime');
         /* End Queue Routing */
-        
+
 	 	/* Add Device Token */
 	 	Route::post('add-device-token', 'Api\AuthController@addDeviceToken');
 

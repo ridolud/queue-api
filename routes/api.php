@@ -15,8 +15,11 @@ use Illuminate\Http\Request;
 
 Route::prefix('v1')->group(function(){
 
+    /* Authentification */
 	Route::name("login")->post('login', 'Api\Auth\LoginController@login');
 	Route::name("register")->post('register', 'Api\Auth\RegisterController@register');
+    Route::get('email/verify/{id}/{hash}', 'Api\Auth\VerificationController@verify')->name('verification.verify');
+	/* end authentification */
 
 	Route::get('test_push_notif/{deviceToken}', 'Api\TestPushNotifController@testPush');
 

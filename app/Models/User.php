@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Notifications\EmailVerificationNotification;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -39,8 +41,20 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function queue()
     {
         return $this->hasMany(QueueProcess::class, 'user_id');
+    }
+
+    /**
+     * sending email verification
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new EmailVerificationNotification());
     }
 }

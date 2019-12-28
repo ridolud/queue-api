@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use App\Enums\ResponseCodeEnum;
 use Closure;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Support\Facades\Redirect;
 
 class VerifyEmail
 {

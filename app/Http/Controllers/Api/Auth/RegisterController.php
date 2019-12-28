@@ -8,6 +8,7 @@ use App\Enums\ResponseCodeEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Patient;
 use App\Models\User;
+use App\Notifications\EmailVerificationNotification;
 use App\Rules\UniqueIdentityNumber;
 use App\Rules\UniquePhoneNumber;
 use Illuminate\Http\Request;
@@ -41,8 +42,47 @@ class RegisterController extends Controller
     @OA\Response(response="default", description="successful operation")
     )
      */
-    public function register(Request $request) {
-        $validator = Validator::make($request->all(),
+    public function register(Request $request)
+    {
+
+        if ($this->validator($request)->fails()) {
+            return response()->json([
+                'error' => $this->validator($request)->errors()
+            ], ResponseCodeEnum::Error);
+        }
+
+        try {
+            DB::beginTransaction();
+
+            $input = $request->all();
+
+            $user = $this->createUser($input);
+
+            $data['name'] = $user->name;
+            $data['email'] = $user->email;
+            $data['phone_number'] = $user->phone_number;
+            $data['token'] =  $user->createToken('AppName')->accessToken;
+
+            $this->createPatient($user, $input);
+
+            $user->sendEmailVerificationNotification();
+
+            DB::commit();
+        } catch (\Exception $e) {
+            Log::info($e);
+            return response()->json($e->getMessage(), ResponseCodeEnum::Error);
+        }
+
+        return response()->json($data, ResponseCodeEnum::Success);
+    }
+
+    /**
+     * @param $request
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    private function validator($request)
+    {
+        return Validator::make($request->all(),
             [
                 'phone_number'        => ['required', 'numeric', new UniquePhoneNumber()],
                 'name'                => ['required', 'string', 'max:40'],
@@ -58,43 +98,39 @@ class RegisterController extends Controller
                 'address'             => ['required', 'string', 'min:15'],
                 'identity_photo'      => ['nullable', 'image', 'mimes: jpg, jpeg, png', 'max:5024']
             ]);
+    }
 
-        if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()], ResponseCodeEnum::Error);
-        }
+    /**
+     * @param $input
+     * @return mixed
+     */
+    private function createUser($input)
+    {
+        $input['password'] = bcrypt($input['password']);
 
-        try {
-            DB::beginTransaction();
+        return User::create($input);
+    }
 
-            $input = $request->all();
-            $input['password'] = bcrypt($input['password']);
-            $user = User::create($input);
-            $data['name'] = $user->name;
-            $data['email'] = $user->email;
-            $data['phone_number'] = $user->phone_number;
-            $data['token'] =  $user->createToken('AppName')->accessToken;
+    /**
+     * @param $user
+     * @param $input
+     * @return mixed
+     */
+    private function createPatient($user, $input)
+    {
+        $patient = Patient::create([
+            'auth_id'           => $user->id,
+            'full_name'         => $input['full_name'],
+            'mother_name'       => $input['mother_name'],
+            'identity_number'   => $input['identity_number'] ?? null,
+            'dob'               => $input['dob'],
+            'gender'            => $input['gender'],
+            'blood_type'        => $input['blood_type'],
+            'address'           => $input['address'],
+            'identity_photo'    => $input['identity_number'] ?? null
+        ]);
 
-            Patient::create([
-                'auth_id'           => $user->id,
-                'full_name'         => $input['full_name'],
-                'mother_name'       => $input['mother_name'],
-                'identity_number'   => $input['identity_number'] ?? null,
-                'dob'               => $input['dob'],
-                'gender'            => $input['gender'],
-                'blood_type'        => $input['blood_type'],
-                'address'           => $input['address'],
-                'identity_photo'    => $input['identity_number'] ?? null
-            ]);
-
-            $user->sendEmailVerificationNotification();
-
-            DB::commit();
-        } catch (\Exception $e) {
-            Log::info($e);
-            return response()->json($e->getMessage(), ResponseCodeEnum::Error);
-        }
-
-        return response()->json($data, ResponseCodeEnum::Success);
+        return $patient;
     }
 
 }

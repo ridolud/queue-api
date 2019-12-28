@@ -62,13 +62,9 @@ class QueueProcessLog implements ShouldQueue
                     'snapshot'              => json_encode($snapshot)
                 ]);
 
-                $type = NotificationTypeEnum::normal;
-                $title = "Giliran anda kurang Lagi do 456:)";
-
-                NotifyUser::dispatch($snapshot->user->device_token, Helper::setMessageNotification($type, $title))
+                QueueEstimationTimeJob::dispatch()
                     ->delay(now()->addSeconds(15))
-                    ->onQueue('send-notification');
-
+                    ->onQueue('queue-estimation-time');
             }
 
             DB::commit();

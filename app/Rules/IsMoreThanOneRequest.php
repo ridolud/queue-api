@@ -17,7 +17,6 @@ class IsMoreThanOneRequest implements Rule
      */
     public function __construct($queue_id)
     {
-        //
         $this->queue_id = $queue_id;
     }
 
@@ -30,7 +29,6 @@ class IsMoreThanOneRequest implements Rule
      */
     public function passes($attribute, $value)
     {
-        //
         $queue = QueueProcess::find($this->queue_id);
         if ($value == $queue->process_status) {
             return false;

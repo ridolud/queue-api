@@ -84,8 +84,11 @@ class QueueEstimationTime implements ShouldQueue
                 [
                     'estimation' => $estimation,
                     'time' => $now
-                ]
-            );
+                ]);
+
+            SendNotification::dispatch()
+                ->delay(now()->addSeconds(15))
+                ->onQueue('send-notification');
 
             DB::commit();
         } catch (\Error $error) {

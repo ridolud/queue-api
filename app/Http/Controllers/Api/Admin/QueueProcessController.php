@@ -37,13 +37,9 @@ class QueueProcessController extends Controller
     public function getTodayQueue($hospital_id, $poli_id)
     {
         $queues = QueueProcess::hospital()
-            ->select([
-                'queue_process.*',
-                'doctor.poli_id as poli_id',
-                'doctor.hospital_id as hospital_id'
-            ])
-            ->where('hospital_id', $hospital_id)
-            ->where('poli_id', $poli_id)
+            ->selectedColumn()
+            ->where('doctor.hospital_id', $hospital_id)
+            ->where('doctor.poli_id', $poli_id)
             ->paginate(ListDataEnum::TotalItemPerRequest);
 
         return response()->json($queues, ResponseCodeEnum::Success);

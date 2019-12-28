@@ -48,7 +48,7 @@ class RegisterController extends Controller
         if ($this->validator($request)->fails()) {
             return response()->json([
                 'error' => $this->validator($request)->errors()
-            ], ResponseCodeEnum::Error);
+            ], ResponseCodeEnum::Success);
         }
 
         try {

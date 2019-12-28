@@ -2,15 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Patient;
-use App\Rules\UniqueIdentityNumber;
-use App\Rules\UniquePhoneNumber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use App\Enums\ResponseCodeEnum;
 

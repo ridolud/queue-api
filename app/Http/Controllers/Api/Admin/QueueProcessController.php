@@ -74,7 +74,8 @@ class QueueProcessController extends Controller
     public function updateCurrentQueueStatus(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'current_status' => new IsMoreThanOneRequest($request->queue_id)
+            'current_status' => ['required', 'integer', new IsMoreThanOneRequest($request->queue_id)],
+            'queue_id' => ['required', 'string', 'exists:queue_process,id']
         ]);
 
         if ($validator->fails()) {
@@ -89,14 +90,13 @@ class QueueProcessController extends Controller
             DB::beginTransaction();
 
             $status = $request->current_status;
+            $queue_id = $request->queue_id;
 
-            $queue_process = QueueProcess::find($request->queue_id)
+            QueueProcess::where('id', $queue_id)
                 ->update([
                     'process_status'    => $status,
                     'is_valid'          => Helper::isQueueValid($status)
                 ]);
-
-            $this->logQueue($request->queue_id, $status);
 
             DB::commit();
         } catch (\Error $error) {

@@ -52,6 +52,7 @@ class LoginController extends Controller
             $data["phone_number"] = $user->phone_number;
             $data["name"] = $user->name;
             $data["email"] = $user->email;
+            $data["verified"] = $user->hasVerifiedEmail();
             $data["token"] =  $user->createToken('AppName')->accessToken;
 
             return response()->json($data, ResponseCodeEnum::Success);

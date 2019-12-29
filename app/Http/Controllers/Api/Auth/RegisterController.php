@@ -61,6 +61,7 @@ class RegisterController extends Controller
             $data['name'] = $user->name;
             $data['email'] = $user->email;
             $data['phone_number'] = $user->phone_number;
+            $data['verified'] = false;
             $data['token'] =  $user->createToken('AppName')->accessToken;
 
             $this->createPatient($user, $input);

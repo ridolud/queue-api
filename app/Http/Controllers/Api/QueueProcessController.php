@@ -17,8 +17,6 @@ use App\Http\Controllers\Controller;
 
 class QueueProcessController extends Controller
 {
-
-
     /**
     @OA\Post(
     path="/api/v1/queue",
@@ -56,7 +54,7 @@ class QueueProcessController extends Controller
             ->get()
             ->count();
 
-        if (($fails = $validator->fails()) || ($current_queue>0)) {
+        if ( ($fails = $validator->fails()) || ($current_queue > 0) ) {
             return response()->json([
                 "success" => false,
                 "message" => QueueEnum::failedStoringQueue], ResponseCodeEnum::Success);

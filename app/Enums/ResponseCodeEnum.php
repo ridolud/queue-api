@@ -12,4 +12,5 @@ final class ResponseCodeEnum {
     const UnAuthorized = 401;
     const NotFound = 404;
     const Redirect = 301;
+    const InvalidRequest = 406;
 }

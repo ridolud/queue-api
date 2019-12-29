@@ -48,7 +48,9 @@ class AuthController extends Controller
             ]);
 
         if ($validator->fails()) {
-          return response()->json(['error'=>$validator->errors()], ResponseCodeEnum::UnAuthorized);
+          return response()->json([
+              'error'=>$validator->errors()
+          ], ResponseCodeEnum::InvalidRequest);
         }
 
         $input = $request->all();

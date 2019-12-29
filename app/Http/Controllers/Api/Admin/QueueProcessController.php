@@ -83,7 +83,7 @@ class QueueProcessController extends Controller
                 ->json([
                     'success' => false,
                     'messages' => $validator->getMessageBag()->first()
-                ], ResponseCodeEnum::Error);
+                ], ResponseCodeEnum::InvalidRequest);
         }
 
         try {

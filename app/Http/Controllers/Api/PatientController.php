@@ -102,7 +102,7 @@ class PatientController extends Controller
  		if ($this->validator->fails()) {
        		return response()->json([
        		    'error' => $this->validator->errors()
-            ], ResponseCodeEnum::UnAuthorized);
+            ], ResponseCodeEnum::InvalidRequest);
     	}
 
  		try {

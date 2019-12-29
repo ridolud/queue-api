@@ -42,7 +42,9 @@ class LoginController extends Controller
             ]);
 
         if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()], ResponseCodeEnum::Error);
+            return response()->json([
+                'error'=>$validator->errors()
+            ], ResponseCodeEnum::InvalidRequest);
         }
 
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){

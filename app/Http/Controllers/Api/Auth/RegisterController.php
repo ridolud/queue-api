@@ -64,8 +64,6 @@ class RegisterController extends Controller
             $data['verified'] = false;
             $data['token'] =  $user->createToken('AppName')->accessToken;
 
-            $this->createPatient($user, $input);
-
             $user->sendEmailVerificationNotification();
 
             DB::commit();
@@ -89,15 +87,7 @@ class RegisterController extends Controller
                 'name'                => ['required', 'string', 'max:40'],
                 'email'               => ['required', 'email', 'unique:users'],
                 'password'            => ['required', 'min:8', 'alpha_num'],
-                'c_password'          => ['required', 'same:password'],
-                'full_name'           => ['required', 'string', 'max:40'],
-                'mother_name'         => ['required', 'string', 'max:40'],
-                'identity_number'     => ['nullable', 'numeric', new UniqueIdentityNumber()],
-                'dob'                 => ['required', 'date_format:Y-m-d'],
-                'gender'              => ['required', 'boolean'],
-                'blood_type'          => ['required', 'string', 'in:A,B,AB,O'],
-                'address'             => ['required', 'string', 'min:15'],
-                'identity_photo'      => ['nullable', 'image', 'mimes: jpg, jpeg, png', 'max:5024']
+                'c_password'          => ['required', 'same:password']
             ]);
     }
 
@@ -110,28 +100,6 @@ class RegisterController extends Controller
         $input['password'] = bcrypt($input['password']);
 
         return User::create($input);
-    }
-
-    /**
-     * @param $user
-     * @param $input
-     * @return mixed
-     */
-    private function createPatient($user, $input)
-    {
-        $patient = Patient::create([
-            'auth_id'           => $user->id,
-            'full_name'         => $input['full_name'],
-            'mother_name'       => $input['mother_name'],
-            'identity_number'   => $input['identity_number'] ?? null,
-            'dob'               => $input['dob'],
-            'gender'            => $input['gender'],
-            'blood_type'        => $input['blood_type'],
-            'address'           => $input['address'],
-            'identity_photo'    => $input['identity_number'] ?? null
-        ]);
-
-        return $patient;
     }
 
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Enums\ListDataEnum;
 use App\Enums\NotificationTypeEnum;
+use App\Enums\NotificationCategoryEnum;
 use App\Enums\ResponseCodeEnum;
 use App\Http\Controllers\Controller;
 use App\Jobs\QueueProcessLog;
@@ -142,8 +143,9 @@ class QueueProcessController extends Controller
 
         $type = NotificationTypeEnum::normal;
         $title = "Giliran anda kurang Lagi do 456:)";
+        $category = NotificationCategoryEnum::update_queue;
 
-        SendNotification::dispatch($queue->user->device_token, Helper::setMessageNotification($type, $title))
+        SendNotification::dispatch($queue->user->device_token, Helper::setMessageNotification($type, $title, $category))
             ->delay(now()->addSeconds(15))
             ->onQueue('send-notification');
     }

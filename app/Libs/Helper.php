@@ -3,6 +3,7 @@
 namespace App\Libs;
 
 use App\Enums\NotificationTypeEnum;
+use App\Enums\NotificationCategoryEnum;
 use App\Enums\QueueEnum;
 use App\Models\QueueProcess;
 
@@ -32,7 +33,7 @@ class Helper {
      * @param string $title
      * @return array
      */
-    public static function setMessageNotification($type, $title = '')
+    public static function setMessageNotification($type, $title = '', $category)
     {
         $message = [
             'aps' => [
@@ -43,7 +44,7 @@ class Helper {
                 'badge' => 0,
                 'sound' => 'default',
                 'content-available' => 1,
-                'category' => 'UPDATE_QUEUE'
+                'category' => NotificationCategoryEnum::update_queue
             ]
         ];
 
@@ -57,7 +58,7 @@ class Helper {
                     'badge' => 0,
                     'sound' => 'default',
                     'content-available' => 1,
-                    'category' => 'UPDATE_QUEUE'
+                    'category' => $category
                 ]
             ];
         } else if ($type == NotificationTypeEnum::silent) {
@@ -65,7 +66,7 @@ class Helper {
                 'aps' => [
                     'content-available' => 1,
                     'sound' => '',
-                    'category' => 'UPDATE_QUEUE'
+                    'category' => $category
                 ],
             ];
         }

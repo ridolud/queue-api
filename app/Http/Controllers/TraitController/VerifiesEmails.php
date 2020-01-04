@@ -10,6 +10,10 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\SendNotification;
+use App\Enums\NotificationTypeEnum;
+use App\Enums\NotificationCategoryEnum;
+use App\Libs\Helper;
 
 trait VerifiesEmails
 {
@@ -33,14 +37,31 @@ trait VerifiesEmails
         }
 
         if ($user->hasVerifiedEmail()) {
+
+            self::sendNotifIfVerivied($user->device_token);
+            
             return view('verified-email');
         }
 
         if ($user->markEmailAsVerified()) {
+
+            self::sendNotifIfVerivied($user->device_token);
+
             event(new Verified($request->user()));
         }
 
         return view('verified-email');
+    }
+
+    private function sendNotifIfVerivied($device_token) {
+
+        $type = NotificationTypeEnum::normal;
+        $title = "Email anda berhasil diverifikasi";
+        $category = NotificationCategoryEnum::user_email_verified;
+
+        SendNotification::dispatch($device_token, Helper::setMessageNotification($type, $title, $category))
+           ->delay(now()->addSeconds(15))
+           ->onQueue('send-notification');
     }
 
     /**

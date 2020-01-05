@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Enums\ListDataEnum;
 use App\Enums\NotificationTypeEnum;
 use App\Enums\NotificationCategoryEnum;
+use App\Enums\QueueNameEnum;
 use App\Enums\ResponseCodeEnum;
 use App\Http\Controllers\Controller;
 use App\Jobs\QueueProcessLog;
@@ -98,6 +99,10 @@ class QueueProcessController extends Controller
                     'process_status'    => $status,
                     'is_valid'          => Helper::isQueueValid($status)
                 ]);
+
+            QueueProcessLog::dispatch($queue_id, $status)
+                ->delay(now()->addSeconds(15))
+                ->onQueue(QueueNameEnum::QUEUE_PROCESS_LOG);
 
             DB::commit();
         } catch (\Error $error) {

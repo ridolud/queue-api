@@ -7,6 +7,7 @@ use Illuminate\Contracts\Validation\Rule;
 
 class UniqueIdentityNumber implements Rule
 {
+
     /**
      * Create a new rule instance.
      *
@@ -27,6 +28,7 @@ class UniqueIdentityNumber implements Rule
     public function passes($attribute, $value)
     {
         $patient = Patient::where('identity_number', $value)
+            ->where('auth_id', '!=', auth()->user()->id)
             ->get()
             ->count();
 

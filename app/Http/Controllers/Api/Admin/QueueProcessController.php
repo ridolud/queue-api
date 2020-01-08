@@ -100,8 +100,14 @@ class QueueProcessController extends Controller
                     'is_valid'          => Helper::isQueueValid($status)
                 ]);
 
+            $queue = QueueProcess::find($queue_id);
+
             QueueProcessLog::dispatch($queue_id, $status)
                 ->delay(now()->addSeconds(15))
+                ->onQueue(QueueNameEnum::QUEUE_PROCESS_LOG);
+
+            QueueEstimationTimeJob::dispatch($queue->doctor_schedule_id, $queue->submit_time)
+                ->delay(now()->addSeconds(30))
                 ->onQueue(QueueNameEnum::QUEUE_PROCESS_LOG);
 
             DB::commit();

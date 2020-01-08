@@ -75,7 +75,7 @@ class QueueEstimationTime implements ShouldQueue
                 }
             }
 
-            $estimation = (int) ($total_time/$total_patient);
+            $estimation = (int) $total_time/$total_patient;
 
             $now = Carbon::now()->timeZone(TimeConfigEnum::zone);
 
@@ -85,10 +85,6 @@ class QueueEstimationTime implements ShouldQueue
                     'estimation' => $estimation,
                     'time' => $now
                 ]);
-/*
-            SendNotification::dispatch()
-                ->delay(now()->addSeconds(15))
-                ->onQueue('send-notification');*/
 
             DB::commit();
         } catch (\Error $error) {

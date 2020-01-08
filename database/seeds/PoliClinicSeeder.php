@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\PoliClinic;
-use App\Hospital;
+use App\Models\PoliClinic;
+use App\Models\Hospital;
 
 class PoliClinicSeeder extends Seeder
 {
@@ -13,16 +13,28 @@ class PoliClinicSeeder extends Seeder
      */
     public function run()
     {
-        //
-        $polies = ['Poli Gigi', 'Poli THT', 'Poli Ginjal', 'Poli Penyakit Jiwa', 'Poli Gami', 'Poli Andri', 'Poli Ponik', 'Poli Gon', 'Poli Tron'];
+        $polies = [
+            'Poli Gigi',
+            'Poli THT',
+            'Poli Penyakit Dalam',
+            'Poli Penyakit Kulit',
+            'Poli Anak',
+            'Poli Umum',
+        ];
 
-        $hospital = Hospital::first();
+        // TODO: remove conditional 'where'
+        $hospitals = Hospital::where('id', '!=', 'deaaa25d-dcd5-4d76-99d1-9b90247d6904')
+            ->get()
+            ->pluck('id')
+            ->all();
 
-        foreach ($polies as $poly) {
-            PoliClinic::create([
-                'full_name' => $poly,
-                'hospital_id' => $hospital->id,
-            ]);
+        foreach ($hospitals as $hospital) {
+            foreach ($polies as $poly) {
+                PoliClinic::create([
+                    'full_name' => $poly,
+                    'hospital_id' => $hospital,
+                ]);
+            }
         }
     }
 }

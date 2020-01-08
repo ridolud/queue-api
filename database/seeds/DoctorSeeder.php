@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Doctor;
-use App\Hospital;
-use App\PoliClinic;
+use App\Models\Doctor;
+use App\Models\Hospital;
+use App\Models\PoliClinic;
 use Faker\Factory;
 
 class DoctorSeeder extends Seeder
@@ -16,18 +16,27 @@ class DoctorSeeder extends Seeder
      */
     public function run()
     {
-        $hospitals = Hospital::get()->pluck('id')->all();
-        $policlinics = PoliClinic::get()->pluck('id')->all();
+        $hospitals = Hospital::where('id', '!=', 'deaaa25d-dcd5-4d76-99d1-9b90247d6904')
+            ->get()
+            ->pluck('id')
+            ->all();
+
+        $policlinics = PoliClinic::where('id', '!=', 'deaaa25d-dcd5-4d76-99d1-9b90247d6904')
+            ->get()
+            ->pluck('id')
+            ->all();
 
         $faker = Factory::create();
 
-        for ($i=0; $i<50; $i++) {
-            Doctor::create([
-                'full_name' => "Dr. " . $faker->firstName,
-                'hospital_id' => $faker->randomElement($hospitals),
-                'poli_id' => $faker->randomElement($policlinics)
-            ]);
+        foreach ($hospitals as $hospital)
+        {
+            for ($i=0; $i<20; $i++) {
+                Doctor::create([
+                    'full_name' => "Dr. " . $faker->firstName . ' ' . $faker->lastName,
+                    'hospital_id' => $hospital,
+                    'poli_id' => $faker->randomElement($policlinics)
+                ]);
+            }
         }
-
     }
 }

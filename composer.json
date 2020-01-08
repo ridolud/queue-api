@@ -14,6 +14,7 @@
         "edujugon/push-notification": "^4.1",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
+        "laravel/horizon": "^3.4",
         "laravel/passport": "^7.5",
         "laravel/telescope": "^2.1",
         "laravel/tinker": "^1.0",

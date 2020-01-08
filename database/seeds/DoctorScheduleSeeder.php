@@ -15,8 +15,10 @@ class DoctorScheduleSeeder extends Seeder
      */
     public function run()
     {
-        //
-        $doctors = Doctor::get()->pluck('id')->all();
+        $doctors = Doctor::get()
+            ->pluck('id')
+            ->all();
+
         $days = [
           'Senin',
           'Selasa',
@@ -24,6 +26,7 @@ class DoctorScheduleSeeder extends Seeder
           'Kamis',
           'Jum\'at',
         ];
+
         $faker = Factory::create();
 
         $morning_start = [

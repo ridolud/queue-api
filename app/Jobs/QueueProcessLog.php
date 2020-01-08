@@ -62,10 +62,6 @@ class QueueProcessLog implements ShouldQueue
                     'time'                  => Carbon::now()->timeZone(TimeConfigEnum::zone),
                     'snapshot'              => json_encode($snapshot)
                 ]);
-
-                QueueEstimationTimeJob::dispatch($snapshot->doctor_schedule_id, $snapshot->submit_time)
-                    ->delay(now()->addSeconds(15))
-                    ->onQueue(QueueNameEnum::QUEUE_ESTIMATION_TIME);
             }
 
             DB::commit();

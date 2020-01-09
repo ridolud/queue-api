@@ -179,7 +179,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Laravolt\Indonesia\ServiceProvider::class,
-        App\Providers\PushNotificationProvider::class
+        App\Providers\PushNotificationProvider::class,
+        Laravolt\Avatar\ServiceProvider::class,
 
     ],
 
@@ -231,7 +232,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Indonesia' => Laravolt\Indonesia\Facade::class
+        'Indonesia' => Laravolt\Indonesia\Facade::class,
+        'Avatar'    => Laravolt\Avatar\Facade::class,
 
     ],
 

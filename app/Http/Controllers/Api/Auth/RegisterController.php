@@ -4,8 +4,10 @@
 namespace App\Http\Controllers\Api\Auth;
 
 
+use App\Enums\AssetPathEnum;
 use App\Enums\ResponseCodeEnum;
 use App\Http\Controllers\Controller;
+use App\Libs\UUIDGenerator;
 use App\Models\Patient;
 use App\Models\User;
 use App\Notifications\EmailVerificationNotification;
@@ -15,6 +17,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Laravolt\Avatar\Avatar;
+use Webpatser\Uuid\Uuid;
 
 class RegisterController extends Controller
 {

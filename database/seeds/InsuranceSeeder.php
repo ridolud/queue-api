@@ -33,21 +33,6 @@ class InsuranceSeeder extends Seeder
             ['Kaiser Foundation', 'https://pbs.twimg.com/profile_images/971039409540878337/2n-HSVxP_400x400.jpg'],
             ['Emblem Health', 'https://www.expertinsurancereviews.com/wp-content/uploads/2017/07/Emblem-Health-300.png'],
             ['Highmark', 'https://www.expertinsurancereviews.com/wp-content/uploads/2017/07/Highmark-300-1.png'],
-            /*'Carefirst Inc.',
-            'Guidewell Mutual Health',
-            'Centene Corp.',
-            'Hawaii Medical Service',
-            'Blue Cross of Idaho',
-            'Health Care Service Corp.',
-            'Caresource',
-            'Wellmark Inc.',
-            'Blue Cross Blue Shield of Kansas',
-            'Anthem Inc.',
-            'Louisiana Medical Serv',
-            'Maine Comm Health Options',
-            'Carefirst Inc.',
-            'Tufts',
-            'HealthPartners'*/
         ];
 
         foreach ($hospitals as $key => $hospital) {

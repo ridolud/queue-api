@@ -30,8 +30,10 @@ class IsMoreThanOneRequest implements Rule
     public function passes($attribute, $value)
     {
         $queue = QueueProcess::find($this->queue_id);
-        if ($value == $queue->process_status) {
-            return false;
+        if ($queue) {
+            if ($value == $queue->process_status) {
+                return false;
+            }
         }
 
         return true;

@@ -55,34 +55,43 @@ class QueueEstimationTime implements ShouldQueue
         try {
             DB::beginTransaction();
 
+            // get queue remaining
             $queues = QueueProcess::where('doctor_schedule_id', $this->doctor_schedule_id)
                 ->where('is_valid', QueueEnum::Valid)
                 ->where('process_status', QueueEnum::waiting)
                 ->where('submit_time', '<', $this->submit_time)
                 ->get();
 
-            foreach ($queues as $queue) {
-                $times = $queue->log()
+            $queue_log = QueueProcess::where('doctor_schedule_id', $this->doctor_schedule_id)
+                ->where('is_valid', QueueEnum::inValid)
+                ->where('process_status', QueueEnum::checkOut)
+                ->get();
+
+            foreach ($queue_log as $queue) {
+                $times = QueueProcessLog::where('queue_process_id', $queue->id)
                     ->whereIn('status', $status)
                     ->get()
                     ->pluck('time')
                     ->all();
 
-                if (count($times) == 2) {
+                if (count($times) > 1) {
                     $difference = (int) Carbon::parse($times[0])->diffInMinutes($times[1]);
                     $total_patient++;
                     $total_time += $difference;
                 }
             }
 
-            $estimation = (int) $total_time/$total_patient;
+            $estimation = 15;
+
+            if ($total_patient > 1) {
+                $estimation = $total_time/$total_patient;
+            }
 
             $now = Carbon::now()->timeZone(TimeConfigEnum::zone);
 
-            QueueEstimationTimeModel::updateOrCreate(
-                ['doctor_schedule_id' => $this->doctor_schedule_id],
-                [
-                    'estimation' => $estimation,
+            QueueEstimationTimeModel::create([
+                    'doctor_schedule_id' => $this->doctor_schedule_id,
+                    'estimation' => round($estimation),
                     'time' => $now
                 ]);
 

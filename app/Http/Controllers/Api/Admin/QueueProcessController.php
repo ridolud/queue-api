@@ -76,8 +76,8 @@ class QueueProcessController extends Controller
     public function updateCurrentQueueStatus(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'queue_id' => ['required', 'string', 'exists:queue_process,id'],
             'current_status' => ['required', 'integer', new IsMoreThanOneRequest($request->queue_id)],
-            'queue_id' => ['required', 'string', 'exists:queue_process,id']
         ]);
 
         if ($validator->fails()) {
@@ -108,7 +108,7 @@ class QueueProcessController extends Controller
 
             QueueEstimationTimeJob::dispatch($queue->doctor_schedule_id, $queue->submit_time)
                 ->delay(now()->addSeconds(30))
-                ->onQueue(QueueNameEnum::QUEUE_PROCESS_LOG);
+                ->onQueue(QueueNameEnum::QUEUE_ESTIMATION_TIME);
 
             DB::commit();
         } catch (\Error $error) {

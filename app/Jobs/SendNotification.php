@@ -25,7 +25,6 @@ class SendNotification implements ShouldQueue
      */
     public function __construct($devicetoken, $data)
     {
-        //
         $this->devicetoken = $devicetoken;
         $this->data = $data;
     }

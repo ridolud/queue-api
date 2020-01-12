@@ -48,6 +48,7 @@ class QueueProcessController extends Controller
                     $query->where('process_status', $request->state);
                 }
             })
+            ->orderBy('submit_time', 'asc')
             ->paginate(ListDataEnum::TotalItemPerRequest);
 
         return response()->json($queues, ResponseCodeEnum::Success);

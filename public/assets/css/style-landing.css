@@ -10,14 +10,25 @@ Ijo - #21808f
 	margin-top: 2px;
 }
 
+.agency-banner-content img {
+  max-height: 28px;
+  margin-top: -15px;
+}
+
 .agency-banner-content.banner-style6 .banner-title {
-	font-size: 2rem;
-	padding-left: 0px;
-	color: #1e4383;
+	font-size: 20px;
+  line-height: 28px;
+  font-weight: 400;
+  color: #000;
 }
 
 .agency-banner6 a.btn-primary {
   margin-top: 20px;
+}
+
+.typing-effect > h2 {
+  font-size: 60px;
+  font-weight: 600;
 }
 
 .hr-timeline-section .agency-section-title.text-center.style5 {
@@ -52,4 +63,64 @@ Ijo - #21808f
 
 .growth-card-section {
 	padding-bottom: 0px;
+}
+
+.growth-card-section .info-card-header img {
+  max-height: 84px;
+}
+
+.growth-card-section .main-title.medium {
+  font-size: 42px;
+}
+
+.customer-satisfaction-list img {
+  max-height: 84px;
+  margin-bottom: 20px;
+}
+
+.customer-satisfaction-wraper h2.satisfaction-title {
+  color: #1E4383;
+}
+
+.team-section-area h4.main-title {
+  font-size: 42px;
+  margin-bottom: 20px;
+  color: #134288 !important;
+}
+
+.single-team-style3 .image {
+  border-radius: 50%;
+  max-width: 160px;
+  margin: auto;
+}
+
+.single-team-style3 .team-content .xs-title {
+  font-size: 18px;
+  color: #000;
+}
+
+.calltoaction-section-3 {
+    background-color: #134288;
+}
+
+.call-to-action-content-3 .call-to-action-title {
+  font-size: 42px;
+  font-weight: 500;
+}
+
+.offcanvas-title, .offcanvas-list-widget li p, .offcanvas-menu.single-page-menu > li > a:hover {
+    color: #134288;
+}
+
+.offcanvas-menu.single-page-menu > li > a:hover::before {
+	background-color: #134288;
+}
+
+@media ( max-width: 1024px) {
+	.agency-banner-content.banner-style6 .banner-title > span {
+    	font-family: inherit;
+    	display: block;
+    	font-size: 16px;
+    	font-weight: 400;
+	}
 }

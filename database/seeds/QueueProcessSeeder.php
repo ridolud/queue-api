@@ -20,8 +20,8 @@ class QueueProcessSeeder extends Seeder
      */
     public function run()
     {
-        $users = User::get()->pluck('id')->all();
-        $patients = Patient::get()->pluck('id')->all();
+        $users = User::where('id', '!=', 42)->get()->pluck('id')->all();
+        $patients = Patient::where('id', '!=', 63)->get()->pluck('id')->all();
         $insurances = Insurance::get()->pluck('id')->all();
         $schedule = DoctorSchedule::first()->id;
 
@@ -32,9 +32,9 @@ class QueueProcessSeeder extends Seeder
                 'user_id' => $faker->randomElement($users),
                 'patient_id' => $patient,
                 'insurance_id' => $faker->randomElement($insurances),
-                'doctor_schedule_id' => $schedule,
+                'doctor_schedule_id' => '08377387-8fa8-400c-93bc-ec22b88e453c',
                 'is_valid' => QueueEnum::Valid,
-                'submit_time' => Carbon::now(),
+                'submit_time' => Carbon::now(\App\Enums\TimeConfigEnum::zone),
                 'process_status' => QueueEnum::waiting,
             ]);
         }

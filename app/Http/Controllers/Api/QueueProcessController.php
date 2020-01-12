@@ -199,8 +199,6 @@ class QueueProcessController extends Controller
 
             $queue_remaining = Helper::getQueueRemaining($queue->doctor_schedule_id, $queue->submit_time);
 
-            $current_estimation = $estimation->estimation * $queue_remaining;
-
             DB::commit();
         } catch (\Error $error) {
             Log::error($error);
@@ -211,7 +209,7 @@ class QueueProcessController extends Controller
             'success' => true,
             'message' => 'Success get estimation time',
             'data' => [
-                'estimation' => $current_estimation,
+                'estimation' => $estimation->estimation,
                 'time' => $estimation->time,
                 'queue_remaining' => $queue_remaining
             ]

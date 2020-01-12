@@ -157,4 +157,16 @@ class QueueProcess extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function doctor()
+    {
+        return $this->hasOneThrough(
+            Doctor::class,
+            DoctorSchedule::class,
+            'doctor_id',
+            'id',
+            'id',
+            'doctor_id'
+        );
+    }
+
 }

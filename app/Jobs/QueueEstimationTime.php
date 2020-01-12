@@ -2,10 +2,8 @@
 
 namespace App\Jobs;
 
-use App\Enums\NotificationTypeEnum;
 use App\Enums\QueueEnum;
 use App\Enums\TimeConfigEnum;
-use App\Libs\Helper;
 use App\Models\QueueProcess;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
@@ -55,16 +53,10 @@ class QueueEstimationTime implements ShouldQueue
         try {
             DB::beginTransaction();
 
-            // get queue remaining
-            $queues = QueueProcess::where('doctor_schedule_id', $this->doctor_schedule_id)
-                ->where('is_valid', QueueEnum::Valid)
-                ->where('process_status', QueueEnum::waiting)
-                ->where('submit_time', '<', $this->submit_time)
-                ->get();
-
             $queue_log = QueueProcess::where('doctor_schedule_id', $this->doctor_schedule_id)
                 ->where('is_valid', QueueEnum::inValid)
                 ->where('process_status', QueueEnum::checkOut)
+                ->where('submit_time', '<', Carbon::yesterday(TimeConfigEnum::zone))
                 ->get();
 
             foreach ($queue_log as $queue) {
@@ -89,8 +81,11 @@ class QueueEstimationTime implements ShouldQueue
 
             $now = Carbon::now()->timeZone(TimeConfigEnum::zone);
 
-            QueueEstimationTimeModel::create([
+            QueueEstimationTimeModel::updateOrCreate(
+                [
                     'doctor_schedule_id' => $this->doctor_schedule_id,
+                ],
+                [
                     'estimation' => round($estimation),
                     'time' => $now
                 ]);

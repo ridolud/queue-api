@@ -11,6 +11,8 @@ use App\Models\QueueProcess;
 use App\Rules\CheckIfQueueExists;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -165,20 +167,45 @@ class QueueProcessController extends Controller
      */
     public function getQueueEstimationTime()
     {
-        $queue = Auth::user()
-            ->queue()
-            ->orderBy('submit_time', 'desc')
-            ->first();
+        try {
+            DB::beginTransaction();
 
-        $estimation = QueueEstimationTimeModel::where('doctor_schedule_id', $queue->doctor_schedule_id)
-            ->first([
-                'estimation',
-                'time'
-            ]);
+            $queue = Auth::user()
+                ->queue()
+                ->orderBy('submit_time', 'desc')
+                ->first();
 
-        $queue_remaining = Helper::getQueueRemaining($queue->doctor_schedule_id, $queue->submit_time);
+            if (!$queue)
+            {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'You haven\'t any queue number',
+                ], ResponseCodeEnum::Success);
+            }
 
-        $current_estimation = $estimation->estimation * $queue_remaining;
+            $estimation = QueueEstimationTimeModel::where('doctor_schedule_id', $queue->doctor_schedule_id)
+                ->first([
+                    'estimation',
+                    'time'
+                ]);
+
+            if (!$estimation)
+            {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Estimation doesnt exists',
+                ], ResponseCodeEnum::Success);
+            }
+
+            $queue_remaining = Helper::getQueueRemaining($queue->doctor_schedule_id, $queue->submit_time);
+
+            $current_estimation = $estimation->estimation * $queue_remaining;
+
+            DB::commit();
+        } catch (\Error $error) {
+            Log::error($error);
+            DB::rollBack();
+        }
 
         return response()->json([
             'success' => true,

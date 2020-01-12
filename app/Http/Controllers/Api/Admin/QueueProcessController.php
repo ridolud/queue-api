@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Enums\ListDataEnum;
 use App\Enums\NotificationTypeEnum;
 use App\Enums\NotificationCategoryEnum;
+use App\Enums\QueueEnum;
 use App\Enums\QueueNameEnum;
 use App\Enums\ResponseCodeEnum;
 use App\Http\Controllers\Controller;
@@ -110,6 +111,8 @@ class QueueProcessController extends Controller
                 ->delay(now()->addSeconds(30))
                 ->onQueue(QueueNameEnum::QUEUE_ESTIMATION_TIME);
 
+            $this->collectDeviceToken($queue->doctor_schedule_id, $status);
+
             DB::commit();
         } catch (\Error $error) {
             DB::rollBack();
@@ -159,6 +162,35 @@ class QueueProcessController extends Controller
         SendNotification::dispatch($queue->user->device_token, Helper::setMessageNotification($type, $title, $category))
             ->delay(now()->addSeconds(15))
             ->onQueue('send-notification');
+    }
+
+    /**
+     * send notification to incoming patient
+     * @param $doctor_schedule_id
+     * @param $status
+     * @return void
+     */
+    private function collectDeviceToken($doctor_schedule_id, $status)
+    {
+        $queue_process = QueueProcess::where('doctor_schedule_id', $doctor_schedule_id)
+            ->where('process_status', QueueEnum::waiting)
+            ->orderBy('submit_time', 'asc')
+            ->first();
+
+        $type = NotificationTypeEnum::normal;
+        $title = "Gilian anda sekarang, silahkan masuk";
+
+        if ($status == QueueEnum::checkIn) {
+            $title = "Gilian anda sebentar lagi";
+        }
+
+        $category = NotificationCategoryEnum::update_queue;
+
+        $message = Helper::setMessageNotification($type, $title, $category);
+
+        SendNotification::dispatch($queue_process->user->device_token, $message)
+                ->delay(now()->addSeconds(40))
+                ->onQueue(QueueNameEnum::SEND_NOTIFICATION);
     }
 
 }

@@ -6,8 +6,11 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Enums\ResponseCodeEnum;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
@@ -62,6 +65,24 @@ class LoginController extends Controller
         }
 
         return response()->json(['error'=>'Unauthorised'], ResponseCodeEnum::UnAuthorized);
+
+    }
+
+    public function logout()
+    {
+        try {
+            DB::beginTransaction();
+
+            User::where('id', Auth::user()->id)
+                ->update([
+                    'device_token' => ''
+                ]);
+
+            DB::commit();
+        } catch (\Error $error) {
+            Log::error($error);
+            DB::rollBack();
+        }
 
     }
 

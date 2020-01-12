@@ -13,7 +13,7 @@
         <!-- signatra-font -->
         <link rel="stylesheet" href="assets/css/signatra-font.css">
 
-        <link rel="icon" type="image/png" href="favicon.ico">
+        <link rel="icon" type="image/png" href="{{ asset('assets/antridoc/logo.png') }}">
         <!-- Place favicon.ico in the root directory -->
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -79,7 +79,7 @@
             <ul class="offcanvas-menu single-page-menu">
                 <li><a href="#homes">HOME</a></li>
                 <li><a href="#services">SERVICE</a></li>
-                <li><a href="#testimonial">TESTIMONIAL</a></li>
+                <li><a href="#our-teams">MEET OUR TEAM</a></li>
             </ul>
         </div>
         <div class="offcanvas-content-wraper">
@@ -87,22 +87,22 @@
                 <h2 class="offcanvas-title">GET IN TOUCH</h2>
                 <ul class="offcanvas-list-widget">
                     <li>
-                        <p><i class="icon icon-map-marker2"></i><a href="https://maps.google.com/maps?q=221B+Baker+Street,+London,+United+Kingdom&amp;hl=en&amp;t=v&amp;hnear=221B+Baker+St,+London+NW1+6XE,+United+Kingdom" target="_blank">179 MADISON ST. OLIVER AV. <br> NEW YORK, NY-12548</a></p>
+                        <p><i class="icon icon-map-marker2"></i><a href="https://goo.gl/maps/ccgxxZob7xwAFyu68" target="_blank">Jl. Grand Boulevard, BSD Green Office Park 9, BSD City, Sampora, Kec. Cisauk, Tangerang, Banten 15345</p>
                     </li>
                     <li>
-                        <p><i class="icon icon-phone-call3"></i><a href="tel:+1%20(254)%20854-6987">+1 (254) 854-6987</a></p>
+                        <p><i class="icon icon-phone-call3"></i><a href="tel:+6281227241327">+62 812-2724-132-7</a></p>
                     </li>
                     <li>
-                        <p><i class="icon icon-envelope4"></i><a href="mailto:info@example.com">INFO@EXAMPLE.COM</a></p>
+                        <p><i class="icon icon-envelope4"></i><a href="mailto:antridoc@gmail.com">antridoc@gmail.com</a></p>
                     </li>
                 </ul>
-                <h2 class="offcanvas-title">GET SOCIAL TOGETHER</h2>
+                <!-- <h2 class="offcanvas-title">GET SOCIAL TOGETHER</h2>
                 <ul class="social-list version-4">
                     <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
                     <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
                     <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
                     <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                </ul>
+                </ul> -->
             </div>
         </div>
     </div>
@@ -116,14 +116,14 @@
             <div class="col-lg-7 align-self-center">
                 <div class="agency-banner-content banner-style6">
                     <h1 class="banner-title">
-                        Antridoc
-                        <!-- <span class="separete-border"></span>
-                        <span class="sub-content">Creative Agency to Established <br> a Brand Idencity</span> -->
+                        <img src="{{ asset( 'assets/antridoc/Antridoc-logo.png' ) }}">
+                        <span class="separete-border"></span>
+                        <span class="sub-content">Solusi antrian rumah sakit</span>
                     </h1>
                     <div class="typing-effect">
-                        <h2>Focus on being <span class="color-char">Productive</span> instead of <span class="typed"></span></h2>
+                        <h2><span class="color-char">Mau ke rumah sakit?<br> Registrasi dan antri aja dari </span><span class="typed"></span></h2>
                     </div>
-                    <a href="#" class="btn btn-primary style5 icon-right">GET IN TOUCH <i class="icon icon-arrow-right"></i></a>
+                    <!-- <a href="#" class="btn btn-primary style5 icon-right">GET IN TOUCH <i class="icon icon-arrow-right"></i></a> -->
                 </div><!-- .agency-banner-content END -->
             </div>
             <div class="col-lg-5">
@@ -139,13 +139,14 @@
 </section><!-- end agency banner section -->
 
 <!-- growth grid section -->
-<section class="growth-card-section xs-section-padding">
+<section class="growth-card-section xs-section-padding" id="services">
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <div class="agency-section-title text-center style5">
-                    <h2 class="main-title medium">Forward into Growth</h2>
-                    <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarks grove the headline of Alphabet Village</p>
+                    <h2 class="main-title medium">Sistem Manajemen Antrian<br>Rumah Sakit</h2>
+                    <p>Antridoc mengintegrasikan sistem antrian dengan sistem manajemen rumah sakit,
+kelola antrian rumah sakit secara efisien</p>
                 </div><!-- .agency-section-title .style3 END -->
             </div>
         </div><!-- .row END -->        
@@ -153,40 +154,40 @@
             <div class="col-md-6 col-lg-3">
                 <div class="info-card text-center">
                     <div class="info-card-header">
-                        <img src="assets/images/growth-icon-1.png" alt="">
+                        <img src="{{ asset('assets/antridoc/Bitmap-1.png') }}" alt="">
                     </div>
                     <div class="info-card-body">
-                        <h3 class="card-title">Business Relation</h3>
+                        <h3 class="card-title">Sistem antri terintegrasi</h3>
                     </div>
                 </div><!-- .info-card END -->
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="info-card text-center">
                     <div class="info-card-header">
-                        <img src="assets/images/growth-icon-2.png" alt="">
+                        <img src="{{ asset('assets/antridoc/Bitmap-2.png') }}" alt="">
                     </div>
                     <div class="info-card-body">
-                        <h3 class="card-title">Business Relation</h3>
+                        <h3 class="card-title">Informasi antrian secara real-time</h3>
                     </div>
                 </div><!-- .info-card END -->
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="info-card text-center">
                     <div class="info-card-header">
-                        <img src="assets/images/growth-icon-3.png" alt="">
+                        <img src="{{ asset('assets/antridoc/Bitmap-3.png') }}" alt="">
                     </div>
                     <div class="info-card-body">
-                        <h3 class="card-title">Business Relation</h3>
+                        <h3 class="card-title">Pemberitahuan langsung ke smartphone pasien</h3>
                     </div>
                 </div><!-- .info-card END -->
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="info-card text-center">
                     <div class="info-card-header">
-                        <img src="assets/images/growth-icon-4.png" alt="">
+                        <img src="{{ asset('assets/antridoc/Bitmap-4.png') }}" alt="">
                     </div>
                     <div class="info-card-body">
-                        <h3 class="card-title">Business Relation</h3>
+                        <h3 class="card-title">Laporan performa pelayanan</h3>
                     </div>
                 </div><!-- .info-card END -->
             </div>
@@ -203,55 +204,55 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <h2 class="satisfaction-title">We believe in Customer <span>Satisfaction</span></h2>
+                    <h2 class="satisfaction-title">Fokus kami dalam peningkatan pelayanan melalui pengalaman antri pasien</h2>
                 </div>
             </div>
             <div class="row satisfiction-group">
                 <div class="col-lg-6">
                     <div class="customer-satisfaction-list wow fadeInLeft">
-                        <i class="icon icon-icon_01"></i>
-                        <h3 class="xs-title">Business Growth</h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast</p>
+                        <img src="{{ asset('assets/antridoc/Bitmap-5.png') }}" alt="">
+                        <h3 class="xs-title">Informasi Lengkap</h3>
+                        <p>Informasi poliklinik tersedia dan jadwal dokter serta jumlah antrian saat ini dapat diakses secara realtime</p>
                         <span class="number-count"></span>
                     </div><!-- .customer-satisfaction-list END -->
                 </div>
                 <div class="col-lg-6">
                     <div class="customer-satisfaction-list wow fadeInRight">
-                        <i class="icon icon-icon_02"></i>
-                        <h3 class="xs-title">Great Solution</h3>
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                        <img src="{{ asset('assets/antridoc/Bitmap-6.png') }}" alt="">
+                        <h3 class="xs-title">Ruang tunggu tidak lagi membosankan</h3>
+                        <p>Menunggu atrian selagi menikmati secangkir kopi atau melakukan aktifitas lain dirumah dan dimanapun </p>
                         <span class="number-count"></span>
                     </div><!-- .customer-satisfaction-list END -->
                 </div>
                 <div class="col-lg-6">
                     <div class="customer-satisfaction-list wow fadeInLeft">
-                        <i class="icon icon-icon_03"></i>
-                        <h3 class="xs-title">Time is Money</h3>
-                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave</p>
+                        <img src="{{ asset('assets/antridoc/Bitmap-7.png') }}" alt="">
+                        <h3 class="xs-title">Registrasi dan antri satu kali</h3>
+                        <p>Tidak perlu lagi antri untuk registrasi dan antri poliklinik karena sistem terintegrasi</p>
                         <span class="number-count"></span>
                     </div><!-- .customer-satisfaction-list END -->
                 </div>
                 <div class="col-lg-6">
                     <div class="customer-satisfaction-list wow fadeInRight">
-                        <i class="icon icon-icon_04"></i>
-                        <h3 class="xs-title">Better Investment</h3>
-                        <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia,</p>
+                        <img src="{{ asset('assets/antridoc/Bitmap-8.png') }}" alt="">
+                        <h3 class="xs-title">Tidak perlu takut antrian terlewat</h3>
+                        <p>Ketika mendekati giliran antrian akan diberitahukan melalui notifikasi smartphone</p>
                         <span class="number-count"></span>
                     </div><!-- .customer-satisfaction-list END -->
                 </div>
                 <div class="col-lg-6">
                     <div class="customer-satisfaction-list wow fadeInLeft">
-                        <i class="icon icon-icon_05"></i>
-                        <h3 class="xs-title">Growth Graph</h3>
-                        <p>But the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way. When she reached the first hills of the Italic Mountains</p>
+                        <img src="{{ asset('assets/antridoc/Bitmap-9.png') }}" alt="">
+                        <h3 class="xs-title">Ruang tunggu menjadi tidak terbatas</h3>
+                        <p>Melakukan antrian darimana saja dan kapan saja secara online tanpa perlu antri diruang tunggu</p>
                         <span class="number-count"></span>
                     </div><!-- .customer-satisfaction-list END -->
                 </div>
                 <div class="col-lg-6">
                     <div class="customer-satisfaction-list wow fadeInRight">
-                        <i class="icon icon-icon_06"></i>
-                        <h3 class="xs-title">Global Business</h3>
-                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot</p>
+                        <img src="{{ asset('assets/antridoc/Bitmap-10.png') }}" alt="">
+                        <h3 class="xs-title">Terhindar potensi tertular penyakit</h3>
+                        <p>Tidak ada lagi rasa cemas tertular penyakit karena satu ruang tunggu dengan pasien lain</p>
                         <span class="number-count"></span>
                     </div><!-- .customer-satisfaction-list END -->
                 </div>
@@ -260,16 +261,16 @@
     </div>
 </section><!-- end customer satisfiction -->
 
-<!-- horizontal timeline section -->
+<!-- horizontal timeline section 
 <div class="xs-section-padding hr-timeline-section">
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <div class="agency-section-title text-center style5">
                     <h2 class="main-title medium">Milestones</h2>
-                </div><!-- .agency-section-title .style3 END -->
+                </div>
             </div>
-        </div><!-- .row END -->   
+        </div> 
         <div class="row hr-timeline-group">
             <div class="col-md-6 col-lg-3">
                 <div class="hr-single-timeline wow bounceIn">
@@ -279,8 +280,8 @@
                             <i class="icon icon-working_process_icons_1"></i>
                             <p>Estimate</p>
                         </div>
-                    </div><!-- .hr-timeline-content-wraper END -->
-                </div><!-- .hr-single-timeline END -->
+                    </div>
+                </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="hr-single-timeline color-1 wow bounceIn" data-wow-delay=".5s">
@@ -290,8 +291,8 @@
                             <i class="icon icon-working_process_icons_2"></i>
                             <p>Idea Making</p>
                         </div>
-                    </div><!-- .hr-timeline-content-wraper END -->
-                </div><!-- .hr-single-timeline END -->
+                    </div>
+                </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="hr-single-timeline color-2 wow bounceIn" data-wow-delay=".7s">
@@ -301,8 +302,8 @@
                             <i class="icon icon-working_process_icons_3"></i>
                             <p>Working Plan</p>
                         </div>
-                    </div><!-- .hr-timeline-content-wraper END -->
-                </div><!-- .hr-single-timeline END -->
+                    </div>
+                </div>
             </div>
             <div class="col-md-6 col-lg-3">
                 <div class="hr-single-timeline color-3 wow bounceIn" data-wow-delay=".9s">
@@ -312,111 +313,101 @@
                             <i class="icon icon-working_process_icons_4"></i>
                             <p>Handover</p>
                         </div>
-                    </div><!-- .hr-timeline-content-wraper END -->
-                </div><!-- .hr-single-timeline END -->
+                    </div>
+                </div>
             </div>
-        </div><!-- .row .hr-timeline-group END -->
-    </div><!-- .container END -->
+        </div>
+    </div>
     <div class="timeline-wave">
         <img src="assets/images/timeline-wave-shape.png" alt="">
     </div>
-</div><!-- horizontal timeline section end -->
+</div>horizontal timeline section end -->
 
-<!-- agency team section -->
-<section class="xs-section-padding gray-bg">
+<section class="team-section-area xs-section-padding-top" data-scrollax-parent="true" id="our-teams">
     <div class="container">
         <div class="row">
-            <div class="col-lg-10 mx-auto">
-                <div class="agency-section-title text-center section-title-style2">
-                    <div class="title-icon">
-                        <i class="icon icon-users3 gradient-icon"></i>
-                    </div>
+            <div class="col-md-9 mx-auto">
+                <div class="agency-section-title text-center style3">
                     <h4 class="main-title">Meet Our Team</h4>
-                    <p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                    <p>Kami terdiri dari praktisi IT arsitektur, design, bisnis development, dan lainnya. Antridoc berawal dari final project di Apple Developer Academy | Indonesia, dan akan terus dikembangkan demi memberikan benyak manfaat melalui inovasi teknologi.</p>
                 </div>
             </div>
-        </div><!-- .row end -->
-        <div class="row xs-mb-5">
-            <div class="col-lg-3 col-md-6">
-                <div class="single-team-style2">
+        </div>
+        <div class="row xs-mb-9">
+            <div class="col-lg-4 col-md-6">
+                <div class="single-team-style3">
                     <div class="image">
-                        <img src="assets/images/team/team-5.jpg" alt="">
-                        <div class="hover-area text-center">
-                            <div class="team-content">
-                                <h4 class="xs-title">CHARLOTTE GRACE</h4>
-                                <span>Chief Executive</span>
-                            </div>
-                            <ul class="social-list version-5">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul><!-- .social-list -->        
-                        </div><!-- .hover-area END -->
+                        <img src="{{ asset('assets/antridoc/team/Bitmap-wimba.png') }}" alt="" draggable="false">
+                    </div>
+                    <div class="team-content text-center">
+                        <h3 class="xs-title">WIMBA PRASIDDHA</h3>
+                        <span>Product Design Development</span>
                     </div>
                 </div><!-- .single-team-style2 END -->
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="single-team-style2">
+            <div class="col-lg-4 col-md-6">
+                <div class="single-team-style3">
                     <div class="image">
-                        <img src="assets/images/team/team-6.jpg" alt="">
-                        <div class="hover-area text-center">
-                            <div class="team-content">
-                                <h4 class="xs-title">ROBERT S NUNN</h4>
-                                <span>Talent Director</span>
-                            </div>
-                            <ul class="social-list version-5">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul><!-- .social-list -->        
-                        </div><!-- .hover-area END -->
+                        <img src="{{ asset('assets/antridoc/team/Bitmap-bill.png') }}" alt="" draggable="false">
+                    </div>
+                    <div class="team-content text-center">
+                        <h3 class="xs-title">BILL TANTHOWI JAUHARI</h3>
+                        <span>Solution Architecture</span>
                     </div>
                 </div><!-- .single-team-style2 END -->
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="single-team-style2">
+            <div class="col-lg-4 col-md-6">
+                <div class="single-team-style3">
                     <div class="image">
-                        <img src="assets/images/team/team-7.jpg" alt="">
-                        <div class="hover-area text-center">
-                            <div class="team-content">
-                                <h4 class="xs-title">JOSEPH L KEESLER</h4>
-                                <span>Interior Design</span>
-                            </div>
-                            <ul class="social-list version-5">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul><!-- .social-list -->        
-                        </div><!-- .hover-area END -->
+                        <img src="{{ asset('assets/antridoc/team/Bitmap-fauzan.png') }}" alt="" draggable="false">
+                    </div>
+                    <div class="team-content text-center">
+                        <h3 class="xs-title">FAUZAN ALDWINAVALDHY</h3>
+                        <span>Finance & Operational</span>
                     </div>
                 </div><!-- .single-team-style2 END -->
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="single-team-style2">
+        </div>
+        <div class="row xs-mb-9">
+            <div class="col-lg-4 col-md-6">
+                <div class="single-team-style3">
                     <div class="image">
-                        <img src="assets/images/team/team-8.jpg" alt="">
-                        <div class="hover-area text-center">
-                            <div class="team-content">
-                                <h4 class="xs-title">GERALD Y KOHL</h4>
-                                <span>Product Investigator</span>
-                            </div>
-                            <ul class="social-list version-5">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul><!-- .social-list -->        
-                        </div><!-- .hover-area END -->
+                        <img src="{{ asset('assets/antridoc/team/Bitmap-ridho.png') }}" alt="" draggable="false">
+                    </div>
+                    <div class="team-content text-center">
+                        <h3 class="xs-title">FARIDO LUEDFI</h3>
+                        <span>Software Engineer</span>
+                    </div>
+                </div><!-- .single-team-style2 END -->
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-team-style3">
+                    <div class="image">
+                        <img src="{{ asset('assets/antridoc/team/Bitmap-yosia.png') }}" alt="" draggable="false">
+                    </div>
+                    <div class="team-content text-center">
+                        <h3 class="xs-title">YOSIA SETIAWAN</h3>
+                        <span>Software Engineer</span>
+                    </div>
+                </div><!-- .single-team-style2 END -->
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="single-team-style3">
+                    <div class="image">
+                        <img src="{{ asset('assets/antridoc/team/Bitmap-nadya.png') }}" alt="" draggable="false">
+                    </div>
+                    <div class="team-content text-center">
+                        <h3 class="xs-title">NADYA NAZLA IRZANTI</h3>
+                        <span>User Experience Researcher</span>
                     </div>
                 </div><!-- .single-team-style2 END -->
             </div>
         </div>
     </div>
-</section>        
-<!-- agency team section end -->
+    <div class="dot-images">
+        <img src="assets/images/dotted-img-1.png" data-scrollax="properties: { translateY: '-100%' }" alt="" draggable="false" style="transform: translateZ(0px) translateY(38.943488943488944%);">
+    </div>
+</section>
 
 <!-- call to action section -->
 <section class="calltoaction-section-3">
@@ -424,8 +415,8 @@
         <div class="row">
             <div class="col-lg-10 mx-auto text-center">
                 <div class="call-to-action-content-3">
-                    <h2 class="call-to-action-title">Join With The Entrepreneur Community for Business Growth</h2>
-                    <a href="service.html" class="btn btn-primary style6 icon-right">Contact Us <i class="icon icon-arrow-right"></i></a>
+                    <h2 class="call-to-action-title">Kami selalu terbuka kepada siapapun untuk berkolaborasi memberikan manfaat melalui teknologi</h2>
+                    <!-- <a href="#" class="btn btn-primary style6 icon-right">Hubungi Kami <i class="icon icon-arrow-right"></i></a> -->
                 </div>
             </div>
         </div><!-- .row END -->
@@ -497,87 +488,8 @@
         </div>
     </div>
 </div>    <!-- END sidebar cart item -->    <!-- END offset cart strart -->
-
-<!-- offset cart strart -->
-<!-- sidebar cart item -->
-<div class="xs-sidebar-group info-group">
-    <div class="xs-overlay black-bg"></div>
-    <div class="xs-sidebar-widget">
-        <div class="sidebar-widget-container">
-            <div class="widget-heading">
-                <a href="#" class="close-side-widget">
-                    <i class="icon icon-cross"></i>
-                </a>
-            </div>
-            <div class="sidebar-textwidget">
-                <div class="sidebar-logo-wraper">
-                    <a href="index.html">
-                        <img src="assets/images/color-logo.png" alt="sidebar logo">
-                    </a>
-                </div>
-                <p>Far far away, behind the word moun tains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of  </p>
-                <ul class="sideabr-list-widget">
-                    <li>
-                        <div class="media">
-                            <div class="d-flex">
-                                <img src="assets/images/location.png" alt="">
-                            </div>
-                            <div class="media-body">
-                                <p>759 Pinewood Avenue</p>
-                                <span>Marquette, Michigan</span>
-                            </div>
-                        </div><!-- address 1 -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <div class="d-flex">
-                                <img src="assets/images/mail.png" alt="">
-                            </div>
-                            <div class="media-body">
-                                <a href="mailto:info@domain.com">info@domain.com</a>
-                                <span>Online Support</span>
-                            </div>
-                        </div><!-- address 1 -->
-                    </li>
-                    <li>
-                        <div class="media">
-                            <div class="d-flex">
-                                <img src="assets/images/phone.png" alt="">
-                            </div>
-                            <div class="media-body">
-                                <a href="tel:906-624-2565">906-624-2565</a>
-                                <span>Mon-Fri 8am-5pm</span>
-                            </div>
-                        </div><!-- address 1 -->
-                    </li>
-                </ul><!-- .sideabr-list-widget -->
-                <div class="subscribe-form-wraper">
-                    <p>Get Subscribed!</p>
-                    <form action="#" method="POST" class="subscribe-form">
-                        <label for="sub-input"></label>
-                        <div class="form-group">
-                            <input type="email" name="email" id="sub-input" placeholder="Enter your mail here" class="form-control">
-                            <button class="sub-btn" type="submit"><i class="icon icon-arrow-right"></i></button>
-                        </div>
-                    </form>
-                </div>
-                <ul class="social-list version-2">
-                    <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                    <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                    <li><a href="#" class="vimeo"><i class="fa fa-vimeo"></i></a></li>
-                </ul><!-- .social-list -->
-                <div class="text-center">
-                    <a href="https://themeforest.net/user/xpeedstudio/portfolio" class="btn btn-primary">Purchase Now</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>    <!-- END sidebar widget item -->    <!-- END offset cart strart -->
-
         <!-- footer section start -->
-        <footer class="xs-footer-section footer-style7" style="background-image: url(assets/images/footer-vector-img-2.png);">
+        <footer class="xs-footer-section footer-style7" style="/*background-image: url(assets/images/footer-vector-img-2.png);*/">
             <div class="footer-top-area">
                 <div class="container">
                     <div class="row">
@@ -585,29 +497,29 @@
                             <div class="footer-widget text-widget">
                                 <div class="footer-logo-wraper">
                                     <a href="index.html" class="footer-logo">
-                                        <img src="assets/images/logo-5.png" alt="">
+                                        <img src="{{ asset('assets/antridoc/Antridoc-logo.png') }}" alt="">
                                     </a>
                                 </div>
-                                <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia,</p>
-                                <span class="multipile-dots"></span>
+                                <p>Kami adalah sistem manajemen antrian, berfokus dalam peningkatan pengalaman antrian pasien yang akan mempengaruhi kenyamanan pasien dan meningkatkan kinerja rumah sakit.</p>
+                                
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-6">
-                            <div class="footer-widget">
+                            <!-- <div class="footer-widget">
                                 <ul class="xs-list round">
                                     <li><a href="index.html">Home</a></li>
                                     <li><a href="about.html">About</a></li>
                                     <li><a href="service.html">Service</a></li>
                                     <li><a href="news-list.html">Blog</a></li>
                                     <li><a href="contact.html">Contact</a></li>
-                                </ul><!-- .xs-list END -->
-                            </div><!-- .footer-widget END -->
+                                </ul>
+                            </div> -->
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <div class="footer-widget">
-                                <p><a href="https://www.google.com/maps/place/London,+UK/@51.528308,-0.3817812,10z/data=!3m1!4b1!4m5!3m4!1s0x47d8a00baf21de75:0x52963a5addd52a99!8m2!3d51.5073509!4d-0.1277583" target="_blank">178 Alex Avenue. William Street. New York, NY-25435</a> </p>
-                                <p><a href="tel:(805)%20215-8578"> (805) 215-8578</a></p>
-                                <p><a href="mailto:admin@agencifynewyork.com">admin@agencifynewyork.com</a></p>
+                                <p><a href="https://goo.gl/maps/ccgxxZob7xwAFyu68" target="_blank">Jl. Grand Boulevard, BSD Green Office Park 9, BSD City, Sampora, Kec. Cisauk, Tangerang, Banten 15345</a> </p>
+                                <p><a href="tel:+6281227241327"> +62 812-2724-132-7</a></p>
+                                <p><a href="mailto:antridoc@gmail.com">antridoc@gmail.com</a></p>
                             </div><!-- .footer-widget END -->
                         </div>
                     </div><!-- .row END -->
@@ -618,17 +530,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="copyright-section">
-                                <p>Copyright 2018, <a href="https://themeforest.net/user/xpeedstudio/portfolio">XpeedStudio</a>. All Rights Reserved.</p>
+                                <p>Copyright 2019, Antridoc, All Rights Reserved.</p>
                             </div><!-- .copyright-section END -->
                         </div>
                         <div class="col-md-6">
-                            <ul class="simple-social-list">
+                            <!-- <ul class="simple-social-list">
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                                 <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                 </div>

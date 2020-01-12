@@ -12,9 +12,5 @@
 */
 
 Route::get('/', function () {
-    return view('under-construction');
-});
-
-Route::get('/landing-page-dev', function () {
     return view('home');
 });

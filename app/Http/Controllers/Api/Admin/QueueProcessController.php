@@ -188,20 +188,23 @@ class QueueProcessController extends Controller
             ->orderBy('submit_time', 'asc')
             ->first();
 
-        $type = NotificationTypeEnum::normal;
-        $title = "Gilian anda sekarang, silahkan masuk";
+        if ($queue_process) {
+            $type = NotificationTypeEnum::normal;
+            $title = "Gilian anda sekarang, silahkan masuk";
 
-        if ($status == QueueEnum::checkIn) {
-            $title = "Gilian anda sebentar lagi";
-        }
+            if ($status == QueueEnum::checkIn) {
+                $title = "Gilian anda sebentar lagi";
+            }
 
-        $category = NotificationCategoryEnum::update_queue;
+            $category = NotificationCategoryEnum::update_queue;
 
-        $message = Helper::setMessageNotification($type, $title, $category);
+            $message = Helper::setMessageNotification($type, $title, $category);
 
-        SendNotification::dispatch($queue_process->user->device_token, $message)
+            SendNotification::dispatch($queue_process->user->device_token, $message)
                 ->delay(now()->addSeconds(40))
                 ->onQueue(QueueNameEnum::SEND_NOTIFICATION);
+        }
+
     }
 
 }

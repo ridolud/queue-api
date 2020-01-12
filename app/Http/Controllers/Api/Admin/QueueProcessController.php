@@ -43,7 +43,12 @@ class QueueProcessController extends Controller
             ->selectedColumn()
             ->where('doctor.hospital_id', $hospital_id)
             ->where('doctor.poli_id', $poli_id)
-            ->when('process_status', function ($query) use ($request){
+            ->when('doctor_schedule_id', function ($query) use ($request) {
+                if (isset($request->schedule)) {
+                    $query->where('doctor_schedule_id', $request->schedule);
+                }
+            })
+            ->when('process_status', function ($query) use ($request) {
                 if (isset($request->state)) {
                     $query->where('process_status', $request->state);
                 }

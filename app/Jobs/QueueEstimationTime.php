@@ -56,7 +56,7 @@ class QueueEstimationTime implements ShouldQueue
             $queue_log = QueueProcess::where('doctor_schedule_id', $this->doctor_schedule_id)
                 ->where('is_valid', QueueEnum::inValid)
                 ->where('process_status', QueueEnum::checkOut)
-                ->where('submit_time', '<', Carbon::yesterday(TimeConfigEnum::zone))
+                ->where('submit_time', '>', Carbon::yesterday(TimeConfigEnum::zone))
                 ->get();
 
             foreach ($queue_log as $queue) {

@@ -47,6 +47,7 @@ class DoctorController extends Controller
             foreach ($doctors as $doctor) {
                 $arr_doctor = [
                     'full_name' => $doctor->full_name,
+                    'avatar' => $doctor->avatar
                 ];
 
                 $arr_doctor["schedule"] = DoctorSchedule::where('doctor_id', $doctor->id)

@@ -21,7 +21,7 @@ class QueueProcessSeeder extends Seeder
     public function run()
     {
         $users = User::where('id', '!=', 42)->get()->pluck('id')->all();
-        $patients = Patient::where('id', '!=', 63)->get()->pluck('id')->all();
+        $patients = Patient::where('id', '!=', 63)->limit(3)->get()->pluck('id')->all();
         $insurances = Insurance::get()->pluck('id')->all();
         $schedule = DoctorSchedule::first()->id;
 

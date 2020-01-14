@@ -121,6 +121,11 @@ Ijo - #21808f
 	background-color: #134288;
 }
 
+.growth-card-section .info-card {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 @media ( max-width: 1024px) {
 	.agency-banner-content.banner-style6 .banner-title > span {
     	font-family: inherit;

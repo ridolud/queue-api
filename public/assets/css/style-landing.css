@@ -26,9 +26,10 @@ Ijo - #21808f
   margin-top: 20px;
 }
 
-.typing-effect > h2 {
+.typing-effect > h2{
   font-size: 60px;
   font-weight: 600;
+  color: #ffab29;
 }
 
 .hr-timeline-section .agency-section-title.text-center.style5 {
@@ -39,9 +40,13 @@ Ijo - #21808f
   top: calc(50% + 110px)
 }
 
-.typing-effect > h2 .color-char, .typing-effect > h2 .typed-cursor, .agency-section-title.style5 .main-title, 
+.typing-effect > h2 .color-char, .agency-section-title.style5 .main-title, 
 .info-card .info-card-body .card-title {
 	color: #1e4383;
+}
+
+.typing-effect > h2 .typed-cursor {
+  color: #ffab29;
 }
 
 .btn.style5 {

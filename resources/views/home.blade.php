@@ -123,7 +123,7 @@
                     <div class="typing-effect">
                         <h2><span class="color-char">Mau ke rumah sakit?<br> Registrasi dan antri aja dari </span><span class="typed"></span></h2>
                     </div>
-                    <!-- <a href="#" class="btn btn-primary style5 icon-right">GET IN TOUCH <i class="icon icon-arrow-right"></i></a> -->
+                    <a href="https://wasap.at/jfIT2p" class="btn btn-primary style5 icon-right">GET IN TOUCH <i class="icon icon-arrow-right"></i></a>
                 </div><!-- .agency-banner-content END -->
             </div>
             <div class="col-lg-5">
@@ -416,7 +416,7 @@ kelola antrian rumah sakit secara efisien</p>
             <div class="col-lg-10 mx-auto text-center">
                 <div class="call-to-action-content-3">
                     <h2 class="call-to-action-title">Kami selalu terbuka kepada siapapun untuk berkolaborasi memberikan manfaat melalui teknologi</h2>
-                    <!-- <a href="#" class="btn btn-primary style6 icon-right">Hubungi Kami <i class="icon icon-arrow-right"></i></a> -->
+                    <a href="https://wasap.at/jfIT2p" class="btn btn-primary style6 icon-right">Hubungi Kami <i class="icon icon-arrow-right"></i></a>
                 </div>
             </div>
         </div><!-- .row END -->

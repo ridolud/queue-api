@@ -128,7 +128,7 @@
             </div>
             <div class="col-lg-5">
                 <div class="agency-banner-img">
-                    <img src="assets/images/welcome/agency_welcome_3.png" data-scrollax="properties: { translateY: '50%' }" alt="">
+                    <img src="assets/antridoc/illustration.png" data-scrollax="properties: { translateY: '50%' }" alt="">
                 </div><!-- .agency-banner-img END -->
             </div>
         </div>

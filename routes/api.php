@@ -19,6 +19,7 @@ Route::prefix('v1')->group(function(){
 	Route::name("login")->post('login', 'Api\Auth\LoginController@login');
 	Route::name("register")->post('register', 'Api\Auth\RegisterController@register');
     Route::get('email/verify/{id}/{hash}', 'Api\Auth\VerificationController@verify')->name('verification.verify');
+    Route::post('resend-verification', 'Api\Auth\VerificationController@reSendVeriesEmails');
 	/* end authentification */
 
 	Route::get('test_push_notif/{deviceToken}', 'Api\TestPushNotifController@testPush');

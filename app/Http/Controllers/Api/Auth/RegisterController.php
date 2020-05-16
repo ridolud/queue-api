@@ -73,7 +73,9 @@ class RegisterController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             Log::info($e);
-            return response()->json($e->getMessage(), ResponseCodeEnum::Error);
+            return response()->json([
+               'error' => $e->getMessage(),
+            ], ResponseCodeEnum::Error);
         }
 
         return response()->json($data, ResponseCodeEnum::Success);

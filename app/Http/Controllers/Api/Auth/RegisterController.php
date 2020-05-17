@@ -61,13 +61,9 @@ class RegisterController extends Controller
             $input = $request->all();
 
             $user = $this->createUser($input);
-
-            // $data['name'] = $user->name;
-            // $data['phone_number'] = $user->phone_number;
-
-            $data['email'] = $user->email;
-            $data['verified'] = false;
-            $data['token'] =  $user->createToken('AppName')->accessToken;
+;
+            $user['verified'] = false;
+            $user['token'] =  $user->createToken('AppName')->accessToken;
 
             $user->sendEmailVerificationNotification();
 
@@ -79,7 +75,7 @@ class RegisterController extends Controller
             ], ResponseCodeEnum::Error);
         }
 
-        return response()->json($data, ResponseCodeEnum::Success);
+        return response()->json($user, ResponseCodeEnum::Success);
     }
 
     /**
@@ -92,7 +88,7 @@ class RegisterController extends Controller
             [
                 // 'phone_number'        => ['required', 'numeric', new UniquePhoneNumber()],
                 // 'name'                => ['required', 'string', 'max:40'],
-                
+
                 'email'               => ['required', 'email', 'unique:users'],
                 'password'            => ['required', 'min:8', 'alpha_num'],
                 'c_password'          => ['required', 'same:password']

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Enums\ResponseCodeEnum;
+use App\Rules\UniquePhoneNumber;
 
 class AuthController extends Controller
 {
@@ -28,37 +29,63 @@ class AuthController extends Controller
 	 	return response()->json($user, ResponseCodeEnum::Success);
 	}
 
-    /**
-      @OA\Get(
-          path="/api/v1/add-device-token",
-          tags={"Profile"},
-          summary="Add Device Token",
-          operationId="adddevicetoken",
-          security={ {"bearerAuth": {}}, },
+  /**
+    @OA\Get(
+        path="/api/v1/add-device-token",
+        tags={"Profile"},
+        summary="Add Device Token",
+        operationId="adddevicetoken",
+        security={ {"bearerAuth": {}}, },
 
-         @OA\Response(response="default", description="successful operation")
-      )
-    */
-      public function addDeviceToken(Request $request)
-      {
+        @OA\Response(response="default", description="successful operation")
+    )
+  */
+    public function addDeviceToken(Request $request)
+    {
 
-        $validator = Validator::make($request->all(),
-            [
-              'device_token' => 'required',
-            ]);
+      $validator = Validator::make($request->all(),
+          [
+            'device_token' => 'required',
+          ]);
 
-        if ($validator->fails()) {
-          return response()->json([
-              'error'=>$validator->errors()
-          ], ResponseCodeEnum::InvalidRequest);
-        }
-
-        $input = $request->all();
-        $data = Auth::user();
-
-        $data->device_token = $input['device_token'];
-        $data->update();
-
-        return response()->json($input, ResponseCodeEnum::Success);
+      if ($validator->fails()) {
+        return response()->json([
+            'error'=>$validator->errors()
+        ], ResponseCodeEnum::InvalidRequest);
       }
+
+      $input = $request->all();
+      $data = Auth::user();
+
+      $data->device_token = $input['device_token'];
+      $data->update();
+
+      return response()->json($input, ResponseCodeEnum::Success);
+    }
+
+    public function updateUser(Request $request) 
+    {
+      $user = Auth::user();
+       
+      $validator = Validator::make($request->all(),
+        [
+          'phone_number'        => "numeric|unique:users,phone_number,{$user->id}",
+          'name'                => ['string', 'max:40'],
+          'gander'              => ['string', 'max:40'],
+          'dob'                 => ['date']
+      ]);
+
+      if ( $validator->fails() ){
+        return response()->json([
+          'error' => $validator->errors()
+        ], ResponseCodeEnum::InvalidRequest);
+      }
+
+      $input = $request->all();
+      
+      $user->update($input);
+
+      return response()->json($user, ResponseCodeEnum::Success);
+
+    }
 }

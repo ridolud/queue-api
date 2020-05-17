@@ -56,7 +56,9 @@ Route::prefix('v1')->group(function(){
 
         Route::group(['middleware' => ['verified']], function () {
 
+            /* User / Profile */
             Route::get('user', 'Api\AuthController@getUser');
+            Route::post('user', 'Api\AuthController@updateUser');
 
             /* Queue Routing */
             Route::name('queue.store')->post('queue', 'Api\QueueProcessController@store');

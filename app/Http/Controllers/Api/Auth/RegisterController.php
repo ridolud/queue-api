@@ -62,9 +62,10 @@ class RegisterController extends Controller
 
             $user = $this->createUser($input);
 
-            $data['name'] = $user->name;
+            // $data['name'] = $user->name;
+            // $data['phone_number'] = $user->phone_number;
+
             $data['email'] = $user->email;
-            $data['phone_number'] = $user->phone_number;
             $data['verified'] = false;
             $data['token'] =  $user->createToken('AppName')->accessToken;
 
@@ -90,7 +91,8 @@ class RegisterController extends Controller
         return Validator::make($request->all(),
             [
                 // 'phone_number'        => ['required', 'numeric', new UniquePhoneNumber()],
-                'name'                => ['required', 'string', 'max:40'],
+                // 'name'                => ['required', 'string', 'max:40'],
+                
                 'email'               => ['required', 'email', 'unique:users'],
                 'password'            => ['required', 'min:8', 'alpha_num'],
                 'c_password'          => ['required', 'same:password']
